@@ -1,0 +1,205 @@
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <table border="0" id="maintable" width="1226">
+      <tr id="3muAgRKGAqAEDQaD">
+        <td id="generallabel_12_1410913654452" width="116">
+          <b>Author:</b>
+        </td>
+        <td id="generalvalue_12_1410913654452" width="1106">
+          Troyens
+        </td>
+      </tr>
+      <tr id="nfLEgRKGAqAEDQap">
+        <td id="generallabel_27_1410915515389" width="116">
+          <b>Syst&#232;me:</b>
+        </td>
+        <td id="generalvalue_27_1410915515389" width="1106">
+          RecyclApp
+        </td>
+      </tr>
+      <tr id="vmuAgRKGAqAEDQaF">
+        <td id="generallabel_10_1410913654451" width="116">
+          <b>Acteur(s):</b>
+        </td>
+        <td id="generalvalue_10_1410913654451" width="1106">
+          Utilisateur
+        </td>
+      </tr>
+      <tr id="3fLEgRKGAqAEDQaq">
+        <td id="generallabel_28_1410915713825" width="116">
+          <b>Parties prenantes et int&#233;r&#234;ts:</b>
+        </td>
+        <td id="generalvalue_28_1410915713825" width="400">
+          Utilisateur: Placer un nouvel &#233;quipement sur le plan.
+        </td>
+      </tr>
+      <tr id="vmuAgRKGAqAEDQaG">
+        <td id="generallabel_9_1410913654451" width="116">
+          <b>Preconditions:</b>
+        </td>
+        <td id="generalvalue_9_1410913654451" width="1106">
+          Aucune
+        </td>
+      </tr>
+      <tr id="fmuAgRKGAqAEDQaH">
+        <td id="generallabel_8_1410913654451" width="116">
+          <b>Garanties en cas de succ&#232;s:</b>
+        </td>
+        <td id="generalvalue_8_1410913654451" width="1106">
+          L'&#233;quipement s&#233;lectionn&#233; par l'utilisateur est en position sur le 
+          plan
+        </td>
+      </tr>
+      <tr id="aWuAgRKGAqAEDQaJ">
+        <td id="flowofeventlabelId_7_1410913654451" width="116">
+          <b>Sc&#233;nario principal:</b>
+        </td>
+        <td style="padding-left:0;" valign="top" id="flowofeventvalueId_7_1410913654451" width="1110">
+          <table border="0" width="1100" height="96">
+            <tr>
+              <td id="flowofeventfirstcelllabel_7_1410913654451" width="18">
+                &#160;
+              </td>
+              <td id="flowofeventactioninputlabel_7_1410913654451" align="center" width="546">
+                <b>Utilisateur</b>
+              </td>
+              <td id="flowofeventsystemresponselabel_7_1410913654451" align="center" width="537">
+                <b>Syst&#232;me</b>
+              </td>
+            </tr>
+            <tr>
+              <td id="flowofeventNumIdPrefix_7_14109136544511" width="18">
+                1
+              </td>
+              <td class="actor" width="546">
+                L'utilisateur clique un &#233;quipement.
+              </td>
+              <td class="system" width="537">
+                <p>
+                  
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td id="flowofeventNumIdPrefix_7_14109136544512" width="18">
+                <p>
+                  2
+                </p>
+              </td>
+              <td class="actor" width="546">
+                
+              </td>
+              <td class="system" width="537">
+                Le syst&#232;me indique le type d'&#233;quipement s&#233;lectionn&#233; par 
+                l'utilisateur.
+              </td>
+            </tr>
+            <tr>
+              <td id="flowofeventNumIdPrefix_7_14109136544513" width="18">
+                <p>
+                  3
+                </p>
+              </td>
+              <td class="actor" width="546">
+                L'utilisateur pointe sur le plan.
+              </td>
+              <td class="system" width="537">
+                
+              </td>
+            </tr>
+            <tr>
+              <td id="flowofeventNumIdPrefix_7_14109136544514">
+                <p>
+                  4
+                </p>
+              </td>
+              <td class="actor" width="546">
+                
+              </td>
+              <td class="system" width="537">
+                Le syst&#232;me affiche la position du pointeur.
+              </td>
+            </tr>
+            <tr>
+              <td id="flowofeventNumIdPrefix_7_14109136544515" height="16">
+                <p>
+                  5
+                </p>
+              </td>
+              <td class="actor" width="546" height="16">
+                L'utilisateur clique sur le plan.
+              </td>
+              <td class="system" width="537" height="16">
+                
+              </td>
+            </tr>
+            <tr>
+              <td id="flowofeventNumIdPrefix_7_14109136544516">
+                <p>
+                  6
+                </p>
+              </td>
+              <td class="actor" width="546">
+                
+              </td>
+              <td class="system" width="537">
+                Le syst&#232;me inscrit l'&#233;quipement sur le plan.
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr id="HfLEgRKGAqAEDQan">
+        <td id="flowofeventlabelId_26_1410915412069" width="116">
+          <b>Sc&#233;narios alternatifs:</b>
+        </td>
+        <td style="padding-left:0;" valign="top" id="flowofeventvalueId_26_1410915412069" width="1106">
+          <table border="0" width="100%" height="66">
+            <tr>
+              <td id="flowofeventfirstcelllabel_26_1410915412069" width="20">
+                &#160;
+              </td>
+              <td id="flowofeventactioninputlabel_26_1410915412069" align="center" width="549">
+                &#160; <b>Utilisateur</b>
+              </td>
+              <td id="flowofeventsystemresponselabel_26_1410915412069" align="center" width="549">
+                <b>Syst&#232;me</b>
+              </td>
+            </tr>
+            <tr>
+              <td id="flowofeventNumIdPrefix_26_14109154120691">
+                1
+              </td>
+              <td class="actor">
+                Ligne3: L'utilisateur pointe en dehors du plan.
+              </td>
+              <td class="system">
+                
+              </td>
+            </tr>
+            <tr>
+              <td id="flowofeventNumIdPrefix_26_14109154120692">
+                <p>
+                  2
+                </p>
+              </td>
+              <td class="actor">
+                
+              </td>
+              <td class="system">
+                Le syst&#232;me n'affiche aucune information concernant la position 
+                du pointeur.
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <p>
+      &#160;
+    </p>
+  </body>
+</html>
