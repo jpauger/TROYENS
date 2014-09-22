@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="IFT-2007" company="Troyens" webLink="http://" view-date="2014-08-31" view-index="0" gantt-divider-location="413" resource-divider-location="300" version="2.0" locale="en_CA">
+    <description/>
+    <view zooming-state="default:5" id="gantt-chart">
+        <field id="tpd3" name="Name" width="54" order="0"/>
+        <field id="tpd4" name="Begin date" width="22" order="1"/>
+        <field id="tpd5" name="End date" width="22" order="2"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Name" width="50" order="0"/>
+        <field id="1" name="Default role" width="50" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <calendar id="1" name="default">
+                <default-week sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+                <only-show-weekends value="true"/>
+                <overriden-day-types/>
+                <days/>
+            </calendar>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" name="Inception" meeting="false" start="2014-09-02" duration="2" complete="100" expand="true">
+            <task id="1" name="Définir les cas d'utilisations" meeting="false" start="2014-09-02" duration="2" complete="100" expand="true"/>
+            <task id="2" name="Faire la vision" meeting="false" start="2014-09-02" duration="2" complete="100" expand="true"/>
+            <task id="3" name="Faire les spécification supplémentaires" meeting="false" start="2014-09-02" duration="2" complete="100" expand="true"/>
+            <task id="4" name="Faire le glossaire" meeting="false" start="2014-09-02" duration="2" complete="100" expand="true"/>
+        </task>
+        <task id="122" name="Élaboration" meeting="false" start="2014-09-04" duration="19" complete="36" expand="true">
+            <task id="7" name="Itération 1" meeting="false" start="2014-09-04" duration="19" complete="16" expand="true">
+                <task id="13" name="UC : Placer un équipement sur le plan" meeting="false" start="2014-09-04" duration="5" complete="15" expand="true">
+                    <task id="48" name="MAJ diagrammes" meeting="false" start="2014-09-04" duration="5" complete="46" expand="true"/>
+                    <task id="89" name="Implémentation" meeting="false" start="2014-09-04" duration="5" complete="0" expand="true"/>
+                    <task id="139" name="Test et intégration" meeting="false" start="2014-09-04" duration="5" complete="0" expand="true"/>
+                </task>
+                <task id="12" name="UC : Déplacer un équipment sur le plan" meeting="false" start="2014-09-08" duration="5" complete="16" expand="true">
+                    <task id="50" name="MAJ Diagrammes" meeting="false" start="2014-09-08" duration="5" complete="50" expand="true"/>
+                    <task id="90" name="Implémentation" meeting="false" start="2014-09-08" duration="5" complete="0" expand="true"/>
+                    <task id="141" name="Test et intégration" meeting="false" start="2014-09-08" duration="5" complete="0" expand="true"/>
+                </task>
+                <task id="11" name="UC : Définir panier entrant" meeting="false" start="2014-09-13" duration="5" complete="18" expand="true">
+                    <task id="52" name="MAJ Diagrammes" meeting="false" start="2014-09-13" duration="5" complete="56" expand="true"/>
+                    <task id="91" name="Implémentation" meeting="false" start="2014-09-13" duration="5" complete="0" expand="true"/>
+                    <task id="143" name="Test et intégration" meeting="false" start="2014-09-13" duration="5" complete="0" expand="true"/>
+                </task>
+                <task id="10" name="UC : Voir les quantités de chaque produit" meeting="false" start="2014-09-18" duration="5" complete="17" expand="true">
+                    <task id="54" name="MAJ Diagrammes" meeting="false" start="2014-09-18" duration="5" complete="52" expand="true"/>
+                    <task id="92" name="Implémentation" meeting="false" start="2014-09-18" duration="5" complete="0" expand="true"/>
+                    <task id="145" name="Test et intégration" meeting="false" start="2014-09-18" duration="5" complete="0" expand="true"/>
+                </task>
+            </task>
+            <task id="164" name="Faire le domain model" meeting="false" start="2014-09-04" duration="6" complete="100" expand="true"/>
+        </task>
+        <task id="87" name="Contruction" meeting="false" start="2014-09-23" duration="57" complete="16" expand="true">
+            <task id="128" name="Itération 2" meeting="false" start="2014-09-23" duration="24" complete="16" expand="true">
+                <task id="22" name="UC : Ajouter un convoyeur" meeting="false" start="2014-09-23" duration="8" complete="16" expand="true">
+                    <task id="65" name="MAJ Diagrammes" meeting="false" start="2014-09-23" duration="8" complete="50" expand="true"/>
+                    <task id="97" name="Implémentation" meeting="false" start="2014-09-23" duration="8" complete="0" expand="true"/>
+                    <task id="147" name="Test et intégration" meeting="false" start="2014-09-23" duration="8" complete="0" expand="true"/>
+                </task>
+                <task id="9" name="UC : Annuler l'opération" meeting="false" start="2014-10-01" duration="8" complete="18" expand="true">
+                    <task id="57" name="MAJ Diagrammes" meeting="false" start="2014-10-01" duration="8" complete="54" expand="true"/>
+                    <task id="93" name="Implémentation" meeting="false" start="2014-10-01" duration="8" complete="0" expand="true"/>
+                    <task id="149" name="Test et intégration" meeting="false" start="2014-10-01" duration="8" complete="0" expand="true"/>
+                </task>
+                <task id="8" name="UC : Répeter l'opération" meeting="false" start="2014-10-09" duration="8" complete="14" expand="true">
+                    <task id="59" name="MAJ Diagrammes" meeting="false" start="2014-10-09" duration="8" complete="44" expand="true"/>
+                    <task id="94" name="Implémentation" meeting="false" start="2014-10-09" duration="8" complete="0" expand="true"/>
+                    <task id="151" name="Test et intégration" meeting="false" start="2014-10-09" duration="8" complete="0" expand="true"/>
+                </task>
+            </task>
+            <task id="132" name="Itération 3" meeting="false" start="2014-10-17" duration="33" complete="16" expand="true">
+                <task id="26" name="UC : Charger son travail" meeting="false" start="2014-10-17" duration="11" complete="16" expand="true">
+                    <task id="71" name="MAJ Diagrammes" meeting="false" start="2014-10-17" duration="11" complete="50" expand="true"/>
+                    <task id="100" name="Implémentation" meeting="false" start="2014-10-17" duration="11" complete="0" expand="true"/>
+                    <task id="153" name="Test et intégration" meeting="false" start="2014-10-17" duration="11" complete="0" expand="true"/>
+                </task>
+                <task id="28" name="UC : Voir quantités en un point" meeting="false" start="2014-10-28" duration="11" complete="16" expand="true">
+                    <task id="73" name="MAJ Diagrammes" meeting="false" start="2014-10-28" duration="11" complete="50" expand="true"/>
+                    <task id="101" name="Implémentation" meeting="false" start="2014-10-28" duration="11" complete="0" expand="true"/>
+                    <task id="155" name="Test et intégration" meeting="false" start="2014-10-28" duration="11" complete="0" expand="true"/>
+                </task>
+                <task id="29" name="UC : Enregistrer le plan" meeting="false" start="2014-11-08" duration="11" complete="16" expand="true">
+                    <task id="69" name="MAJ Diagrammes" meeting="false" start="2014-11-08" duration="11" complete="50" expand="true"/>
+                    <task id="99" name="Implémentation" meeting="false" start="2014-11-08" duration="11" complete="0" expand="true"/>
+                    <task id="157" name="Test et intégration" meeting="false" start="2014-11-08" duration="11" complete="0" expand="true"/>
+                </task>
+            </task>
+        </task>
+        <task id="88" name="Transition" meeting="false" start="2014-11-26" duration="18" complete="16" expand="true">
+            <task id="136" name="Itération 4" meeting="false" start="2014-11-26" duration="18" complete="16" expand="true">
+                <task id="27" name="UC : Exporter le schéma sous forme d'une image" meeting="false" start="2014-11-26" duration="6" complete="16" expand="true">
+                    <task id="67" name="MAJ Diagrammes" meeting="false" start="2014-11-26" duration="6" complete="50" expand="true"/>
+                    <task id="98" name="Implémentation" meeting="false" start="2014-11-26" duration="6" complete="0" expand="true"/>
+                    <task id="159" name="Test et intégration" meeting="false" start="2014-11-26" duration="6" complete="0" expand="true"/>
+                </task>
+                <task id="37" name="UC : Zoomer sur le plan" meeting="false" start="2014-12-02" duration="6" complete="16" expand="true">
+                    <task id="61" name="MAJ DIagrammes" meeting="false" start="2014-12-02" duration="6" complete="50" expand="true"/>
+                    <task id="95" name="Implémentation" meeting="false" start="2014-12-02" duration="6" complete="0" expand="true"/>
+                    <task id="161" name="Test et intégration" meeting="false" start="2014-12-02" duration="6" complete="0" expand="true"/>
+                </task>
+                <task id="20" name="UC : Dézoomer sur le plan" meeting="false" start="2014-12-08" duration="6" complete="16" expand="true">
+                    <task id="63" name="MAJ Diagrammes" meeting="false" start="2014-12-08" duration="6" complete="50" expand="true"/>
+                    <task id="96" name="Implémentation" meeting="false" start="2014-12-08" duration="6" complete="0" expand="true"/>
+                    <task id="163" name="Test et intégration" meeting="false" start="2014-12-08" duration="6" complete="0" expand="true"/>
+                </task>
+            </task>
+        </task>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <taskdisplaycolumns>
+        <displaycolumn property-id="tpd2" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd7" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd8" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd6" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd10" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd11" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd9" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd1" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd0" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd3" order="0" width="214" visible="true"/>
+        <displaycolumn property-id="tpd4" order="1" width="90" visible="true"/>
+        <displaycolumn property-id="tpd5" order="2" width="90" visible="true"/>
+    </taskdisplaycolumns>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>
