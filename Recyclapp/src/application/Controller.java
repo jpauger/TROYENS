@@ -2,6 +2,7 @@
 package application;
 import domaine.*;
 import utilitaires.*;
+import recyclapp.gui.FenetrePrincipale;
 
 /**
  *
@@ -9,6 +10,11 @@ import utilitaires.*;
  */
 public class Controller {
     
+    FenetrePrincipale fenetre ;
+    Station station ;
+    
+    
+       
     void enregistrer(){}
     void importer(){}
     void annuler(){}

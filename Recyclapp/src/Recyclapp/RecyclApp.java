@@ -5,6 +5,8 @@
  */
 package recyclapp;
 
+import javax.swing.UIManager;
+
 /**
  *
  * @author De Bayzer
@@ -16,6 +18,15 @@ public class Recyclapp {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        try
+        {
+            UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
+            recyclapp.gui.FenetrePrincipale fenetrePrincipale = new recyclapp.gui.FenetrePrincipale();
+            fenetrePrincipale.setVisible(true);
+        }
+        catch(Exception e){e.printStackTrace();}
+        
     }
     
 }
