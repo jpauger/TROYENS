@@ -1,13 +1,11 @@
 package domaine;
 import java.awt.Point;
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
-
-
 
 
 /**
@@ -17,22 +15,17 @@ import javax.swing.BorderFactory;
 public class Station extends Equipement  {
     
     private String nomStation = "" ;
-    private Point position = new Point(0,0);
+    private final Point position = new Point(0,0);
     private Point start_drag ;
     private Point start_loc ;
-    private Dimension d = new Dimension(70,70);
+    private final Dimension d = new Dimension(70,70);
     private Point decalage ;
+    private int nbSorties = 1;
     private int nouveau_X;
     private int nouveau_Y;
-    
-    //ImageIcon imageStation = new ImageIcon();
-    
-    
-
-    String description ;
-    Color couleur ;
-    int capaciteMax ;
-    int tailleImage ;
+    private double capaciteMax ;
+    private String description ;
+//    Color couleur ;
     
     
     MatriceTransformation matriceTransformation ;
@@ -103,9 +96,41 @@ public class Station extends Equipement  {
     public void mouseMoved(MouseEvent e){}
     
     
-    void definirNombreSorties(int nombreSorties){}
+    
+    // LES METHODES POUR MODIFIER LES PARAMATRES D'UNE STATION
+    
+    
+    void definirNombreSorties(int nouveauNbSorties)
+    {
+        this.nbSorties = nouveauNbSorties;
+    }
+    
     void majQuantiteSorties(){};
-    void definirImage(ImageIcon image){}
+    
+    
+    void definirImage(ImageIcon image)
+    {
+        this.setIcon(image);
+    }
+    
+    void changerNomStation (String nvNom)
+    {
+        this.nomStation = nvNom;
+    }
+    
+    void changerCapaciteMax (double nvCapaciteMax)
+    {
+        this.capaciteMax = nvCapaciteMax;
+    }
+    
+    void changerDescription (String nvDescription)
+    {
+        this.description = nvDescription;
+    }
+    
+    // LES METHODES POUR OBTENIR LES PARAMETRES D'UNE STATION
+    
+ 
     
     
     //methode pour obtenir la position en tenant compte de la position de la sourie
