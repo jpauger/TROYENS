@@ -32,11 +32,50 @@ public class PlanDeTravail {
     }
     
     
-    void ajouterEntreeUsine (Coordonnee coordonnee){}
-    void ajouterSortieUsine (Coordonnee coordonnee){}
-    void ajouterJonction (Coordonnee corrdonnee){}
+    public void ajouterEntreeUsine (Coordonnee coordonnee)
+    {
+       EntreeUsine nouvelleEntreeUsine = new EntreeUsine();
+       coordonnee = nouvelleEntreeUsine.coordonnees;
+       nouvelleEntreeUsine.setLocation(numeroAleatoire(this.conteneur.getWidth() - nouvelleEntreeUsine.getWidth()), numeroAleatoire(this.conteneur.getHeight()-nouvelleEntreeUsine.getHeight()));
+        // on ajoute l'objet au JPanel
+        this.conteneur.add(nouvelleEntreeUsine);
+        // on actualise le graphique
+        this.conteneur.repaint();
+    }
     
-    void ajouterConvoyeur (SortieEquipement equipementInitial, Equipement equipement){}
+    public void ajouterSortieUsine (Coordonnee coordonnee)
+    {
+        SortieUsine nouvelleSortieUsine = new SortieUsine();
+        coordonnee = nouvelleSortieUsine.coordonnees;
+        nouvelleSortieUsine.setLocation(numeroAleatoire(this.conteneur.getWidth() - nouvelleSortieUsine.getWidth()), numeroAleatoire(this.conteneur.getHeight()-nouvelleSortieUsine.getHeight()));
+        // on ajoute l'objet au JPanel
+        this.conteneur.add(nouvelleSortieUsine);
+        // on actualise le graphique
+        this.conteneur.repaint();
+    }
+    
+    void ajouterJonction (Coordonnee coordonnee)
+    {
+        Jonction nouvelleJonction = new Jonction();
+        coordonnee = nouvelleJonction.coordonnees;
+        nouvelleJonction.setLocation(numeroAleatoire(this.conteneur.getWidth() - nouvelleJonction.getWidth()), numeroAleatoire(this.conteneur.getHeight()-nouvelleJonction.getHeight()));
+        // on ajoute l'objet au JPanel
+        this.conteneur.add(nouvelleJonction);
+        // on actualise le graphique
+        this.conteneur.repaint();
+    }
+    
+    void ajouterConvoyeur (SortieEquipement equipementInitial, Equipement equipement)
+    {
+        Convoyeur nouveauConvoyeur = new Convoyeur();
+        equipementInitial = nouveauConvoyeur.sortie;
+        equipement = nouveauConvoyeur.equipement;
+        nouveauConvoyeur.setLocation(numeroAleatoire(this.conteneur.getWidth() - nouveauConvoyeur.getWidth()), numeroAleatoire(this.conteneur.getHeight()-nouveauConvoyeur.getHeight()));
+        // on ajoute l'objet au JPanel
+        this.conteneur.add(nouveauConvoyeur);
+        // on actualise le graphique
+        this.conteneur.repaint();
+    }
     
     void validerPlan(){}
     
