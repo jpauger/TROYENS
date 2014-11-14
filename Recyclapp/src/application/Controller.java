@@ -12,8 +12,12 @@ public class Controller {
     
     FenetrePrincipale fenetre ;
     Station station ;
+    public PlanDeTravail plan;
     
-    
+    public Controller()
+    {
+        plan = new PlanDeTravail();
+    }
        
     void enregistrer(){}
     void importer(){}
@@ -24,7 +28,11 @@ public class Controller {
     void afficherFenetreSelection (Equipement equipement){}
     void afficherFenetreMatriceTransformation(Station station){}
     
-    void ajouterStation(Coordonnee coordonnees){}
+    public void ajouterStation(Coordonnee coordonnees)
+    {
+        plan.ajouterStation(coordonnees);
+    }
+    
     void ajouterEntreeUsine(Coordonnee coordonnees){}
     void ajouterSortieUsine(Coordonnee coordonnees){}
     void ajouterJonction(Coordonnee coordonnees){}

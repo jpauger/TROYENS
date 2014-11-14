@@ -1,7 +1,11 @@
 package recyclapp.gui;
+import application.Controller;
 import javax.swing.ImageIcon;
 //import javax.swing.*;
 import domaine.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import utilitaires.Coordonnee;
 //import java.awt.event.ActionListener;
 
 
@@ -11,14 +15,18 @@ import domaine.*;
  */
 public class FenetrePrincipale extends javax.swing.JFrame{
     
-    private PlanDeTravail plan ;
+    
+    private InterfacePlan interfacePlan;
+    private Controller controller;
 
     /**
      * Creates new form FenetrePrincipale
      */
-    public FenetrePrincipale() {
+    public FenetrePrincipale() 
+    {
         initComponents();
-        plan = new PlanDeTravail(this.panneauPlanTravail); 
+        controller = new Controller();
+        interfacePlan = new InterfacePlan(this.panneauPlanTravail,controller);        
     }
  
     /**
@@ -283,11 +291,16 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void boutonStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonStationActionPerformed
-        // TODO add your handling code here:
-        plan.ajouterStation();
+        // TODO : Ici on changera l'évenement pour celle avec les coordonnees directement dans les paramètre entrant lorsque le drag and drop sera fait
+        JFrame frame = new JFrame("Entrez coordonnées");
+        String coordonneeX = JOptionPane.showInputDialog(frame,"Coordonnée X ?");
+        String coordonneeY = JOptionPane.showInputDialog(frame,"Coordonnée Y ?");
+        Coordonnee coordonnee = new Coordonnee(Integer.parseInt(coordonneeX), Integer.parseInt(coordonneeY));
+        controller.ajouterStation(coordonnee);
+        interfacePlan.RafraichirPlan();
     }//GEN-LAST:event_boutonStationActionPerformed
 
-               
+       
     /**
      * @param args the command line arguments
      */

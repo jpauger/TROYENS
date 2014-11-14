@@ -1,18 +1,17 @@
 package domaine;
+import java.awt.Dimension;
 import utilitaires.*;
-import javax.swing.JLabel;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 /**
  *
  * @author TROYENS
  */
-public abstract class Equipement extends JLabel implements MouseListener, MouseMotionListener {
+public class Equipement {
     
-    Coordonnee coordonnees;
-    int nombreEntrees = 1 ;
-    int nombreSorties = 1 ;
+    public Coordonnee coordonnees;
+    public int nombreEntrees = 1 ;
+    public int nombreSorties = 1 ;
+    public final Dimension size = new Dimension(70,70);
     
     LigneProduit[] obtenirInformationTransit()
     {
