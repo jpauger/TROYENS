@@ -74,11 +74,15 @@ public class PlanDeTravail {
     
     void validerPlan(){}
     
-    Equipement obtenirEquipement(Coordonnee coordonnee)
+    public Equipement obtenirEquipement(Coordonnee coordonnee)
     {
-        //code temporaire juste pour eviter une erreur de type "missing return"
-        Equipement equipement = null;
-        return equipement;
+        for(int i=0;i<listeEquipement.size();i++)
+        {
+            Equipement equipement = listeEquipement.get(i);
+            if(equipement.estSurEquipement(coordonnee))
+                return equipement;
+        }
+        return null;
     }
     
     SortieEquipement obtenirSortieVide()

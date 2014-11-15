@@ -10,8 +10,11 @@ import domaine.Equipement;
 import domaine.PlanDeTravail;
 import domaine.Station;
 import java.awt.Dimension;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import utilitaires.Coordonnee;
 
 /**
  *
@@ -25,6 +28,11 @@ public class InterfacePlan {
     {
         this.controller = controller;
         this.conteneur = jpanel;
+        this.conteneur.addMouseListener(new java.awt.event.MouseAdapter(){
+            public void mouseClicked(java.awt.event.MouseEvent evt){                
+                Equipement equipement = controller.obtenirEquipement(new Coordonnee( evt.getX(), evt.getY()));
+            }
+        });
     }
     
     public void RafraichirPlan()

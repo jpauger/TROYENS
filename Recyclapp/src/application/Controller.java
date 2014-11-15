@@ -40,11 +40,9 @@ public class Controller {
     
     void validerPlan(){}
     
-    Equipement obtenirEquipement(Coordonnee coordonnee)
+    public Equipement obtenirEquipement(Coordonnee coordonnee)
     {
-        //code temporaire juste pour eviter une erreur de type "missing return"
-        Equipement equipement = null;
-        return equipement;
+        return plan.obtenirEquipement(coordonnee);
     }
     
     SortieEquipement obtenirSortieVide()
