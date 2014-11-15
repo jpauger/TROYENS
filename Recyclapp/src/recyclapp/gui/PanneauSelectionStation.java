@@ -1,16 +1,36 @@
 package recyclapp.gui;
 
+import application.Controller;
+import javax.swing.JPanel;
+
 /**
  *
  * @author De Bayzer
  */
 public class PanneauSelectionStation extends javax.swing.JPanel {
+    
+    
+    private JPanel conteneur ;
+    private Controller controller;
 
     /**
      * Creates new form panneauOutils
+     * @param unConteneur
+     * @param unController
      */
-    public PanneauSelectionStation() {
+    public PanneauSelectionStation(JPanel unConteneur, Controller unController ) {
+        this.controller = unController;
+        this.conteneur = unConteneur ;
+    }
+    
+    public void AfficherPanneauSelection()
+    {
+        this.setVisible(true);
+        this.setLocation(0,0);
+        this.setSize(this.conteneur.getSize());
+        this.conteneur.add(this);
         initComponents();
+        this.conteneur.repaint();
     }
 
     /**

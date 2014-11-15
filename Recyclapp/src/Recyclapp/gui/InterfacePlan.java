@@ -39,10 +39,12 @@ public class InterfacePlan {
             //TODO : centraliser la gestion du type d'équipement? Trouver une meilleur facon de procéder
             if(equipement instanceof Station)
                 labelPlace.setIcon(((Station)equipement).image);
-            this.conteneur.add(labelPlace);
+            this.conteneur.add(labelPlace);            
         }
         
         this.conteneur.repaint();
     }
+    
+    
     
 }
