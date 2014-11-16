@@ -15,15 +15,46 @@ public class PlanDeTravail {
     boolean estAfficheImage = false;
     int zoom = 100 ;
     
+    
+    
     //constructeur de la classe plan de travail
     public PlanDeTravail ()
     {
+    }
+    
+    public void supprimerToutes()
+    {
+        listeEquipement.clear();
     }
     
     public void ajouterStation (Coordonnee coordonnee)
     {
         Station nouvelleStation = new Station(coordonnee);
         listeEquipement.add(nouvelleStation);
+    }
+    
+    public void supprimerStation (Equipement unEquipement)
+    {
+        for(int i=0;i<listeEquipement.size();i++)
+        {
+            Equipement equipement = listeEquipement.get(i);
+            if(equipement.estSurEquipement(unEquipement.coordonnees))
+                listeEquipement.remove(i);
+        }
+        
+
+    }
+    
+    //deplace une station prise en paramettre vers de nouvelles coordonnées prise en parametre
+    public void relocaliserStation (Equipement unEquipement, Coordonnee coorArrivee)
+    {
+        for (Equipement equipement : listeEquipement)
+        {
+            if ( equipement.coordonnees == unEquipement.coordonnees)
+            {
+                equipement.coordonnees = coorArrivee;
+            }
+        }
     }
     
     
@@ -80,8 +111,13 @@ public class PlanDeTravail {
         {
             Equipement equipement = listeEquipement.get(i);
             if(equipement.estSurEquipement(coordonnee))
+            {
+                System.out.println("TROUVÉ"); //test
                 return equipement;
+            }
+                
         }
+        System.out.println("NON TROUVÉ"); //test
         return null;
     }
     

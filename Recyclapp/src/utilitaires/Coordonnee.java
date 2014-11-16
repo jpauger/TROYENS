@@ -18,6 +18,13 @@ public class Coordonnee {
         this.y = ordonnee;
     }
     
+    //consructeur sans arguments
+    public Coordonnee()
+    {
+        this.x = 0;
+        this.y = 0;
+    }
+    
     public int getX()
     {
         return x;

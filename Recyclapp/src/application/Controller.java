@@ -45,6 +45,20 @@ public class Controller {
         return plan.obtenirEquipement(coordonnee);
     }
     
+    public void relocaliserStation (Equipement equipement, Coordonnee coorArrivee)
+    {
+        plan.relocaliserStation(equipement,coorArrivee);
+    }
+    
+    public void supprimerStation(Equipement equipement)
+    {
+        plan.supprimerStation(equipement);
+    }
+    
+    public void supprimerToutes(){ plan.supprimerToutes();}
+    
+    
+    
     SortieEquipement obtenirSortieVide()
     {
         //code temporaire juste pour eviter une erreur de type "missing return"

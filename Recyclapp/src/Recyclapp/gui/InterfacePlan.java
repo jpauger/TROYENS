@@ -10,6 +10,7 @@ import domaine.Equipement;
 import domaine.PlanDeTravail;
 import domaine.Station;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,11 +27,47 @@ public class InterfacePlan {
     
     public InterfacePlan (JPanel jpanel, Controller controller)
     {
+        Coordonnee loc_depart = new Coordonnee();
+        Coordonnee loc_arrivee = new Coordonnee();
+        Equipement unEquipement = new Equipement();
+                
         this.controller = controller;
         this.conteneur = jpanel;
         this.conteneur.addMouseListener(new java.awt.event.MouseAdapter(){
-            public void mouseClicked(java.awt.event.MouseEvent evt){                
-                Equipement equipement = controller.obtenirEquipement(new Coordonnee( evt.getX(), evt.getY()));
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt){
+                
+                //Equipement equipement = controller.obtenirEquipement(new Coordonnee( evt.getX(), evt.getY()));
+                  //controller.supprimerToutes();
+                Coordonnee coordonnees = new Coordonnee(400,400);// test
+                controller.relocaliserStation(controller.obtenirEquipement(new Coordonnee( evt.getX(), evt.getY())) , coordonnees ); 
+                RafraichirPlan();
+            }
+            
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+//                Coordonnee coord = new Coordonnee(evt.getX(),evt.getY());
+//                controller.ajouterStation(coord);
+//                RafraichirPlan();
+            }
+          
+            
+        });
+        
+        this.conteneur.addMouseMotionListener(new java.awt.event.MouseMotionListener() {
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+//                Coordonnee coord = new Coordonnee(e.getX(),e.getY());
+//                controller.ajouterStation(coord);
+//                RafraichirPlan();
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
     }
@@ -47,9 +84,10 @@ public class InterfacePlan {
             //TODO : centraliser la gestion du type d'équipement? Trouver une meilleur facon de procéder
             if(equipement instanceof Station)
                 labelPlace.setIcon(((Station)equipement).image);
-            this.conteneur.add(labelPlace);            
+            this.conteneur.add(labelPlace);
+            
         }
-        
+        this.conteneur.validate();
         this.conteneur.repaint();
     }
     

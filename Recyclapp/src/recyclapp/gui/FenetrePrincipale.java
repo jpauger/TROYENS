@@ -3,9 +3,11 @@ import application.Controller;
 import javax.swing.ImageIcon;
 //import javax.swing.*;
 import domaine.*;
+import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import utilitaires.Coordonnee;
+import java.awt.Point;
 //import java.awt.event.ActionListener;
 
 
@@ -19,6 +21,9 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private InterfacePlan interfacePlan;
     private Controller controller;
     private PanneauSelectionStation panneauSelectionStation ;
+    
+    
+ 
 
     /**
      * Creates new form FenetrePrincipale
