@@ -18,9 +18,9 @@ import java.awt.Point;
 public class FenetrePrincipale extends javax.swing.JFrame{
     
     
-    private InterfacePlan interfacePlan;
-    private Controller controller;
-    private PanneauSelectionStation panneauSelectionStation ;
+    private final InterfacePlan interfacePlan;
+    private final Controller controller;
+    private final PanneauSelectionStation panneauSelectionStation ;
     
     
  
@@ -147,6 +147,19 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 
         boutonStation.setText("Ajouter Station");
         boutonStation.setToolTipText("");
+        boutonStation.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                boutonStationMouseDragged(evt);
+            }
+        });
+        boutonStation.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                boutonStationMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                boutonStationMouseReleased(evt);
+            }
+        });
         boutonStation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boutonStationActionPerformed(evt);
@@ -308,6 +321,21 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         interfacePlan.RafraichirPlan(); 
         
     }//GEN-LAST:event_boutonStationActionPerformed
+
+    private void boutonStationMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boutonStationMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boutonStationMousePressed
+
+    private void boutonStationMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boutonStationMouseDragged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boutonStationMouseDragged
+
+    private void boutonStationMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boutonStationMouseReleased
+        // TODO add your handling code here:
+        Coordonnee coord = new Coordonnee(evt.getX()-350 ,evt.getY());
+        controller.ajouterStation(coord ); 
+        interfacePlan.RafraichirPlan();
+    }//GEN-LAST:event_boutonStationMouseReleased
 
        
     /**

@@ -112,12 +112,10 @@ public class PlanDeTravail {
             Equipement equipement = listeEquipement.get(i);
             if(equipement.estSurEquipement(coordonnee))
             {
-                System.out.println("TROUVÉ"); //test
                 return equipement;
             }
                 
         }
-        System.out.println("NON TROUVÉ"); //test
         return null;
     }
     
