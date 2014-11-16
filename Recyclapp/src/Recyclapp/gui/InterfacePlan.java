@@ -74,6 +74,7 @@ public class InterfacePlan {
     
     public void RafraichirPlan()
     {
+        this.conteneur.removeAll();
         for(int i=0;i<controller.plan.listeEquipement.size();i++)
         {
             Equipement equipement = controller.plan.listeEquipement.get(i);
@@ -87,7 +88,6 @@ public class InterfacePlan {
             this.conteneur.add(labelPlace);
             
         }
-        this.conteneur.validate();
         this.conteneur.repaint();
     }
     
