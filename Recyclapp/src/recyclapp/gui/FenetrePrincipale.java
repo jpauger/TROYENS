@@ -57,6 +57,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         jLabel7 = new javax.swing.JLabel();
         panneauOutils = new javax.swing.JPanel();
         boutonStation = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         panneauProprietes = new javax.swing.JPanel();
         panneauPlanTravail = new javax.swing.JPanel();
         panneauMenuBas = new javax.swing.JPanel();
@@ -124,7 +125,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(600, Short.MAX_VALUE))
+                .addContainerGap(612, Short.MAX_VALUE))
         );
         panneauMenuHautLayout.setVerticalGroup(
             panneauMenuHautLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,13 +167,18 @@ public class FenetrePrincipale extends javax.swing.JFrame{
             }
         });
 
+        jButton1.setText("Ajouter Convoyeur");
+        jButton1.setToolTipText("");
+
         javax.swing.GroupLayout panneauOutilsLayout = new javax.swing.GroupLayout(panneauOutils);
         panneauOutils.setLayout(panneauOutilsLayout);
         panneauOutilsLayout.setHorizontalGroup(
             panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panneauOutilsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(boutonStation, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(boutonStation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(192, Short.MAX_VALUE))
         );
         panneauOutilsLayout.setVerticalGroup(
@@ -180,7 +186,9 @@ public class FenetrePrincipale extends javax.swing.JFrame{
             .addGroup(panneauOutilsLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(boutonStation)
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(176, Short.MAX_VALUE))
         );
 
         panneauProprietes.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "propriétés", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
@@ -284,7 +292,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(panneauOutils, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panneauProprietes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(panneauProprietes, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(panneauPlanTravail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -378,6 +386,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JCheckBox checkboxGrilleMagetique;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -49,17 +49,6 @@ public class Station extends Equipement  {
         this.addMouseMotionListener(this);*/
     }
     
-    //Constructeur sans parametres
-    public Station ()
-    {
-        
-        this.nomStation = "nomStation";
-        this.image = new ImageIcon("src/ico/station3moyen.png");
-        this.coordonnees.setX(0);
-        this.coordonnees.setY(0);
-        
-    }
-    
     public Coordonnee obtenirCoordonnees ()
     {
         return this.coordonnees;

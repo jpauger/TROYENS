@@ -93,14 +93,8 @@ public class PlanDeTravail {
     
     void ajouterConvoyeur (SortieEquipement equipementInitial, Equipement equipement)
     {
-        Convoyeur nouveauConvoyeur = new Convoyeur();
-        equipementInitial = nouveauConvoyeur.sortie;
-        equipement = nouveauConvoyeur.equipement;
-        //nouveauConvoyeur.setLocation(numeroAleatoire(this.conteneur.getWidth() - nouveauConvoyeur.getWidth()), numeroAleatoire(this.conteneur.getHeight()-nouveauConvoyeur.getHeight()));
-        // on ajoute l'objet au JPanel
-        //this.conteneur.add(nouveauConvoyeur);
-        // on actualise le graphique
-        //this.conteneur.repaint();
+        Convoyeur nouveauConvoyeur = new Convoyeur( equipementInitial, equipement);
+        listeConvoyeur.add(nouveauConvoyeur);
     }
     
     void validerPlan(){}
