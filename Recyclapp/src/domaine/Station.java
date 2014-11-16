@@ -34,6 +34,9 @@ public class Station extends Equipement  {
         super.coordonnees = coordonnees;
         // on initialise les propiétés d'une station
         this.nomStation = "nomStation";
+        this.description = "descriptionStation";
+        this.capaciteMax = 1000;
+        this.nombreSorties = 3;
         /*this.setSize(d);
         this.setPreferredSize(d);
         this.setToolTipText("STATION");

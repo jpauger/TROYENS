@@ -32,7 +32,9 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     {
         initComponents();
         controller = new Controller();
-        interfacePlan = new InterfacePlan(this.panneauPlanTravail,controller);     
+        panneauSelectionStation = new PanneauSelectionStation(this.panneauProprietes ,controller);
+        panneauSelectionStation.Init();
+        interfacePlan = new InterfacePlan(this.panneauPlanTravail,controller, panneauSelectionStation);          
     }
  
     /**
@@ -187,11 +189,6 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         panneauPlanTravail.setBackground(new java.awt.Color(153, 153, 153));
         panneauPlanTravail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "plan de travail", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
         panneauPlanTravail.setForeground(new java.awt.Color(255, 255, 255));
-        panneauPlanTravail.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panneauPlanTravailMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout panneauPlanTravailLayout = new javax.swing.GroupLayout(panneauPlanTravail);
         panneauPlanTravail.setLayout(panneauPlanTravailLayout);
@@ -311,13 +308,6 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         interfacePlan.RafraichirPlan(); 
         
     }//GEN-LAST:event_boutonStationActionPerformed
-
-    private void panneauPlanTravailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panneauPlanTravailMouseClicked
-        // TODO add your handling code here:
-        // test pour afficher panneauSelectionStation
-        panneauSelectionStation = new PanneauSelectionStation(this.panneauProprietes ,controller);
-        panneauSelectionStation.AfficherPanneauSelection();
-    }//GEN-LAST:event_panneauPlanTravailMouseClicked
 
        
     /**

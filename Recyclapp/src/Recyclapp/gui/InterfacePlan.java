@@ -24,8 +24,9 @@ import utilitaires.Coordonnee;
 public class InterfacePlan {
     private JPanel conteneur ;
     private Controller controller;
+    private PanneauSelectionStation panneauSelectionStation;
     
-    public InterfacePlan (JPanel jpanel, Controller controller)
+    public InterfacePlan (JPanel jpanel, Controller controller, PanneauSelectionStation panneauSelectionStation)
     {
         Coordonnee loc_depart = new Coordonnee();
         Coordonnee loc_arrivee = new Coordonnee();
@@ -33,17 +34,12 @@ public class InterfacePlan {
                 
         this.controller = controller;
         this.conteneur = jpanel;
+        this.panneauSelectionStation = panneauSelectionStation;
         this.conteneur.addMouseListener(new java.awt.event.MouseAdapter(){
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt){
-                
-                //Equipement equipement = controller.obtenirEquipement(new Coordonnee( evt.getX(), evt.getY()));
-                  //controller.supprimerToutes();
-                Coordonnee coordonnees = new Coordonnee(400,400);// test
-                controller.relocaliserStation(controller.obtenirEquipement(new Coordonnee( evt.getX(), evt.getY())) , coordonnees ); 
-                RafraichirPlan();
-            }
-            
+                MouseClick(evt);
+            }            
             @Override
             public void mouseReleased(java.awt.event.MouseEvent evt)
             {
@@ -71,7 +67,18 @@ public class InterfacePlan {
             }
         });
     }
-    
+    private void MouseClick(java.awt.event.MouseEvent evt)
+    {
+        panneauSelectionStation.AfficherPanneauSelection(false);
+        Equipement equipement = controller.obtenirEquipement(new Coordonnee( evt.getX(), evt.getY()));
+        if(equipement instanceof Station)
+        {
+            panneauSelectionStation.AfficherPanneauSelection(true);
+            panneauSelectionStation.AfficherStation((Station)equipement);
+        }
+
+        RafraichirPlan();
+    }
     public void RafraichirPlan()
     {
         this.conteneur.removeAll();
