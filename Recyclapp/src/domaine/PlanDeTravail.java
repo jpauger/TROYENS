@@ -22,10 +22,6 @@ public class PlanDeTravail {
     {
     }
     
-    public void supprimerToutes()
-    {
-        listeEquipement.clear();
-    }
     
     public void ajouterStation (Coordonnee coordonnee)
     {
@@ -80,7 +76,7 @@ public class PlanDeTravail {
         //this.conteneur.repaint();
     }
     
-    void ajouterJonction (Coordonnee coordonnee)
+    public void ajouterJonction (Coordonnee coordonnee)
     {
         Jonction nouvelleJonction = new Jonction();
         coordonnee = nouvelleJonction.coordonnees;
@@ -91,13 +87,18 @@ public class PlanDeTravail {
         //this.conteneur.repaint();
     }
     
-    void ajouterConvoyeur (SortieEquipement equipementInitial, Equipement equipement)
+    public void ajouterConvoyeur (SortieEquipement sortie, Equipement equipement)
     {
-        Convoyeur nouveauConvoyeur = new Convoyeur( equipementInitial, equipement);
+        Convoyeur nouveauConvoyeur = new Convoyeur(sortie, equipement);
         listeConvoyeur.add(nouveauConvoyeur);
     }
     
-    void validerPlan(){}
+    public void supprimerConvoyeur (SortieEquipement sortie, Equipement equipement)
+    {
+        //TODO : a implementer
+    }
+    
+    public void validerPlan(){}
     
     public Equipement obtenirEquipement(Coordonnee coordonnee)
     {
@@ -113,7 +114,7 @@ public class PlanDeTravail {
         return null;
     }
     
-    SortieEquipement obtenirSortieVide()
+    public SortieEquipement obtenirSortieVide()
     {
         //code temporaire juste pour eviter une erreur de type "missing return"
         SortieEquipement sortie = null;

@@ -13,6 +13,7 @@ public class Controller {
     FenetrePrincipale fenetre ;
     Station station ;
     public PlanDeTravail plan;
+    public boolean btnAjoutConvoyeurClicked = false ;
     
     public Controller()
     {
@@ -36,9 +37,16 @@ public class Controller {
     void ajouterEntreeUsine(Coordonnee coordonnees){}
     void ajouterSortieUsine(Coordonnee coordonnees){}
     void ajouterJonction(Coordonnee coordonnees){}
-    void ajouterConvoyeur(SortieEquipement equipementInitial, Equipement equipementFinal){}
     
-    void validerPlan(){}
+    void ajouterConvoyeur(SortieEquipement sortie, Equipement equipementFinal)
+    {
+        plan.ajouterConvoyeur(sortie, equipementFinal);
+    }
+    
+    void validerPlan()
+    {
+        plan.validerPlan();
+    }
     
     public Equipement obtenirEquipement(Coordonnee coordonnee)
     {
@@ -54,9 +62,6 @@ public class Controller {
     {
         plan.supprimerStation(equipement);
     }
-    
-    public void supprimerToutes(){ plan.supprimerToutes();}
-    
     
     
     SortieEquipement obtenirSortieVide()

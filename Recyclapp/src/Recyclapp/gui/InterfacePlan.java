@@ -27,6 +27,7 @@ public class InterfacePlan {
     private final Controller controller;
     private final PanneauSelectionStation panneauSelectionStation;
     private Coordonnee loc_depart = new Coordonnee();
+    private boolean premierEquipementSelectionne = false;
     
     public InterfacePlan (JPanel jpanel, Controller controller, PanneauSelectionStation panneauSelectionStation)
     {
@@ -39,10 +40,32 @@ public class InterfacePlan {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt){
                 MouseClick(evt);
+                if (controller.btnAjoutConvoyeurClicked)
+                {
+                    if (premierEquipementSelectionne)
+                    {
+                        //TODO: selectionner un deuxieme equipement et ajouter un convoyeur
+                        
+                        // on reinitialise les booleens a false pour sortir du mode ajout de convoyeur
+                        premierEquipementSelectionne = false;
+                        controller.btnAjoutConvoyeurClicked = false;
+                        
+                    }
+                    else
+                    {
+                        //TODO selectionner un premier equipement
+                        
+                        //on valide la selection du premier equipement
+                        premierEquipementSelectionne = true ;
+                       
+                    }
+                    
+                }
             }   
             @Override
             public void mousePressed(java.awt.event.MouseEvent evt)
             {
+                
                 //on stock les coordonnees de depart, elles serviront pour savoir quelle equipement deplacer lors du MouseReleased
                 Coordonnee coordonnees = new Coordonnee( evt.getX(), evt.getY());
                 loc_depart = coordonnees;

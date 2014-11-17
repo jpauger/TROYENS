@@ -5,6 +5,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import utilitaires.Coordonnee;
 
 
@@ -14,6 +15,7 @@ import utilitaires.Coordonnee;
  */
 public class Station extends Equipement  {
     
+    public ArrayList<SortieEquipement> listeSorties = new ArrayList();
     public String nomStation = "" ;
     //private final Point position = new Point(0,0);
     //private Point start_drag ;
@@ -36,13 +38,17 @@ public class Station extends Equipement  {
         this.nomStation = "nomStation";
         this.description = "descriptionStation";
         this.capaciteMax = 1000;
-        this.nombreSorties = 3;
+        this.nombreSorties = 1;
         /*this.setSize(d);
         this.setPreferredSize(d);
         this.setToolTipText("STATION");
         this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.setVisible(true);*/
+        
         this.image = new ImageIcon("src/ico/station3moyen.png");
+        
+        //ajouter une premiere sortie par defaut
+        this.listeSorties.add(new SortieEquipement(1));
         
         //on rajoute les "Listener"
         /*this.addMouseListener(this);

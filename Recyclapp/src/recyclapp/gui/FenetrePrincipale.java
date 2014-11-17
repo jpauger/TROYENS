@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 //import javax.swing.*;
 import domaine.*;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -23,6 +24,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private final InterfacePlan interfacePlan;
     private final Controller controller;
     private final PanneauSelectionStation panneauSelectionStation ;
+    
     private int dragged = 0; //L'élément que l'on déplace (1 = Station)
     private boolean dansLePlan = false; //Si le curseur est présentement à l'intérieur du plan
 
@@ -63,7 +65,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         panneauOutils = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnAjoutConvoyeur = new javax.swing.JButton();
         btnStation = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         panneauProprietes = new javax.swing.JPanel();
@@ -155,10 +157,15 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         panneauOutils.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "outils", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
         panneauOutils.setToolTipText("");
 
-        jButton1.setText("Ajouter Convoyeur");
-        jButton1.setToolTipText("");
+        btnAjoutConvoyeur.setText("Ajouter Convoyeur");
+        btnAjoutConvoyeur.setToolTipText("");
+        btnAjoutConvoyeur.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAjoutConvoyeurMouseClicked(evt);
+            }
+        });
 
-        btnStation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/station3.png"))); // NOI18N
+        btnStation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/station3moyen.png"))); // NOI18N
         btnStation.setToolTipText("");
         btnStation.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnStation.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -183,7 +190,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                 .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panneauOutilsLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jButton1))
+                        .addComponent(btnAjoutConvoyeur))
                     .addGroup(panneauOutilsLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
@@ -199,7 +206,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnAjoutConvoyeur)
                 .addGap(23, 23, 23))
         );
 
@@ -312,7 +319,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(panneauOutils, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panneauProprietes, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE))
+                            .addComponent(panneauProprietes, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(panneauPlanTravail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -332,7 +339,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panneauOutils, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(panneauProprietes, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)))
+                        .addComponent(panneauProprietes, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -357,6 +364,12 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         controller.ajouterStation(coord ); 
         interfacePlan.RafraichirPlan();
     }//GEN-LAST:event_btnStationMouseReleased
+
+    private void btnAjoutConvoyeurMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAjoutConvoyeurMouseClicked
+        // TODO add your handling code here:
+        btnAjoutConvoyeur.setFont(btnAjoutConvoyeur.getFont().deriveFont(Font.BOLD));
+        controller.btnAjoutConvoyeurClicked = true;
+    }//GEN-LAST:event_btnAjoutConvoyeurMouseClicked
 
        
     /**
@@ -395,11 +408,11 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAjoutConvoyeur;
     private javax.swing.JLabel btnStation;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JCheckBox checkboxGrilleMagetique;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
