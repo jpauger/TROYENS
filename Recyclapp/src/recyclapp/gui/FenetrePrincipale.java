@@ -3,11 +3,13 @@ import application.Controller;
 import javax.swing.ImageIcon;
 //import javax.swing.*;
 import domaine.*;
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import utilitaires.Coordonnee;
 import java.awt.Point;
+import java.awt.event.MouseAdapter;
 //import java.awt.event.ActionListener;
 
 
@@ -21,9 +23,8 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private final InterfacePlan interfacePlan;
     private final Controller controller;
     private final PanneauSelectionStation panneauSelectionStation ;
-    
-    
- 
+    private int dragged = 0; //L'élément que l'on déplace (1 = Station)
+    private boolean dansLePlan = false; //Si le curseur est présentement à l'intérieur du plan
 
     /**
      * Creates new form FenetrePrincipale
@@ -34,7 +35,13 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         controller = new Controller();
         panneauSelectionStation = new PanneauSelectionStation(this.panneauProprietes ,controller);
         panneauSelectionStation.Init();
-        interfacePlan = new InterfacePlan(this.panneauPlanTravail,controller, panneauSelectionStation);          
+        interfacePlan = new InterfacePlan(this.panneauPlanTravail,controller, panneauSelectionStation); 
+        
+        
+        /*btnStation.addMouseListener(new MouseAdapter() { 
+          @Override
+          public void mouseDragged(MouseEvent e) {
+          System.out.println("OK");}}); */
     }
  
     /**
@@ -56,8 +63,9 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         panneauOutils = new javax.swing.JPanel();
-        boutonStation = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        btnStation = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         panneauProprietes = new javax.swing.JPanel();
         panneauPlanTravail = new javax.swing.JPanel();
         panneauMenuBas = new javax.swing.JPanel();
@@ -73,6 +81,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RecyclApp - Troyens");
         setBackground(new java.awt.Color(0, 0, 0));
+        setResizable(false);
 
         panneauMenuHaut.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "menu haut [x]", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
 
@@ -125,7 +134,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(612, Short.MAX_VALUE))
+                .addContainerGap(690, Short.MAX_VALUE))
         );
         panneauMenuHautLayout.setVerticalGroup(
             panneauMenuHautLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,49 +155,52 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         panneauOutils.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "outils", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
         panneauOutils.setToolTipText("");
 
-        boutonStation.setText("Ajouter Station");
-        boutonStation.setToolTipText("");
-        boutonStation.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        jButton1.setText("Ajouter Convoyeur");
+        jButton1.setToolTipText("");
+
+        btnStation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/station3.png"))); // NOI18N
+        btnStation.setToolTipText("");
+        btnStation.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnStation.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnStation.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
-                boutonStationMouseDragged(evt);
+                btnStationMouseDragged(evt);
             }
         });
-        boutonStation.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                boutonStationMousePressed(evt);
-            }
+        btnStation.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                boutonStationMouseReleased(evt);
-            }
-        });
-        boutonStation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boutonStationActionPerformed(evt);
+                btnStationMouseReleased(evt);
             }
         });
 
-        jButton1.setText("Ajouter Convoyeur");
-        jButton1.setToolTipText("");
+        jLabel8.setText("Station");
 
         javax.swing.GroupLayout panneauOutilsLayout = new javax.swing.GroupLayout(panneauOutils);
         panneauOutils.setLayout(panneauOutilsLayout);
         panneauOutilsLayout.setHorizontalGroup(
             panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panneauOutilsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(boutonStation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(192, Short.MAX_VALUE))
+                .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panneauOutilsLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jButton1))
+                    .addGroup(panneauOutilsLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jLabel8)
+                            .addComponent(btnStation))))
+                .addContainerGap(273, Short.MAX_VALUE))
         );
         panneauOutilsLayout.setVerticalGroup(
             panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panneauOutilsLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(boutonStation)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
+                .addComponent(btnStation)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
 
         panneauProprietes.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "propriétés", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
@@ -210,6 +222,14 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         panneauPlanTravail.setBackground(new java.awt.Color(153, 153, 153));
         panneauPlanTravail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "plan de travail", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
         panneauPlanTravail.setForeground(new java.awt.Color(255, 255, 255));
+        panneauPlanTravail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panneauPlanTravailMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                panneauPlanTravailMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout panneauPlanTravailLayout = new javax.swing.GroupLayout(panneauPlanTravail);
         panneauPlanTravail.setLayout(panneauPlanTravailLayout);
@@ -219,7 +239,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         );
         panneauPlanTravailLayout.setVerticalGroup(
             panneauPlanTravailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 555, Short.MAX_VALUE)
+            .addGap(0, 561, Short.MAX_VALUE)
         );
 
         panneauMenuBas.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
@@ -292,7 +312,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(panneauOutils, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panneauProprietes, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE))
+                            .addComponent(panneauProprietes, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(panneauPlanTravail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -312,38 +332,31 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panneauOutils, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(panneauProprietes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(panneauProprietes, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void boutonStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonStationActionPerformed
-        // TODO : Ici on changera l'évenement pour celle avec les coordonnees directement dans les paramètre entrant lorsque le drag and drop sera fait
-        JFrame frame = new JFrame("Entrez coordonnées");
-        String coordonneeX = JOptionPane.showInputDialog(frame,"Coordonnée X ?");
-        String coordonneeY = JOptionPane.showInputDialog(frame,"Coordonnée Y ?");
-        Coordonnee coordonnee = new Coordonnee(Integer.parseInt(coordonneeX), Integer.parseInt(coordonneeY));
-        controller.ajouterStation(coordonnee);
-        interfacePlan.RafraichirPlan(); 
-        
-    }//GEN-LAST:event_boutonStationActionPerformed
+    private void btnStationMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStationMouseDragged
+        dragged = 1;
+    }//GEN-LAST:event_btnStationMouseDragged
 
-    private void boutonStationMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boutonStationMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_boutonStationMousePressed
+    private void panneauPlanTravailMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panneauPlanTravailMouseEntered
+        dansLePlan = true;
+    }//GEN-LAST:event_panneauPlanTravailMouseEntered
 
-    private void boutonStationMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boutonStationMouseDragged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_boutonStationMouseDragged
+    private void panneauPlanTravailMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panneauPlanTravailMouseExited
+        dansLePlan = false;
+    }//GEN-LAST:event_panneauPlanTravailMouseExited
 
-    private void boutonStationMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boutonStationMouseReleased
-        // TODO add your handling code here:
-        Coordonnee coord = new Coordonnee(evt.getX()-350 ,evt.getY());
+    private void btnStationMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStationMouseReleased
+        System.out.println("Good");
+        Coordonnee coord = new Coordonnee(evt.getX()-420 ,evt.getY());
         controller.ajouterStation(coord ); 
         interfacePlan.RafraichirPlan();
-    }//GEN-LAST:event_boutonStationMouseReleased
+    }//GEN-LAST:event_btnStationMouseReleased
 
        
     /**
@@ -382,7 +395,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton boutonStation;
+    private javax.swing.JLabel btnStation;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JCheckBox checkboxGrilleMagetique;
@@ -395,6 +408,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane2;
