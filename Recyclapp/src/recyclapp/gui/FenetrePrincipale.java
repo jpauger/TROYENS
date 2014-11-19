@@ -1,4 +1,5 @@
 package recyclapp.gui;
+import recyclapp.*;
 import application.Controller;
 import javax.swing.ImageIcon;
 //import javax.swing.*;
@@ -37,7 +38,10 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         controller = new Controller();
         panneauSelectionStation = new PanneauSelectionStation(this.panneauProprietes ,controller);
         panneauSelectionStation.Init();
-        interfacePlan = new InterfacePlan(this.panneauPlanTravail,controller, panneauSelectionStation); 
+        interfacePlan = new InterfacePlan(this.panneauPlanTravail,controller, panneauSelectionStation);
+         
+       
+        
         
         
         /*btnStation.addMouseListener(new MouseAdapter() { 

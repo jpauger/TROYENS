@@ -9,8 +9,8 @@ import java.util.ArrayList;
  */
 public class PlanDeTravail {
     
-    public ArrayList<Equipement> listeEquipement = new ArrayList<Equipement>();
-    public ArrayList<Convoyeur> listeConvoyeur = new ArrayList<Convoyeur>();
+    public ArrayList<Equipement> listeEquipement = new ArrayList();
+    public ArrayList<Convoyeur> listeConvoyeur = new ArrayList();
     boolean estMagnetique = false;
     boolean estAfficheImage = false;
     int zoom = 100 ;
@@ -91,6 +91,8 @@ public class PlanDeTravail {
     {
         Convoyeur nouveauConvoyeur = new Convoyeur(sortie, equipement);
         listeConvoyeur.add(nouveauConvoyeur);
+        sortie.setEstConnecte(true);
+        System.out.println("convoyeur ajouté");
     }
     
     public void supprimerConvoyeur (SortieEquipement sortie, Equipement equipement)

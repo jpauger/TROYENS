@@ -18,6 +18,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import utilitaires.Coordonnee;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import recyclapp.ligneConvoyeur;
+
 /**
  *
  * @author De Bayzer
@@ -27,7 +31,10 @@ public class InterfacePlan {
     private final Controller controller;
     private final PanneauSelectionStation panneauSelectionStation;
     private Coordonnee loc_depart = new Coordonnee();
+    private Coordonnee coord_depart = new Coordonnee();
     private boolean premierEquipementSelectionne = false;
+    
+    
     
     public InterfacePlan (JPanel jpanel, Controller controller, PanneauSelectionStation panneauSelectionStation)
     {
@@ -35,27 +42,39 @@ public class InterfacePlan {
         this.controller = controller;
         this.conteneur = jpanel;
         this.panneauSelectionStation = panneauSelectionStation;
+       
+        
         this.conteneur.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.conteneur.addMouseListener(new java.awt.event.MouseAdapter(){
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt){
                 MouseClick(evt);
+                
+                // ici on verifie si le bouton ajout convoyeur est cliqué
                 if (controller.btnAjoutConvoyeurClicked)
                 {
+                    // 2eme action : cas ou un premier element est deja selectionné
                     if (premierEquipementSelectionne)
                     {
-                        //TODO: selectionner un deuxieme equipement et ajouter un convoyeur
-                        
+
+                        Coordonnee coord2 = new Coordonnee(evt.getX(),evt.getY());
+                        Station station1 = (Station)controller.obtenirEquipement(coord_depart);
+                        Station station2 =(Station)controller.obtenirEquipement(coord2);
+
+                        controller.ajouterConvoyeur(station1.listeSorties.get(0), station2);
+
                         // on reinitialise les booleens a false pour sortir du mode ajout de convoyeur
                         premierEquipementSelectionne = false;
                         controller.btnAjoutConvoyeurClicked = false;
                         
-                    }
-                    else
-                    {
-                        //TODO selectionner un premier equipement
+                        RafraichirPlan();
                         
-                        //on valide la selection du premier equipement
+                    }
+                    else // 1ere action : cas ou un premier element n'est pas encore selectionné
+                    {
+                        Coordonnee coord1 = new Coordonnee(evt.getX(),evt.getY());
+                        // on stock les coordonnées de la premiere station pour y acceder lors de la 2eme action
+                        coord_depart = coord1;
                         premierEquipementSelectionne = true ;
                        
                     }
@@ -106,6 +125,9 @@ public class InterfacePlan {
     public void RafraichirPlan()
     {
         this.conteneur.removeAll();
+        
+        // affichage des equipements
+        
         for(int i=0;i<controller.plan.listeEquipement.size();i++)
         {
             Equipement equipement = controller.plan.listeEquipement.get(i);
@@ -118,10 +140,17 @@ public class InterfacePlan {
                 labelPlace.setIcon(((Station)equipement).image);
             this.conteneur.add(labelPlace);
             
+            //AFFICHAGE FOIREUX
+            this.conteneur.add(new ligneConvoyeur(controller.plan));
+            
         }
+        
+        // affichage des convoyeurs
+        
+       conteneur.add(new ligneConvoyeur(controller.plan));
+        
+        
         this.conteneur.repaint();
-    }
-    
-    
+    }  
     
 }

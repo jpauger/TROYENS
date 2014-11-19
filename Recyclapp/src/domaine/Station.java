@@ -15,7 +15,7 @@ import utilitaires.Coordonnee;
  */
 public class Station extends Equipement  {
     
-    public ArrayList<SortieEquipement> listeSorties = new ArrayList();
+    
     public String nomStation = "" ;
     //private final Point position = new Point(0,0);
     //private Point start_drag ;
@@ -48,11 +48,17 @@ public class Station extends Equipement  {
         this.image = new ImageIcon("src/ico/station3moyen.png");
         
         //ajouter une premiere sortie par defaut
-        this.listeSorties.add(new SortieEquipement(1));
+        this.listeSorties.add(new SortieEquipement(this , 1));
         
         //on rajoute les "Listener"
         /*this.addMouseListener(this);
         this.addMouseMotionListener(this);*/
+    }
+    
+    // constructeur sans parametre
+    public Station()
+    {
+        
     }
     
     public Coordonnee obtenirCoordonnees ()
@@ -114,7 +120,13 @@ public class Station extends Equipement  {
         super.nombreSorties = nouveauNbSorties;
     }
     
-    void majQuantiteSorties(){};    
+    void majQuantiteSorties(){};
+    
+    void ajouterSortie ()
+    {
+        this.listeSorties.add(new SortieEquipement(this, this.nombreSorties+1));
+        nombreSorties ++;
+    }
  
     
     

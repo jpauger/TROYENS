@@ -1,5 +1,6 @@
 package domaine;
 import java.awt.Color;
+import utilitaires.*;
 
 
 
@@ -9,9 +10,9 @@ import java.awt.Color;
  */
 public class Convoyeur {
     
-    Color couleur;
-    SortieEquipement sortie ;
-    Equipement equipement; 
+    private Color couleur;
+    private final SortieEquipement sortie ;
+    private final Equipement equipement; 
     
     
     // constructeur
@@ -29,8 +30,31 @@ public class Convoyeur {
         return informationTransit;
     }
     
-    void changerCouleur (Color nvlCouleur)
+    public void changerCouleur (Color nvlCouleur)
     {
         this.couleur = nvlCouleur ;
     }
+    
+    public int coorDepartX()
+    {
+        return this.sortie.stationMere().coordonnees.getX();
+    }
+    
+    public int coorDepartY()
+    {
+        return this.sortie.stationMere().coordonnees.getY();
+    }
+    
+   
+    
+    public int coorArriveeX()
+    {
+        return this.equipement.coordonnees.getX();
+    }
+    
+    public int coorArriveeY()
+    {
+        return this.equipement.coordonnees.getX();
+    }
+    
 }

@@ -1,5 +1,6 @@
 package domaine;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import utilitaires.*;
 
 /**
@@ -12,6 +13,7 @@ public class Equipement {
     public int nombreEntrees = 1 ;
     public int nombreSorties = 1 ;
     public final Dimension size = new Dimension(70,70);
+    public ArrayList<SortieEquipement> listeSorties = new ArrayList();
     
     LigneProduit[] obtenirInformationTransit()
     {

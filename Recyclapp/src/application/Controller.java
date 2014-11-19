@@ -38,7 +38,7 @@ public class Controller {
     void ajouterSortieUsine(Coordonnee coordonnees){}
     void ajouterJonction(Coordonnee coordonnees){}
     
-    void ajouterConvoyeur(SortieEquipement sortie, Equipement equipementFinal)
+    public void ajouterConvoyeur(SortieEquipement sortie, Equipement equipementFinal)
     {
         plan.ajouterConvoyeur(sortie, equipementFinal);
     }
