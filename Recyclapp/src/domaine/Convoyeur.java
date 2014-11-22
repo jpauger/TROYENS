@@ -19,6 +19,7 @@ public class Convoyeur {
         this.couleur = Color.GREEN;
         this.sortie = uneSortie ;
         this.equipement = unEquipement;
+        unEquipement.sortieEntrante = uneSortie;
     }
     
     LigneProduit[] obtenirInformationTransit()

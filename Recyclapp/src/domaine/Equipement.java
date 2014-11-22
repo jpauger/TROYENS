@@ -16,6 +16,7 @@ public class Equipement {
     public final Dimension size = new Dimension(70,70);
     public ImageIcon image;
     public ArrayList<SortieEquipement> listeSorties = new ArrayList();
+    public SortieEquipement sortieEntrante;
     
     LigneProduit[] obtenirInformationTransit()
     {

@@ -19,15 +19,16 @@ public class FenetreMatriceTransformation extends javax.swing.JFrame {
         {
             colonnes[i] = "Sortie " + i;
         }
+        /*Object[][] produits = new  Object[station.sortieEntrante.listeLigneProduit.size()][];
+        for(int i =0 ; i< produits.length; i++)
+        {
+            //produits[0] = new Object(){"Bois",100,0};
+        }
         Object[][] produits = {
             {"Bois",100,0},
             {"Metal",100,0},
         };
-        /*for(int i = 0 ; i <= station.listeSorties.size();i++)
-        {
-            for(int j = 0 ; j <= station.listeSorties.get(i).;j++)
-        }*/
-        tableau = new JTable(produits,colonnes);
+        tableau = new JTable(produits,colonnes);*/
         this.setLayout(new BorderLayout());
         this.add(tableau.getTableHeader(), BorderLayout.PAGE_START);
         this.add(tableau, BorderLayout.CENTER);

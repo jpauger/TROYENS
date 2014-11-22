@@ -4,9 +4,11 @@ package domaine;
  *
  * @author TROYENS
  */
-public class Produit {
-    
-    String nom ;
-    String description ;
-    
+public class Produit {    
+    public String nom ;
+    public String description ;
+
+    Produit(String bois) {
+        this.nom = nom;
+    }
 }
