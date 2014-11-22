@@ -12,8 +12,8 @@ import javax.swing.JPanel;
 public class PanneauSelectionStation extends javax.swing.JPanel {
     
     
-    private JPanel conteneur ;
-    private Controller controller;
+    private final JPanel conteneur ;
+    private final Controller controller;
     private Station station;
     
     /**

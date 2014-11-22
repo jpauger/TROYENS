@@ -1,6 +1,4 @@
-package recyclapp;
-
-import java.awt.Color ;
+package utilitaires;
 import domaine.*;
 import javax.swing.JComponent;
 import java.awt.Graphics;
@@ -9,14 +7,12 @@ import java.awt.Graphics2D;
 
 /**
  *
- * @author De Bayzer
+ * @author TROYENS
  */
 public class ligneConvoyeur extends JComponent {
     
     public PlanDeTravail plan;
-    
-    
-    
+
     public ligneConvoyeur(PlanDeTravail plan)
     {
         this.plan = plan ;
@@ -35,9 +31,7 @@ public class ligneConvoyeur extends JComponent {
             
             Graphics2D convoyeur = (Graphics2D) g;
             convoyeur.drawLine(coordX1, coordY1, coordX2, coordY2);    
-        }
-        
-        
+        } 
     }
             
     @Override

@@ -1,18 +1,9 @@
 package recyclapp.gui;
-//import recyclapp.*;
 import application.Controller;
 import javax.swing.ImageIcon;
-//import javax.swing.*;
-//import domaine.*;
-import java.awt.Graphics;
 import java.awt.Font;
-//import java.awt.event.MouseEvent;
-//import javax.swing.JFrame;
-//import javax.swing.JOptionPane;
 import utilitaires.Coordonnee;
-//import java.awt.Point;
-//import java.awt.event.MouseAdapter;
-//import java.awt.event.ActionListener;
+
 
 
 /**
@@ -22,7 +13,7 @@ import utilitaires.Coordonnee;
 public class FenetrePrincipale extends javax.swing.JFrame{
     
     
-    private final InterfacePlan interfacePlan;
+//    private final InterfacePlan interfacePlan;
     private final Controller controller;
     private final PanneauSelectionStation panneauSelectionStation ;
     
@@ -41,14 +32,9 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         panneauSelectionStation = new PanneauSelectionStation(this.panneauProprietes ,controller);
         panneauSelectionStation.Init();
         
-        panneauPlanTravailExt = new PanneauPlanTravail(this.panneauPlanTravail, controller);
+        panneauPlanTravailExt = new PanneauPlanTravail(this.panneauPlanTravail, controller, panneauSelectionStation);
         panneauPlanTravailExt.Init();
-        
-        interfacePlan = new InterfacePlan(this.panneauPlanTravail,controller, panneauSelectionStation, panneauPlanTravailExt );
-         
-       
-        
-        
+
         
         /*btnStation.addMouseListener(new MouseAdapter() { 
           @Override
@@ -372,7 +358,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         System.out.println("Good");
         Coordonnee coord = new Coordonnee(evt.getX()-420 ,evt.getY());
         controller.ajouterStation(coord ); 
-        interfacePlan.RafraichirPlan();
+        panneauPlanTravailExt.RafraichirPlan();
     }//GEN-LAST:event_btnStationMouseReleased
 
     private void btnAjoutConvoyeurMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAjoutConvoyeurMouseClicked

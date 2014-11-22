@@ -5,7 +5,6 @@
  */
 package recyclapp.gui;
 import javax.swing.JPanel;
-import javax.swing.*;
 import domaine.*;
 
 /**
@@ -14,7 +13,7 @@ import domaine.*;
  */
 public class FenetreSelection {
     
-    private JPanel conteneur;
+    private final JPanel conteneur;
     
     //constructeur de la fenetre selection
     public FenetreSelection (JPanel jpanel)

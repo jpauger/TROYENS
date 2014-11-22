@@ -1,5 +1,4 @@
 package domaine;
-import java.awt.event.MouseEvent;
 
 /**
  *

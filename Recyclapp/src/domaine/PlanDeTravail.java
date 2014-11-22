@@ -1,6 +1,5 @@
 package domaine;
 import utilitaires.*;
-import java.awt.event.*;
 import java.util.ArrayList;
 
 /**
@@ -37,8 +36,6 @@ public class PlanDeTravail {
             if(equipement.estSurEquipement(unEquipement.coordonnees))
                 listeEquipement.remove(i);
         }
-        
-
     }
     
     //deplace une station prise en paramettre vers de nouvelles coordonnées prise en parametre
@@ -58,33 +55,18 @@ public class PlanDeTravail {
     {
        EntreeUsine nouvelleEntreeUsine = new EntreeUsine();
        coordonnee = nouvelleEntreeUsine.coordonnees;
-       //nouvelleEntreeUsine.setLocation(numeroAleatoire(this.conteneur.getWidth() - nouvelleEntreeUsine.getWidth()), numeroAleatoire(this.conteneur.getHeight()-nouvelleEntreeUsine.getHeight()));
-        // on ajoute l'objet au JPanel
-        //this.conteneur.add(nouvelleEntreeUsine);
-        // on actualise le graphique
-        //this.conteneur.repaint();
     }
     
     public void ajouterSortieUsine (Coordonnee coordonnee)
     {
         SortieUsine nouvelleSortieUsine = new SortieUsine();
         coordonnee = nouvelleSortieUsine.coordonnees;
-        //ouvelleSortieUsine.setLocation(numeroAleatoire(this.conteneur.getWidth() - nouvelleSortieUsine.getWidth()), numeroAleatoire(this.conteneur.getHeight()-nouvelleSortieUsine.getHeight()));
-        // on ajoute l'objet au JPanel
-        //this.conteneur.add(nouvelleSortieUsine);
-        // on actualise le graphique
-        //this.conteneur.repaint();
     }
     
     public void ajouterJonction (Coordonnee coordonnee)
     {
         Jonction nouvelleJonction = new Jonction();
         coordonnee = nouvelleJonction.coordonnees;
-        //nouvelleJonction.setLocation(numeroAleatoire(this.conteneur.getWidth() - nouvelleJonction.getWidth()), numeroAleatoire(this.conteneur.getHeight()-nouvelleJonction.getHeight()));
-        // on ajoute l'objet au JPanel
-       // this.conteneur.add(nouvelleJonction);
-        // on actualise le graphique
-        //this.conteneur.repaint();
     }
     
     public void ajouterConvoyeur (SortieEquipement sortie, Equipement equipement)

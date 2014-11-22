@@ -2,7 +2,7 @@ package utilitaires;
 
 /**
  *
- * @author De Bayzer
+ * @author TROYENS
  */
 public class CoordonneeLigne {
     
