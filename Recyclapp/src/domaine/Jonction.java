@@ -1,6 +1,6 @@
 package domaine;
-import java.awt.Color;
-import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import utilitaires.*;
 
 /**
  *
@@ -8,7 +8,14 @@ import java.awt.event.MouseEvent;
  */
 public class Jonction extends Equipement {
     
-    Color couleur;
-    void incrementerNombreEntree(){} 
+    public Jonction (Coordonnee coordonnees)
+    {
+        super.coordonnees = coordonnees;
+        this.image = new ImageIcon("src/ico/jonction.png");
+        this.listeSorties.add(new SortieEquipement((Equipement)this, 0));  
+    }
+    
+    void augmenterNbSorties(){ super.nombreSorties++; }
+    void augmenterNbEntrees(){super.nombreEntrees++;}
     
 }

@@ -65,8 +65,8 @@ public class PlanDeTravail {
     
     public void ajouterJonction (Coordonnee coordonnee)
     {
-        Jonction nouvelleJonction = new Jonction();
-        coordonnee = nouvelleJonction.coordonnees;
+        Jonction nouvelleJonction = new Jonction(coordonnee);
+        listeEquipement.add(nouvelleJonction);
     }
     
     public void ajouterConvoyeur (SortieEquipement sortie, Equipement equipement)
