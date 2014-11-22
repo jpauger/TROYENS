@@ -1,7 +1,5 @@
 package domaine;
 import java.awt.Color;
-import utilitaires.*;
-
 
 
 /**
@@ -35,26 +33,31 @@ public class Convoyeur {
         this.couleur = nvlCouleur ;
     }
     
+    
+    
+    
+    
+    /* les coorDepart donnnent pour un convoyeur les coordonnées de départ utilisées pour sa représentation graphique */
     public int coorDepartX()
     {
-        return this.sortie.stationMere().coordonnees.getX();
+        return this.sortie.stationMere().coordonnees.getX() + (this.sortie.stationMere().size.width / 2);
     }
     
     public int coorDepartY()
     {
-        return this.sortie.stationMere().coordonnees.getY();
+        return this.sortie.stationMere().coordonnees.getY() + (this.sortie.stationMere().size.height / 2);
     }
-    
-   
-    
+  
     public int coorArriveeX()
     {
-        return this.equipement.coordonnees.getX();
+        return this.equipement.coordonnees.getX()+ (this.sortie.stationMere().size.width / 2);
     }
     
     public int coorArriveeY()
     {
-        return this.equipement.coordonnees.getX();
+        return this.equipement.coordonnees.getY()+ (this.sortie.stationMere().size.height / 2);
     }
+    
+    /* Fin coordonnées */
     
 }

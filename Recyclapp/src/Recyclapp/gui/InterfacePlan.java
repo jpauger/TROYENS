@@ -30,18 +30,20 @@ public class InterfacePlan {
     private final JPanel conteneur ;
     private final Controller controller;
     private final PanneauSelectionStation panneauSelectionStation;
+    private final PanneauPlanTravail panneauPlanTravailExt;
     private Coordonnee loc_depart = new Coordonnee();
     private Coordonnee coord_depart = new Coordonnee();
     private boolean premierEquipementSelectionne = false;
     
     
     
-    public InterfacePlan (JPanel jpanel, Controller controller, PanneauSelectionStation panneauSelectionStation)
+    public InterfacePlan (JPanel jpanel, Controller controller, PanneauSelectionStation panneauSelectionStation, PanneauPlanTravail panneauPlanTravailExt)
     {
                 
         this.controller = controller;
         this.conteneur = jpanel;
         this.panneauSelectionStation = panneauSelectionStation;
+        this.panneauPlanTravailExt = panneauPlanTravailExt ;
        
         
         this.conteneur.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -141,16 +143,20 @@ public class InterfacePlan {
             this.conteneur.add(labelPlace);
             
             //AFFICHAGE FOIREUX
-            this.conteneur.add(new ligneConvoyeur(controller.plan));
+            
             
         }
         
         // affichage des convoyeurs
         
        conteneur.add(new ligneConvoyeur(controller.plan));
-        
-        
-        this.conteneur.repaint();
+       
+       this.panneauPlanTravailExt.removeAll();
+       this.panneauPlanTravailExt.Init();
+       this.panneauPlanTravailExt.repaint();
+       
+       
+       this.conteneur.repaint();
     }  
     
 }

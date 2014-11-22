@@ -1,17 +1,17 @@
 package recyclapp.gui;
-import recyclapp.*;
+//import recyclapp.*;
 import application.Controller;
 import javax.swing.ImageIcon;
 //import javax.swing.*;
-import domaine.*;
-import java.awt.Color;
+//import domaine.*;
+import java.awt.Graphics;
 import java.awt.Font;
-import java.awt.event.MouseEvent;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+//import java.awt.event.MouseEvent;
+//import javax.swing.JFrame;
+//import javax.swing.JOptionPane;
 import utilitaires.Coordonnee;
-import java.awt.Point;
-import java.awt.event.MouseAdapter;
+//import java.awt.Point;
+//import java.awt.event.MouseAdapter;
 //import java.awt.event.ActionListener;
 
 
@@ -26,6 +26,8 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private final Controller controller;
     private final PanneauSelectionStation panneauSelectionStation ;
     
+    private final PanneauPlanTravail panneauPlanTravailExt;
+    
     private int dragged = 0; //L'élément que l'on déplace (1 = Station)
     private boolean dansLePlan = false; //Si le curseur est présentement à l'intérieur du plan
 
@@ -38,7 +40,11 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         controller = new Controller();
         panneauSelectionStation = new PanneauSelectionStation(this.panneauProprietes ,controller);
         panneauSelectionStation.Init();
-        interfacePlan = new InterfacePlan(this.panneauPlanTravail,controller, panneauSelectionStation);
+        
+        panneauPlanTravailExt = new PanneauPlanTravail(this.panneauPlanTravail, controller);
+        panneauPlanTravailExt.Init();
+        
+        interfacePlan = new InterfacePlan(this.panneauPlanTravail,controller, panneauSelectionStation, panneauPlanTravailExt );
          
        
         
@@ -410,6 +416,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAjoutConvoyeur;
