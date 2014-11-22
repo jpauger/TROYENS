@@ -92,7 +92,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             
             Graphics2D g2d = (Graphics2D) g;
             
-            BasicStroke bs1 = new BasicStroke(1, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
+            BasicStroke bs1 = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
             g2d.setStroke(bs1);
             
             
