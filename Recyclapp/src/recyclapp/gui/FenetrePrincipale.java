@@ -35,11 +35,8 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         panneauPlanTravailExt = new PanneauPlanTravail(this.panneauPlanTravail, controller, panneauSelectionStation);
         panneauPlanTravailExt.Init();
 
-        
-        /*btnStation.addMouseListener(new MouseAdapter() { 
-          @Override
-          public void mouseDragged(MouseEvent e) {
-          System.out.println("OK");}}); */
+        controller.ajouterEntreeUsine(new Coordonnee(0,0));
+        panneauPlanTravailExt.RafraichirPlan();
     }
  
     /**
@@ -164,7 +161,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         btnStation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/station3moyen.png"))); // NOI18N
         btnStation.setToolTipText("");
         btnStation.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnStation.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnStation.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnStation.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 btnStationMouseDragged(evt);
@@ -192,7 +189,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                         .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jLabel8)
                             .addComponent(btnStation))))
-                .addContainerGap(273, Short.MAX_VALUE))
+                .addContainerGap(275, Short.MAX_VALUE))
         );
         panneauOutilsLayout.setVerticalGroup(
             panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

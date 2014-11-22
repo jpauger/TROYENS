@@ -1,5 +1,7 @@
 package domaine;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author TROYENS
@@ -7,18 +9,19 @@ package domaine;
 public class SortieEquipement {
     
     private final int numeroSortie;
-    private boolean sortieParDefaut = false;
+    public boolean sortieParDefaut = false;
     private boolean estConnectee = false;
-    private final Station stationMere ;
+    private final Equipement equipementMere ;
+    public ArrayList<LigneProduit> listeLigneProduit = new ArrayList();
     
-    public SortieEquipement(Station stationMere, int unNumeroSortie)
+    public SortieEquipement(Equipement equipementMere, int unNumeroSortie)
     {
         this.numeroSortie = unNumeroSortie;
         if (this.numeroSortie == 1)
         {
             sortieParDefaut = true ;
         }
-        this.stationMere = stationMere ;
+        this.equipementMere = equipementMere ;
     }
     
     public int getNumSortie()
@@ -36,8 +39,8 @@ public class SortieEquipement {
         estConnectee = etat ;
     }
     
-    public Station stationMere()
+    public Equipement equipementMere()
     {
-        return this.stationMere ;
+        return this.equipementMere ;
     }
 }

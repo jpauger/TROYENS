@@ -13,7 +13,7 @@ public class Station extends Equipement  {
     public String nomStation = "" ;
     public double capaciteMax ;
     public String description ;
-    public ImageIcon image;
+    
     
     
     MatriceTransformation matriceTransformation ;
@@ -25,11 +25,14 @@ public class Station extends Equipement  {
         this.nomStation = "nomStation";
         this.description = "descriptionStation";
         this.capaciteMax = 1000;
-        this.nombreSorties = 1;        
+        this.nombreSorties = 2;        
         this.image = new ImageIcon("src/ico/station3moyen.png");
         
-        //ajouter une premiere sortie par defaut
-        this.listeSorties.add(new SortieEquipement(this , 1));
+        for(int i =0; i< this.nombreSorties;i++)
+        {
+            this.listeSorties.add(new SortieEquipement((Equipement)this, i));
+        }
+        ((SortieEquipement)this.listeSorties.get(0)).sortieParDefaut = true;
     }
     
     // constructeur sans parametre

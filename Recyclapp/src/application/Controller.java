@@ -34,7 +34,10 @@ public class Controller {
         plan.ajouterStation(coordonnees);
     }
     
-    void ajouterEntreeUsine(Coordonnee coordonnees){}
+    public void ajouterEntreeUsine(Coordonnee coordonnees)
+    {
+        plan.ajouterEntreeUsine(coordonnees);
+    }
     void ajouterSortieUsine(Coordonnee coordonnees){}
     void ajouterJonction(Coordonnee coordonnees){}
     

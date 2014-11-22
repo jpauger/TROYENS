@@ -5,10 +5,16 @@
  */
 package recyclapp.gui;
 
+import domaine.Station;
+
 /**
  *
  * @author De Bayzer
  */
 public class FenetreMachineTransformation {
+
+    FenetreMachineTransformation(Station station) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

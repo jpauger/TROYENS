@@ -54,10 +54,10 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                     {
 
                         Coordonnee coord2 = new Coordonnee(evt.getX(),evt.getY());
-                        Station station1 = (Station)controller.obtenirEquipement(coord_depart);
-                        Station station2 =(Station)controller.obtenirEquipement(coord2);
+                        Equipement equipementDepart = controller.obtenirEquipement(coord_depart);
+                        Equipement equipementFin = controller.obtenirEquipement(coord2);
 
-                        controller.ajouterConvoyeur(station1.listeSorties.get(0), station2);
+                        controller.ajouterConvoyeur(equipementDepart.listeSorties.get(0), equipementFin);
 
                         // on reinitialise les booleens a false pour sortir du mode ajout de convoyeur
                         premierEquipementSelectionne = false;
@@ -182,8 +182,11 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             labelPlace.setSize(equipement.size);
             labelPlace.setVisible(true);
             //TODO : centraliser la gestion du type d'équipement? Trouver une meilleur facon de procéder
-            if(equipement instanceof Station)
+            /*if(equipement instanceof Station)
                 labelPlace.setIcon(((Station)equipement).image);
+            else if(equipement instanceof EntreeUsine)
+                labelPlace.setIcon(((EntreeUsine)equipement).image);*/
+            labelPlace.setIcon(equipement.image);
             this.conteneur.add(labelPlace);
             
         }

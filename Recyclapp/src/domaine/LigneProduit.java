@@ -7,5 +7,4 @@ package domaine;
 public class LigneProduit {
     Produit produit ;
     int quantite ;
-    
 }

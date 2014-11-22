@@ -53,8 +53,8 @@ public class PlanDeTravail {
     
     public void ajouterEntreeUsine (Coordonnee coordonnee)
     {
-       EntreeUsine nouvelleEntreeUsine = new EntreeUsine();
-       coordonnee = nouvelleEntreeUsine.coordonnees;
+       EntreeUsine nouvelleEntreeUsine = new EntreeUsine(coordonnee);
+       listeEquipement.add(nouvelleEntreeUsine);
     }
     
     public void ajouterSortieUsine (Coordonnee coordonnee)

@@ -40,22 +40,22 @@ public class Convoyeur {
     /* les coorDepart donnnent pour un convoyeur les coordonnées de départ utilisées pour sa représentation graphique */
     public int coorDepartX()
     {
-        return this.sortie.stationMere().coordonnees.getX() + (this.sortie.stationMere().size.width / 2);
+        return this.sortie.equipementMere().coordonnees.getX() + (this.sortie.equipementMere().size.width / 2);
     }
     
     public int coorDepartY()
     {
-        return this.sortie.stationMere().coordonnees.getY() + (this.sortie.stationMere().size.height / 2);
+        return this.sortie.equipementMere().coordonnees.getY() + (this.sortie.equipementMere().size.height / 2);
     }
   
     public int coorArriveeX()
     {
-        return this.equipement.coordonnees.getX()+ (this.sortie.stationMere().size.width / 2);
+        return this.equipement.coordonnees.getX()+ (this.sortie.equipementMere().size.width / 2);
     }
     
     public int coorArriveeY()
     {
-        return this.equipement.coordonnees.getY()+ (this.sortie.stationMere().size.height / 2);
+        return this.equipement.coordonnees.getY()+ (this.sortie.equipementMere().size.height / 2);
     }
     
     /* Fin coordonnées */
