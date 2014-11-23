@@ -53,7 +53,6 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                     // 2eme action : cas ou un premier element est deja selectionné
                     if (premierEquipementSelectionne)
                     {
-
                         Coordonnee coord2 = new Coordonnee(evt.getX(),evt.getY());
                         Equipement equipementDepart = controller.obtenirEquipement(coord_depart);
                         Equipement equipementFin = controller.obtenirEquipement(coord2);
@@ -63,7 +62,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                             controller.ajouterConvoyeur(equipementDepart.obtenirSortieVide(), equipementFin);
                         }
 
-                        if (equipementDepart instanceof Jonction)
+                        if ( (equipementDepart instanceof Jonction) || (equipementDepart instanceof EntreeUsine))
                         {
                             equipementDepart.ajouterSortie();
                         }
