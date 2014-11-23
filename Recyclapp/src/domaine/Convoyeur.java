@@ -11,14 +11,16 @@ public class Convoyeur {
     private Color couleur;
     private final SortieEquipement sortie ;
     private final Equipement equipement; 
+    public boolean estSelectionne ;
     
     
     // constructeur
     public Convoyeur (SortieEquipement uneSortie, Equipement unEquipement)
     {
-        this.couleur = Color.GREEN;
+        this.couleur = Color.BLUE;
         this.sortie = uneSortie ;
         this.equipement = unEquipement;
+        this.estSelectionne = false ;
         unEquipement.sortieEntrante = uneSortie;
         if(unEquipement instanceof Station)
             ((Station)unEquipement).definirMatriceBase();
@@ -83,6 +85,23 @@ public class Convoyeur {
     public int coorArriveeY()
     {
         return this.equipement.coordonnees.getY()+  decalageHauteurArrivee(this.equipement);
+    }
+    
+    public void selectionner()
+    {
+        this.estSelectionne = true;
+        this.couleur = Color.CYAN;
+    }
+    
+    public void deselectionner()
+    {
+        this.estSelectionne = false ;
+        this.couleur = Color.BLUE;
+    }
+    
+    public Color getCouleur()
+    {
+        return this.couleur;
     }
     
     /* Fin coordonnées */

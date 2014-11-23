@@ -305,7 +305,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 
         jLabel1.setText("Échelle :");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "100 m", "200 m", "500 m", "1km" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5 m", "10 m", "20 m", "40 m" }));
 
         javax.swing.GroupLayout panneauMenuBasLayout = new javax.swing.GroupLayout(panneauMenuBas);
         panneauMenuBas.setLayout(panneauMenuBasLayout);
