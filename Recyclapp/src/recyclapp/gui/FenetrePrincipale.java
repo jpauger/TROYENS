@@ -48,8 +48,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
+        groupeAffichage = new javax.swing.ButtonGroup();
         panneauMenuHaut = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -225,7 +224,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                             .addComponent(jLabel9))
                         .addGap(62, 62, 62)
                         .addComponent(btnJonction)))
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
         panneauOutilsLayout.setVerticalGroup(
             panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,9 +296,11 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         textPanelCoordonnees.setText("x m , y m");
         jScrollPane2.setViewportView(textPanelCoordonnees);
 
+        groupeAffichage.add(jRadioButton1);
+        jRadioButton1.setSelected(true);
         jRadioButton1.setText("Affichage image");
 
-        jRadioButton2.setSelected(true);
+        groupeAffichage.add(jRadioButton2);
         jRadioButton2.setText("Affichage texte");
 
         jLabel1.setText("Échelle :");
@@ -474,9 +475,8 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private javax.swing.JButton btnJonction;
     private javax.swing.JButton btnSortieUsine;
     private javax.swing.JLabel btnStation;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JCheckBox checkboxGrilleMagetique;
+    private javax.swing.ButtonGroup groupeAffichage;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

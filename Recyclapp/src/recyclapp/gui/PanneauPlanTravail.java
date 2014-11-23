@@ -42,7 +42,6 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         panneauSelectionStation = unPanneauSelectionStation;
         initComponents();
         
-        this.conteneur.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.conteneur.addMouseListener(new java.awt.event.MouseAdapter(){
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt){
@@ -100,14 +99,14 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             @Override
             public void mouseReleased(java.awt.event.MouseEvent evt)
             {
-                //25 et 40 sont du au decallage entre le bord de l'image .png et l'image reelle :(
-                // pour que la souris sous bien au milieu de l'image
-                Coordonnee coord = new Coordonnee(evt.getX()-25,evt.getY()-40);
-                // on relocalise l'équipement sur lequel le MousePressed a été appliqué
-                if (controller.obtenirEquipement(loc_depart)!= null)
+                Equipement equip;
+                equip = controller.obtenirEquipement(loc_depart);
+                if(equip != null)
                 {
-                    controller.relocaliserStation(controller.obtenirEquipement(loc_depart) , coord ); 
-                    RafraichirPlan();  
+                    Coordonnee coord = new Coordonnee(evt.getX()+equip.coordonnees.getX()-loc_depart.getX(),evt.getY()+equip.coordonnees.getY()-loc_depart.getY());
+                    // on relocalise l'équipement sur lequel le MousePressed a été appliqué
+                    controller.relocaliserStation(equip , coord); 
+                    RafraichirPlan();
                 }
             }  
         });
@@ -170,6 +169,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     {
         // on vide la liste des anciennes coordonnees avant de recalculer
         listeCoordonnees.clear();
+        
         // on stocke les coordonnées des lignes a tracer dans une arrayliste
         for (int i= 0; i< this.controller.plan.listeConvoyeur.size(); i++ )
         {
@@ -179,12 +179,14 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         // on trace chacune des lignes
         for (int j= 0; j< this.listeCoordonnees.size(); j++)
         {
-            
+            Coordonnee coordRel1 = controller.coordonneeRelative(new Coordonnee(this.listeCoordonnees.get(j).getX1(),this.listeCoordonnees.get(j).getY1()));
+            Coordonnee coordRel2 = controller.coordonneeRelative(new Coordonnee(this.listeCoordonnees.get(j).getX2(),this.listeCoordonnees.get(j).getY2()));
             g.setColor(Color.BLUE);
             Graphics2D g2d = (Graphics2D) g;
             BasicStroke bs1 = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
             g2d.setStroke(bs1);
-            g2d.drawLine(this.listeCoordonnees.get(j).getX1() , this.listeCoordonnees.get(j).getY1() , this.listeCoordonnees.get(j).getX2(), this.listeCoordonnees.get(j).getY2());
+            //g2d.drawLine(this.listeCoordonnees.get(j).getX1()-camX, this.listeCoordonnees.get(j).getY1()-camY, this.listeCoordonnees.get(j).getX2()-camX, this.listeCoordonnees.get(j).getY2()-camY);
+            g2d.drawLine(coordRel1.getX(), coordRel1.getY(), coordRel2.getX(), coordRel2.getY());
         }
         
         
@@ -197,10 +199,13 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         {
             Equipement equipement = controller.plan.listeEquipement.get(i);
             JLabel labelPlace = new JLabel();
-            labelPlace.setLocation(equipement.coordonnees.getX(), equipement.coordonnees.getY());
+            Coordonnee coordRel = controller.coordonneeRelative(equipement.coordonnees);
+            labelPlace.setLocation(coordRel.getX(), coordRel.getY());
+            //labelPlace.setLocation(equipement.coordonnees.getX()-controller.plan.coord_camera.getX(), equipement.coordonnees.getY()-controller.plan.coord_camera.getY());
             labelPlace.setSize(equipement.size);
             labelPlace.setVisible(true);
             labelPlace.setIcon(equipement.image);
+            labelPlace.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             
             if(equipement.estSelectionne)
             {
@@ -218,14 +223,13 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     
     private void afficherSortiesStations (Station station)
     {
-        
         for (int i = 0; i < station.listeSorties.size() ; i++)
         {
+            Coordonnee coordRel = controller.coordonneeRelative(station.coordonnees);
             JLabel labelSortie = new JLabel();
             labelSortie.setIcon(new ImageIcon("src/ico/sortie.png") );
             
-            labelSortie.setLocation(station.coordonnees.getX()+ 40 , station.coordonnees.getY() + ( station.listeSorties.get(i).getNumSortie()*10) );
-            //labelSortie.setLocation(station.listeSorties.get(i).coordonnees.getX(),station.listeSorties.get(i).coordonnees.getY() );
+            labelSortie.setLocation(coordRel.getX()+ 40, coordRel.getY() + ( station.listeSorties.get(i).getNumSortie()*10));
             labelSortie.setSize(5,5);
             labelSortie.setVisible(true);
             this.conteneur.add(labelSortie);
@@ -276,9 +280,59 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     {
         this.conteneur.removeAll();
         afficherEquipements();
+        creerMenuCamera();
         this.Init();
         this.conteneur.repaint();
     }  
+    
+    private void creerMenuCamera()
+    {        
+        for(int i = 0; i < 4; i++)
+        {
+            JLabel fleche = new JLabel();
+            fleche.setSize(20,20);
+            fleche.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            
+            if(i == 0) {//haut
+                fleche.setLocation(778, 12);
+                fleche.setIcon(new ImageIcon("src/ico/FlecheH.png"));
+                fleche.addMouseListener(new java.awt.event.MouseAdapter(){
+                    @Override
+                    public void mouseClicked(MouseEvent e){controller.moveCamera(0,-1);
+                            RafraichirPlan();}
+                    });
+            }
+            else if(i == 1) {//droite
+                fleche.setLocation(798, 32);
+                fleche.setIcon(new ImageIcon("src/ico/FlecheD.png"));
+                fleche.addMouseListener(new java.awt.event.MouseAdapter(){
+                    @Override
+                    public void mouseClicked(MouseEvent e){controller.moveCamera(1,0);
+                            RafraichirPlan();}
+                    });
+            }
+            else if(i == 2) {//bas
+                fleche.setLocation(778, 52);
+                fleche.setIcon(new ImageIcon("src/ico/FlecheB.png"));
+                fleche.addMouseListener(new java.awt.event.MouseAdapter(){
+                    @Override
+                    public void mouseClicked(MouseEvent e){controller.moveCamera(0,1);
+                            RafraichirPlan();}
+                    });
+            }
+            else if(i == 3) {//gauche
+                fleche.setLocation(758, 32);
+                fleche.setIcon(new ImageIcon("src/ico/FlecheG.png"));
+                fleche.addMouseListener(new java.awt.event.MouseAdapter(){
+                    @Override
+                    public void mouseClicked(MouseEvent e){controller.moveCamera(-1,0);
+                            RafraichirPlan();}
+                    });
+            }            
+            
+            this.conteneur.add(fleche);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

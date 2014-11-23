@@ -88,4 +88,13 @@ public class Controller {
     void rendreGrilleMagnetique(){}
     void afficherModeImage(){}
     
+    public void moveCamera(int x, int y)
+    {
+        plan.moveCamera(x,y);
+    }
+    
+    public Coordonnee coordonneeRelative(Coordonnee coordonnee)
+    {
+        return plan.coordonneeRelative(coordonnee);
+    }
 }

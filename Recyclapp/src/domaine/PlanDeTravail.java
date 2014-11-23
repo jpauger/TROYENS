@@ -12,7 +12,9 @@ public class PlanDeTravail {
     public ArrayList<Convoyeur> listeConvoyeur = new ArrayList();
     boolean estMagnetique = false;
     boolean estAfficheImage = false;
-    int zoom = 100 ;
+    public Coordonnee coord_camera = new Coordonnee(0,0);
+    public final int zoom_values[] = new int []{5,10,20,40};
+    public int zoom = 2;
     
     
     
@@ -24,7 +26,7 @@ public class PlanDeTravail {
     
     public void ajouterStation (Coordonnee coordonnee)
     {
-        Station nouvelleStation = new Station(coordonnee);
+        Station nouvelleStation = new Station(coordonneeCliqueSurPlan(coordonnee));
         listeEquipement.add(nouvelleStation);
     }
     
@@ -33,7 +35,7 @@ public class PlanDeTravail {
         for(int i=0;i<listeEquipement.size();i++)
         {
             Equipement equipement = listeEquipement.get(i);
-            if(equipement.estSurEquipement(unEquipement.coordonnees))
+            if(equipement.estSurEquipement(coordonneeCliqueSurPlan(unEquipement.coordonnees)))
                 listeEquipement.remove(i);
         }
     }
@@ -53,19 +55,19 @@ public class PlanDeTravail {
     
     public void ajouterEntreeUsine (Coordonnee coordonnee)
     {
-       EntreeUsine nouvelleEntreeUsine = new EntreeUsine(coordonnee);
+       EntreeUsine nouvelleEntreeUsine = new EntreeUsine(coordonneeCliqueSurPlan(coordonnee));
        listeEquipement.add(nouvelleEntreeUsine);
     }
     
     public void ajouterSortieUsine (Coordonnee coordonnee)
     {
-        SortieUsine nouvelleSortieUsine = new SortieUsine(coordonnee);
+        SortieUsine nouvelleSortieUsine = new SortieUsine(coordonneeCliqueSurPlan(coordonnee));
         listeEquipement.add(nouvelleSortieUsine);
     }
     
     public void ajouterJonction (Coordonnee coordonnee)
     {
-        Jonction nouvelleJonction = new Jonction(coordonnee);
+        Jonction nouvelleJonction = new Jonction(coordonneeCliqueSurPlan(coordonnee));
         listeEquipement.add(nouvelleJonction);
     }
     
@@ -98,7 +100,7 @@ public class PlanDeTravail {
         for(int i=0;i<listeEquipement.size();i++)
         {
             Equipement equipement = listeEquipement.get(i);
-            if(equipement.estSurEquipement(coordonnee))
+            if(equipement.estSurEquipement(coordonneeCliqueSurPlan(coordonnee)))
             {
                 return equipement;
             }
@@ -124,4 +126,21 @@ public class PlanDeTravail {
         return num;
     }
        
+    public void moveCamera(int x, int y)
+    {
+        coord_camera.setX(coord_camera.getX()+x*(40/zoom));    
+        coord_camera.setY(coord_camera.getY()+y*(40/zoom));
+    }
+    
+    public Coordonnee coordonneeRelative(Coordonnee coordonnee)
+    {
+        Coordonnee c = new Coordonnee(coordonnee.getX()-coord_camera.getX(), coordonnee.getY()-coord_camera.getY());
+        return c;
+    }
+    
+    private Coordonnee coordonneeCliqueSurPlan(Coordonnee coordonnee)
+    {
+        Coordonnee c = new Coordonnee(coordonnee.getX()+coord_camera.getX(), coordonnee.getY()+coord_camera.getY());
+        return c;
+    }
 }
