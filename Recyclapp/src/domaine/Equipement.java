@@ -18,6 +18,7 @@ public class Equipement {
     public ArrayList<SortieEquipement> listeSorties = new ArrayList();
     public SortieEquipement sortieEntrante;
     public boolean estSelectionne = false;
+    public boolean entreeOccupee = false ;
     
     LigneProduit[] obtenirInformationTransit()
     {
@@ -62,5 +63,10 @@ public class Equipement {
     public void ajouterSortie ()
     {
         this.listeSorties.add(new SortieEquipement(this, this.getNombreSortie()+1));
+    }
+    
+    public void ajouterEntree()
+    {
+        this.nombreEntrees ++ ;
     }
 }

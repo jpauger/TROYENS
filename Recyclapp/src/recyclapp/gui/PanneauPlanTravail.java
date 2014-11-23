@@ -57,15 +57,14 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                         Equipement equipementDepart = controller.obtenirEquipement(coord_depart);
                         Equipement equipementFin = controller.obtenirEquipement(coord2);
                         
-                        if (! (equipementFin instanceof EntreeUsine) )
+                        if ( !(equipementFin instanceof EntreeUsine)  && !(equipementFin.entreeOccupee) )
                         {
                             controller.ajouterConvoyeur(equipementDepart.obtenirSortieVide(), equipementFin);
                             selectionner(equipementFin);
-                        }
-
-                        if ( (equipementDepart instanceof Jonction) || (equipementDepart instanceof EntreeUsine))
-                        {
-                            equipementDepart.ajouterSortie();
+                           if (! (equipementFin instanceof Jonction))
+                            {
+                                equipementFin.entreeOccupee = true;
+                            } 
                         }
 
                         // on reinitialise les booleens a false pour sortir du mode ajout de convoyeur
@@ -301,7 +300,6 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     }
     
     
-    
     /*
      * permet d'annuler la selection d'un convoyeur
      *
@@ -354,8 +352,6 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         this.Init();
         this.conteneur.repaint();
     }  
-    
-    
     
     
     private void creerMenuCamera()
