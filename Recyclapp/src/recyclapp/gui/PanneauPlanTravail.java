@@ -104,7 +104,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                 
                 if(equip != null)
                 {
-                    Coordonnee coord = new Coordonnee(evt.getX()+equip.coordonnees.getX()-loc_depart.getX(),evt.getY()+equip.coordonnees.getY()-loc_depart.getY());
+                    Coordonnee coord = new Coordonnee(evt.getX()+ equip.coordonnees.getX()-loc_depart.getX(),evt.getY()+equip.coordonnees.getY()-loc_depart.getY());
                     // on relocalise l'équipement sur lequel le MousePressed a été appliqué
                     controller.relocaliserStation(equip , coord); 
                     RafraichirPlan();
@@ -241,7 +241,9 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             JLabel labelSortie = new JLabel();
             labelSortie.setIcon(new ImageIcon("src/ico/sortie.png") );
             
-            labelSortie.setLocation(coordRel.getX()+ 40, coordRel.getY() + ( station.listeSorties.get(i).getNumSortie()*10));
+            //labelSortie.setLocation(coordRel.getX()+ 40, coordRel.getY() + 10+ ( station.listeSorties.get(i).getNumSortie() * 10 ));
+            
+            labelSortie.setLocation(coordRel.getX()+ 40, coordRel.getY() + 10 + ( station.listeSorties.get(i).getNumSortie() * 10 ));
             labelSortie.setSize(5,5);
             labelSortie.setVisible(true);
             this.conteneur.add(labelSortie);

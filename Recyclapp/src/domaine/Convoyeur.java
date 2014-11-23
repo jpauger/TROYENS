@@ -69,12 +69,23 @@ public class Convoyeur {
     /* les coorDepart donnnent pour un convoyeur les coordonnées de départ utilisées pour sa représentation graphique */
     public int coorDepartX()
     {
-        return this.sortie.equipementMere().coordonnees.getX() + decalageLargeurDepart(this.equipement) ;
+        int coorDepartX = this.sortie.equipementMere().coordonnees.getX() + decalageLargeurDepart(this.equipement) ; 
+        if (this.sortie.equipementMere() instanceof Station)
+        {
+            coorDepartX = this.sortie.equipementMere().coordonnees.getX()+ 40 ;
+        }
+        return coorDepartX ;
     }
     
     public int coorDepartY()
     {
-        return this.sortie.equipementMere().coordonnees.getY() + decalageHauteurDepart(this.equipement);
+        int coorDepartY = this.sortie.equipementMere().coordonnees.getY() + decalageHauteurDepart(this.equipement);
+        
+        if (this.sortie.equipementMere() instanceof Station)
+        {
+            coorDepartY = this.sortie.equipementMere().coordonnees.getY()+ 10 + this.sortie.getNumSortie()*10 ;
+        }
+        return coorDepartY ;
     }
   
     public int coorArriveeX()
