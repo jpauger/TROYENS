@@ -8,6 +8,7 @@ import utilitaires.*;
  */
 public class Jonction extends Equipement {
     
+    
     public Jonction (Coordonnee coordonnees)
     {
         super.coordonnees = coordonnees;
@@ -15,7 +16,7 @@ public class Jonction extends Equipement {
         this.listeSorties.add(new SortieEquipement((Equipement)this, 0));  
     }
     
-    void augmenterNbSorties(){ super.nombreSorties++; }
-    void augmenterNbEntrees(){super.nombreEntrees++;}
+    
+    void augmenterNbEntrees(){ super.nombreEntrees++; }
     
 }

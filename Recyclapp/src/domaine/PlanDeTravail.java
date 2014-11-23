@@ -71,10 +71,19 @@ public class PlanDeTravail {
     
     public void ajouterConvoyeur (SortieEquipement sortie, Equipement equipement)
     {
-        Convoyeur nouveauConvoyeur = new Convoyeur(sortie, equipement);
-        listeConvoyeur.add(nouveauConvoyeur);
-        sortie.setEstConnecte(true);
-        System.out.println("convoyeur ajouté");
+        if (! sortie.estConnecte())
+        {
+            Convoyeur nouveauConvoyeur = new Convoyeur(sortie, equipement);
+            listeConvoyeur.add(nouveauConvoyeur);
+            sortie.setEstConnecte(true);
+            System.out.println("convoyeur ajouté");
+
+            if(sortie.equipementMere() instanceof Jonction)
+            {
+                sortie.equipementMere().augmenterNbSorties();
+            }
+        }
+ 
     }
     
     public void supprimerConvoyeur (SortieEquipement sortie, Equipement equipement)

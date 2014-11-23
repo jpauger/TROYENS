@@ -17,6 +17,7 @@ public class Equipement {
     public ImageIcon image;
     public ArrayList<SortieEquipement> listeSorties = new ArrayList();
     public SortieEquipement sortieEntrante;
+    public boolean estSelectionne = false;
     
     LigneProduit[] obtenirInformationTransit()
     {
@@ -36,4 +37,6 @@ public class Equipement {
         
         return coordonneeX >= pointXHautGauche && coordonneeX <= pointXHautDroite && coordonneeY >= pointYHautGauche && coordonneeY <= pointYBasGauche;
     }
+    
+    void augmenterNbSorties(){this.nombreSorties += 1;}
 }

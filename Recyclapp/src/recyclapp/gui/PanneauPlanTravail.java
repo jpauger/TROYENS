@@ -12,6 +12,8 @@ import java.awt.BasicStroke;
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -69,6 +71,11 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                     {
                         Coordonnee coord1 = new Coordonnee(evt.getX(),evt.getY());
                         // on stock les coordonnées de la premiere station pour y acceder lors de la 2eme action
+                        Equipement equipement = controller.obtenirEquipement(coord1);
+                        equipement.estSelectionne = true ;
+                        RafraichirPlan();
+                        equipement.estSelectionne = false; 
+                        
                         coord_depart = coord1;
                         premierEquipementSelectionne = true ;
                     }
@@ -89,8 +96,11 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                 // pour que la souris sous bien au milieu de l'image
                 Coordonnee coord = new Coordonnee(evt.getX()-25,evt.getY()-40);
                 // on relocalise l'équipement sur lequel le MousePressed a été appliqué
-                controller.relocaliserStation(controller.obtenirEquipement(loc_depart) , coord ); 
-                RafraichirPlan();
+                if (controller.obtenirEquipement(loc_depart)!= null)
+                {
+                    controller.relocaliserStation(controller.obtenirEquipement(loc_depart) , coord ); 
+                    RafraichirPlan();  
+                }
             }  
         });
         
@@ -150,7 +160,8 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     
     private void afficherConvoyeurs(Graphics g)
     {
-        
+        // on vide la liste des anciennes coordonnees avant de recalculer
+        listeCoordonnees.clear();
         // on stocke les coordonnées des lignes a tracer dans une arrayliste
         for (int i= 0; i< this.controller.plan.listeConvoyeur.size(); i++ )
         {
@@ -168,8 +179,8 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             g2d.drawLine(this.listeCoordonnees.get(j).getX1() , this.listeCoordonnees.get(j).getY1() , this.listeCoordonnees.get(j).getX2(), this.listeCoordonnees.get(j).getY2());
         }
         
-        // on vide la liste après avoir tracé toutes les lignes
-        listeCoordonnees.clear();
+        
+        
     }
     
     private void afficherEquipements()
@@ -182,9 +193,36 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             labelPlace.setSize(equipement.size);
             labelPlace.setVisible(true);
             labelPlace.setIcon(equipement.image);
+            
+            if(equipement.estSelectionne)
+            {
+                labelPlace.setBorder(BorderFactory.createLineBorder(Color.yellow));
+            }
             this.conteneur.add(labelPlace);
             
+            if (equipement instanceof Station)
+            {
+                afficherSortiesStations((Station)equipement);
+            }
+            
         }
+    }
+    
+    private void afficherSortiesStations (Station station)
+    {
+        
+        for (int i = 0; i < station.listeSorties.size() ; i++)
+        {
+            JLabel labelSortie = new JLabel();
+            labelSortie.setIcon(new ImageIcon("src/ico/sortie.png") );
+            
+            labelSortie.setLocation(station.coordonnees.getX()+ 40 , station.coordonnees.getY()+ 10 + (station.listeSorties.get(i).getNumSortie()*20) );
+
+            labelSortie.setSize(5,5);
+            labelSortie.setVisible(true);
+            this.conteneur.add(labelSortie);
+        }
+        
     }
     
     /*
@@ -202,7 +240,21 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     private void MouseClick(java.awt.event.MouseEvent evt)
     {
         panneauSelectionStation.AfficherPanneauSelection(false);
-        Equipement equipement = controller.obtenirEquipement(new Coordonnee( evt.getX(), evt.getY()));
+        Coordonnee coord = new Coordonnee(evt.getX(), evt.getY());
+        
+        Equipement equipement = controller.obtenirEquipement(coord);
+        
+        // on verifie si on a cliqué sur un convoyeur
+        boolean convoyeurTrouve = false;
+        
+        for (int i =0; i< this.listeCoordonnees.size(); i++)
+        {
+            if ( coord.estSurLigne(this.listeCoordonnees.get(i))) 
+            {
+                convoyeurTrouve = true ;
+                System.out.println("Convoyeur");
+            } 
+        }
         if(equipement instanceof Station)
         {
             panneauSelectionStation.AfficherPanneauSelection(true);
