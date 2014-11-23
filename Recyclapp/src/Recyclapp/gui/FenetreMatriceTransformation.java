@@ -3,7 +3,6 @@ package recyclapp.gui;
 import domaine.Station;
 import java.awt.BorderLayout;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 public class FenetreMatriceTransformation extends javax.swing.JFrame {
     private JTable tableau;
@@ -78,6 +77,7 @@ public class FenetreMatriceTransformation extends javax.swing.JFrame {
             for (int j = 0 ; j < nCol ; j++)
                 tableData[i][j] = tableau.getValueAt(i,j);
         station.produits = tableData;
+        station.majQuantiteProduitSorties();
     }//GEN-LAST:event_btnEnregistrerActionPerformed
 
 

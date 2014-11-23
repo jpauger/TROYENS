@@ -1,4 +1,5 @@
 package domaine;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import utilitaires.Coordonnee;
 
@@ -25,6 +26,7 @@ public class Station extends Equipement  {
         this.description = "descriptionStation";
         this.capaciteMax = 1000;      
         this.image = new ImageIcon("src/ico/station3moyen.png");
+        this.nombreSorties = 2;
         
         for(int i =0; i< this.nombreSorties;i++)
         {
@@ -63,7 +65,29 @@ public class Station extends Equipement  {
         }
     }
     
-    void majQuantiteSorties(){};
+    public void majQuantiteProduitSorties()
+    {
+        //Vider la lsite de produit pour chaque sorties
+        for(int i = 0; i< listeSorties.size();i++)
+        {
+            listeSorties.get(i).listeLigneProduit.clear();
+        }
+        //Recréer la liste de produits pour chaque produit entrant multiplié par la matrice de transformation
+        for(int i = 0; i< produits.length;i++)
+        {
+            for(int j=0; j < this.sortieEntrante.listeLigneProduit.size();j++)
+            {
+               LigneProduit listeLigneProduit = this.sortieEntrante.listeLigneProduit.get(j);
+               if(produits[i][0].toString().contains(listeLigneProduit.produit.nom))
+               {
+                   for(int k = 0 ; k< this.listeSorties.size();k++)
+                   {
+                       this.listeSorties.get(k).listeLigneProduit.add(new LigneProduit(listeLigneProduit.produit,listeLigneProduit.quantite * Integer.parseInt(produits[i][k+1].toString()) / 100));
+                   }
+               }
+            }
+        }
+    };
     
     
 
