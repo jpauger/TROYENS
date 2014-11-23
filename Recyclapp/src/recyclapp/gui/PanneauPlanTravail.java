@@ -261,7 +261,6 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
 
         if(equipement instanceof Station)
         {
-            //AnnulerSelectionConvoyeurs();
             selectionner(equipement);
             panneauSelectionStation.AfficherPanneauSelection(true);
             panneauSelectionStation.AfficherStation((Station)equipement);
