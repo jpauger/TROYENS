@@ -180,7 +180,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         {
             Coordonnee coordRel1 = controller.coordonneeRelative(new Coordonnee(this.listeCoordonnees.get(j).getX1(),this.listeCoordonnees.get(j).getY1()));
             Coordonnee coordRel2 = controller.coordonneeRelative(new Coordonnee(this.listeCoordonnees.get(j).getX2(),this.listeCoordonnees.get(j).getY2()));
-            g.setColor(Color.BLUE);
+            g.setColor(this.controller.plan.listeConvoyeur.get(j).getCouleur());
             Graphics2D g2d = (Graphics2D) g;
             BasicStroke bs1 = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
             g2d.setStroke(bs1);
@@ -255,23 +255,38 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         
         Equipement equipement = controller.obtenirEquipement(coord);
         
-        // on verifie si on a cliqué sur un convoyeur
-        boolean convoyeurTrouve = false;
-        
-        for (int i =0; i< this.listeCoordonnees.size(); i++)
-        {
-            if ( coord.estSurLigne(this.listeCoordonnees.get(i))) 
-            {
-                convoyeurTrouve = true ;
-                System.out.println("Convoyeur");
-            } 
-        }
+
         if(equipement instanceof Station)
         {
+            AnnulerSelectionConvoyeurs();
             panneauSelectionStation.AfficherPanneauSelection(true);
             panneauSelectionStation.AfficherStation((Station)equipement);
         }
+        else 
+        {
+            // on verifie si on a cliqué sur un convoyeur        
+            for (int i =0; i< this.listeCoordonnees.size(); i++)
+            {
+                if ( coord.estSurLigne(this.listeCoordonnees.get(i))) 
+                {
+                    // On peut récupérer le convoyeur cliqué a ce niveau
+                    this.controller.plan.listeConvoyeur.get(i).selectionner();
+                } 
+            }
 
+        }
+
+        RafraichirPlan();
+    }
+    
+    public void AnnulerSelectionConvoyeurs()
+    {
+        for (int i =0; i< this.listeCoordonnees.size(); i++)
+            {
+                    // On peut récupérer le convoyeur cliqué a ce niveau
+                    this.controller.plan.listeConvoyeur.get(i).deselectionner();
+
+            }
         RafraichirPlan();
     }
     
