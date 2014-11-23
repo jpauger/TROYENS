@@ -145,7 +145,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     {
         super.paint(g);
         afficherConvoyeurs(g);
-        afficherStations();
+        afficherEquipements();
     }
     
     private void afficherConvoyeurs(Graphics g)
@@ -172,7 +172,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         listeCoordonnees.clear();
     }
     
-    private void afficherStations()
+    private void afficherEquipements()
     {
         for(int i=0;i<controller.plan.listeEquipement.size();i++)
         {
@@ -181,11 +181,6 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             labelPlace.setLocation(equipement.coordonnees.getX(), equipement.coordonnees.getY());
             labelPlace.setSize(equipement.size);
             labelPlace.setVisible(true);
-            //TODO : centraliser la gestion du type d'équipement? Trouver une meilleur facon de procéder
-            /*if(equipement instanceof Station)
-                labelPlace.setIcon(((Station)equipement).image);
-            else if(equipement instanceof EntreeUsine)
-                labelPlace.setIcon(((EntreeUsine)equipement).image);*/
             labelPlace.setIcon(equipement.image);
             this.conteneur.add(labelPlace);
             
@@ -220,7 +215,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     public void RafraichirPlan()
     {
         this.conteneur.removeAll();
-        afficherStations();
+        afficherEquipements();
         this.Init();
         this.conteneur.repaint();
     }  
