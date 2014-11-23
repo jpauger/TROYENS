@@ -8,7 +8,7 @@ public class Produit {
     public String nom ;
     public String description ;
 
-    Produit(String bois) {
+    Produit(String nom) {
         this.nom = nom;
     }
 }

@@ -3,6 +3,7 @@ package recyclapp.gui;
 import domaine.Station;
 import java.awt.BorderLayout;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class FenetreMatriceTransformation extends javax.swing.JFrame {
     private JTable tableau;
@@ -10,6 +11,7 @@ public class FenetreMatriceTransformation extends javax.swing.JFrame {
     /**
      * Creates new form FenetreMatriceTransformation
      */
+    @SuppressWarnings("empty-statement")
     public FenetreMatriceTransformation(Station station) {
         initComponents();
         this.station = station;
@@ -19,16 +21,8 @@ public class FenetreMatriceTransformation extends javax.swing.JFrame {
         {
             colonnes[i] = "Sortie " + i;
         }
-        /*Object[][] produits = new  Object[station.sortieEntrante.listeLigneProduit.size()][];
-        for(int i =0 ; i< produits.length; i++)
-        {
-            //produits[0] = new Object(){"Bois",100,0};
-        }
-        Object[][] produits = {
-            {"Bois",100,0},
-            {"Metal",100,0},
-        };
-        tableau = new JTable(produits,colonnes);*/
+                
+        tableau = new JTable(station.produits, colonnes);
         this.setLayout(new BorderLayout());
         this.add(tableau.getTableHeader(), BorderLayout.PAGE_START);
         this.add(tableau, BorderLayout.CENTER);
@@ -77,10 +71,13 @@ public class FenetreMatriceTransformation extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerActionPerformed
-        for(int i=0;i<tableau.getRowCount();i++)
-        {
-            
-        }
+        //DefaultTableModel dtm = (DefaultTableModel) tableau.getModel();
+        int nRow = tableau.getRowCount(), nCol = tableau.getColumnCount();
+        Object[][] tableData = new Object[nRow][nCol];
+        for (int i = 0 ; i < nRow ; i++)
+            for (int j = 0 ; j < nCol ; j++)
+                tableData[i][j] = tableau.getValueAt(i,j);
+        station.produits = tableData;
     }//GEN-LAST:event_btnEnregistrerActionPerformed
 
 

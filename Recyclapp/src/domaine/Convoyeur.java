@@ -20,6 +20,8 @@ public class Convoyeur {
         this.sortie = uneSortie ;
         this.equipement = unEquipement;
         unEquipement.sortieEntrante = uneSortie;
+        if(unEquipement instanceof Station)
+            ((Station)unEquipement).definirMatriceBase();
     }
     
     LigneProduit[] obtenirInformationTransit()
@@ -32,11 +34,7 @@ public class Convoyeur {
     public void changerCouleur (Color nvlCouleur)
     {
         this.couleur = nvlCouleur ;
-    }
-    
-    
-    
-    
+    } 
     
     /* les coorDepart donnnent pour un convoyeur les coordonnées de départ utilisées pour sa représentation graphique */
     public int coorDepartX()

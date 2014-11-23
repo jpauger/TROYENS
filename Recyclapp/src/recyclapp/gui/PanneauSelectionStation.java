@@ -49,6 +49,10 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
         txtNomStation.setText(station.nomStation);
         txtDescription.setText(station.description);
         
+        if(station.sortieEntrante == null)
+            btnMatrice.setVisible(false);
+        else
+            btnMatrice.setVisible(true);
         for(int i=0;i<station.nombreSorties;i++)
         {
             JLabel lblSortie = new JLabel("Sortie" + i);

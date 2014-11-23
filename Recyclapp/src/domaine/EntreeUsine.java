@@ -16,7 +16,7 @@ public class EntreeUsine extends Equipement {
        SortieEquipement sortieEquipement = new SortieEquipement((Equipement)this, 0);
        sortieEquipement.listeLigneProduit.add(new LigneProduit(new Produit("Bois"),1000));
        sortieEquipement.listeLigneProduit.add(new LigneProduit(new Produit("Metal"),1000));
-       this.listeSorties.add(new SortieEquipement((Equipement)this, 0));  
+       this.listeSorties.add(sortieEquipement);  
     }
     void ajouterLigneProduit (int quantite ,Produit produit ){}
    
