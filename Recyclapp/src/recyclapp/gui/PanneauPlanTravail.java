@@ -167,6 +167,9 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         afficherEquipements();
     }
     
+    /*
+    *   Permet d'afficher tous les convoyeurs du plan de travail  
+    */
     private void afficherConvoyeurs(Graphics g)
     {
         // on vide la liste des anciennes coordonnees avant de recalculer
@@ -195,6 +198,9 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         
     }
     
+    /*
+    *   Permet d'afficher tous les équipements du plan de travail
+    */
     private void afficherEquipements()
     {
         for(int i=0;i<controller.plan.listeEquipement.size();i++)
@@ -223,6 +229,11 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         }
     }
     
+    
+    /*
+    *   Permet d'afficher toutes les sorties d'une station donnée
+    *   @param station de type Station
+    */
     private void afficherSortiesStations (Station station)
     {
         for (int i = 0; i < station.listeSorties.size() ; i++)
@@ -251,6 +262,10 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     }
     
     
+    
+    /*
+     *   Gère les actions a effectuer lorsqu'on fait un simple click sur le plan de travail
+     */
     private void MouseClick(java.awt.event.MouseEvent evt)
     {
         panneauSelectionStation.AfficherPanneauSelection(false);
@@ -285,25 +300,28 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         
     }
     
+    
+    
+    /*
+     * permet d'annuler la selection d'un convoyeur
+     *
+     */
     public void AnnulerSelectionConvoyeurs()
     {
         for (int i =0; i< this.listeCoordonnees.size(); i++)
-            {
-                    // On peut récupérer le convoyeur cliqué a ce niveau
-                    this.controller.plan.listeConvoyeur.get(i).deselectionner();
+        {
+            // On pourrait récupérer le convoyeur cliqué a ce niveau
+            this.controller.plan.listeConvoyeur.get(i).deselectionner();
 
-            }
+        }
         RafraichirPlan();
     }
     
-    public void AnnulerSelectionEquipements()
-    {
-        for(int i = 0; i< this.controller.plan.listeEquipement.size(); i++)
-        {
-            this.controller.plan.listeEquipement.get(i).estSelectionne = false;
-        }
-    }
     
+    /*
+     * permet de selectionner un equipement sur le plan qui sera mis en surbrillance lors de l'affichage
+     * @param un equipement
+     */
     private void selectionner(Equipement equipement)
     {
         AnnulerSelectionEquipements();
@@ -314,10 +332,20 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             panneauSelectionStation.AfficherPanneauSelection(true);
             panneauSelectionStation.AfficherStation((Station)equipement);
         }
-
-        
     }
     
+    // annule la selection de tous les equipements du plan.
+    public void AnnulerSelectionEquipements()
+    {
+        for(int i = 0; i< this.controller.plan.listeEquipement.size(); i++)
+        {
+            this.controller.plan.listeEquipement.get(i).estSelectionne = false;
+        }
+    }
+    
+    /*
+     *  permet de rafraichir le plan de travail et réafficher tout son contenu.
+     */
     public void RafraichirPlan()
     {
         this.conteneur.removeAll();
@@ -326,6 +354,9 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         this.Init();
         this.conteneur.repaint();
     }  
+    
+    
+    
     
     private void creerMenuCamera()
     {        
