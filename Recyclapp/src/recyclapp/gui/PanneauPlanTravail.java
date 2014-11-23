@@ -60,6 +60,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                         if (! (equipementFin instanceof EntreeUsine) )
                         {
                             controller.ajouterConvoyeur(equipementDepart.obtenirSortieVide(), equipementFin);
+                            selectionner(equipementFin);
                         }
 
                         if ( (equipementDepart instanceof Jonction) || (equipementDepart instanceof EntreeUsine))
@@ -78,9 +79,9 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                         Coordonnee coord1 = new Coordonnee(evt.getX(),evt.getY());
                         // on stock les coordonnées de la premiere station pour y acceder lors de la 2eme action
                         Equipement equipement = controller.obtenirEquipement(coord1);
-                        equipement.estSelectionne = true ;
+                        
+                        selectionner(equipement);
                         RafraichirPlan();
-                        equipement.estSelectionne = false; 
                         
                         coord_depart = coord1;
                         premierEquipementSelectionne = true ;
@@ -100,6 +101,8 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             {
                 Equipement equip;
                 equip = controller.obtenirEquipement(loc_depart);
+                selectionner(equip);
+                
                 if(equip != null)
                 {
                     Coordonnee coord = new Coordonnee(evt.getX()+equip.coordonnees.getX()-loc_depart.getX(),evt.getY()+equip.coordonnees.getY()-loc_depart.getY());
@@ -258,12 +261,14 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
 
         if(equipement instanceof Station)
         {
-            AnnulerSelectionConvoyeurs();
+            //AnnulerSelectionConvoyeurs();
+            selectionner(equipement);
             panneauSelectionStation.AfficherPanneauSelection(true);
             panneauSelectionStation.AfficherStation((Station)equipement);
         }
-        else 
+        else if (!(equipement instanceof Jonction) && !(equipement instanceof EntreeUsine) && !(equipement instanceof SortieUsine))
         {
+            AnnulerSelectionConvoyeurs();
             // on verifie si on a cliqué sur un convoyeur        
             for (int i =0; i< this.listeCoordonnees.size(); i++)
             {
@@ -277,6 +282,8 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         }
 
         RafraichirPlan();
+        AnnulerSelectionEquipements();
+        
     }
     
     public void AnnulerSelectionConvoyeurs()
@@ -288,6 +295,28 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
 
             }
         RafraichirPlan();
+    }
+    
+    public void AnnulerSelectionEquipements()
+    {
+        for(int i = 0; i< this.controller.plan.listeEquipement.size(); i++)
+        {
+            this.controller.plan.listeEquipement.get(i).estSelectionne = false;
+        }
+    }
+    
+    private void selectionner(Equipement equipement)
+    {
+        AnnulerSelectionEquipements();
+        AnnulerSelectionConvoyeurs();
+        equipement.estSelectionne = true;
+        if (equipement instanceof Station)
+        {
+            panneauSelectionStation.AfficherPanneauSelection(true);
+            panneauSelectionStation.AfficherStation((Station)equipement);
+        }
+
+        
     }
     
     public void RafraichirPlan()
