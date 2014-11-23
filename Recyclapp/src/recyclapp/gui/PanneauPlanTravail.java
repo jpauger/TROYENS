@@ -59,7 +59,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                         Equipement equipementDepart = controller.obtenirEquipement(coord_depart);
                         Equipement equipementFin = controller.obtenirEquipement(coord2);
 
-                        controller.ajouterConvoyeur(equipementDepart.listeSorties.get(0), equipementFin);
+                        controller.ajouterConvoyeur(equipementDepart.obtenirSortieVide(), equipementFin);
 
                         // on reinitialise les booleens a false pour sortir du mode ajout de convoyeur
                         premierEquipementSelectionne = false;

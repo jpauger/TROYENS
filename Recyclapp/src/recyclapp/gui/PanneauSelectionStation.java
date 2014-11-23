@@ -48,6 +48,7 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
         this.station = station;
         txtNomStation.setText(station.nomStation);
         txtDescription.setText(station.description);
+        txtNombreSorties.setText(String.valueOf(station.nombreSorties));
         
         if(station.sortieEntrante == null)
             btnMatrice.setVisible(false);
@@ -84,6 +85,8 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
         btnEnregistrer = new javax.swing.JButton();
         txtCapaciteMax = new javax.swing.JTextField();
         btnMatrice = new javax.swing.JButton();
+        txtNombreSorties = new javax.swing.JTextField();
+        labelNbSorties = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "selection"));
 
@@ -114,6 +117,8 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
             }
         });
 
+        labelNbSorties.setText("nombre de sorties :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,17 +133,23 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCapaciteMax, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNomStation, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtNomStation, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(labelNbSorties)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtNombreSorties)
+                                    .addComponent(txtCapaciteMax, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))))
                         .addContainerGap(32, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnMatrice, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -160,7 +171,11 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtCapaciteMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombreSorties, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelNbSorties))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnMatrice)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(btnEnregistrer)
@@ -173,6 +188,16 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
     private void btnEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerActionPerformed
         station.nomStation = txtNomStation.getText();
         station.description = txtDescription.getText();
+        
+        //on ajoute des sorties a la station
+        int temp = Integer.parseInt(txtNombreSorties.getText());
+        if (station.nombreSorties < temp)
+        {
+            for (int i= station.nombreSorties ; i < temp ; i++)
+            {
+                station.ajouterSortie();
+            }
+        }
     }//GEN-LAST:event_btnEnregistrerActionPerformed
 
     private void btnMatriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMatriceActionPerformed
@@ -188,8 +213,10 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelNbSorties;
     private javax.swing.JTextField txtCapaciteMax;
     private javax.swing.JTextArea txtDescription;
     private javax.swing.JTextField txtNomStation;
+    private javax.swing.JTextField txtNombreSorties;
     // End of variables declaration//GEN-END:variables
 }

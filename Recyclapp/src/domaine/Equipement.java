@@ -38,5 +38,20 @@ public class Equipement {
         return coordonneeX >= pointXHautGauche && coordonneeX <= pointXHautDroite && coordonneeY >= pointYHautGauche && coordonneeY <= pointYBasGauche;
     }
     
-    void augmenterNbSorties(){this.nombreSorties += 1;}
+    public void augmenterNbSorties(){this.nombreSorties += 1;}
+    
+    public SortieEquipement obtenirSortieVide()
+    {
+        SortieEquipement sortieEquipement = this.listeSorties.get(0);
+
+        for (int i=0; i< listeSorties.size(); i++ )
+        {
+            if (!listeSorties.get(i).estConnecte())
+            {
+                sortieEquipement = listeSorties.get(i);
+            }
+        }
+        return sortieEquipement ;
+    }
+    
 }

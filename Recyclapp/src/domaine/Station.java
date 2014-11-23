@@ -24,7 +24,7 @@ public class Station extends Equipement  {
         this.nomStation = "nomStation";
         this.description = "descriptionStation";
         this.capaciteMax = 1000;
-        this.nombreSorties = 2;        
+        this.nombreSorties = 1;        
         this.image = new ImageIcon("src/ico/station3moyen.png");
         
         for(int i =0; i< this.nombreSorties;i++)
@@ -66,7 +66,7 @@ public class Station extends Equipement  {
     
     void majQuantiteSorties(){};
     
-    void ajouterSortie ()
+    public void ajouterSortie ()
     {
         this.listeSorties.add(new SortieEquipement(this, this.nombreSorties+1));
         nombreSorties ++;

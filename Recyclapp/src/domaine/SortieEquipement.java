@@ -17,6 +17,7 @@ public class SortieEquipement {
     public SortieEquipement(Equipement equipementMere, int unNumeroSortie)
     {
         this.numeroSortie = unNumeroSortie;
+        this.estConnectee = false ;
         if (this.numeroSortie == 1)
         {
             sortieParDefaut = true ;
