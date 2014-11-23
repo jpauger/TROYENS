@@ -59,8 +59,8 @@ public class PlanDeTravail {
     
     public void ajouterSortieUsine (Coordonnee coordonnee)
     {
-        SortieUsine nouvelleSortieUsine = new SortieUsine();
-        coordonnee = nouvelleSortieUsine.coordonnees;
+        SortieUsine nouvelleSortieUsine = new SortieUsine(coordonnee);
+        listeEquipement.add(nouvelleSortieUsine);
     }
     
     public void ajouterJonction (Coordonnee coordonnee)

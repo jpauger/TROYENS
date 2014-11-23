@@ -65,14 +65,7 @@ public class Station extends Equipement  {
     
     void majQuantiteSorties(){};
     
-    public int getNombreSortie()
-    {
-        return super.listeSorties.size();
-    }
     
-    public void ajouterSortie ()
-    {
-        this.listeSorties.add(new SortieEquipement(this, this.getNombreSortie()+1));
-    }
+
         
 }

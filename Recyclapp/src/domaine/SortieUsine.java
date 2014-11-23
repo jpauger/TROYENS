@@ -1,13 +1,21 @@
 package domaine;
 
+import javax.swing.ImageIcon;
+import utilitaires.Coordonnee;
+
 /**
  *
  * @author TROYENS
  */
 public class SortieUsine extends Equipement {
     
-    int nombreSorties = 0 ;
-    
-        //ici on surcharge les methodes des Listeners      
+    public SortieUsine (Coordonnee coordonnees)
+    {
+       super.coordonnees = coordonnees;          
+       this.image = new ImageIcon("src/ico/light/appbar.door.leave.png");
+       
+       this.listeSorties.add(new SortieEquipement((Equipement)this, 0));
+       this.listeSorties.get(0).setEstConnecte(true);
+    }  
     
 }

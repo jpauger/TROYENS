@@ -16,7 +16,4 @@ public class Jonction extends Equipement {
         this.listeSorties.add(new SortieEquipement((Equipement)this, 0));  
     }
     
-    
-    void augmenterNbEntrees(){ super.nombreEntrees++; }
-    
 }

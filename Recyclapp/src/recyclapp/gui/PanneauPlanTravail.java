@@ -58,8 +58,16 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                         Coordonnee coord2 = new Coordonnee(evt.getX(),evt.getY());
                         Equipement equipementDepart = controller.obtenirEquipement(coord_depart);
                         Equipement equipementFin = controller.obtenirEquipement(coord2);
+                        
+                        if (! (equipementFin instanceof EntreeUsine) )
+                        {
+                            controller.ajouterConvoyeur(equipementDepart.obtenirSortieVide(), equipementFin);
+                        }
 
-                        controller.ajouterConvoyeur(equipementDepart.obtenirSortieVide(), equipementFin);
+                        if (equipementDepart instanceof Jonction)
+                        {
+                            equipementDepart.ajouterSortie();
+                        }
 
                         // on reinitialise les booleens a false pour sortir du mode ajout de convoyeur
                         premierEquipementSelectionne = false;

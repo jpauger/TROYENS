@@ -54,4 +54,13 @@ public class Equipement {
         return sortieEquipement ;
     }
     
+    public int getNombreSortie()
+    {
+        return this.listeSorties.size();
+    }
+    
+    public void ajouterSortie ()
+    {
+        this.listeSorties.add(new SortieEquipement(this, this.getNombreSortie()+1));
+    }
 }
