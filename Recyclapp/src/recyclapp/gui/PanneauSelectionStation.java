@@ -48,7 +48,7 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
         this.station = station;
         txtNomStation.setText(station.nomStation);
         txtDescription.setText(station.description);
-        txtNombreSorties.setText(String.valueOf(station.nombreSorties));
+        txtNombreSorties.setText(String.valueOf(station.getNombreSortie()));
         
         if(station.sortieEntrante == null)
             btnMatrice.setVisible(false);
@@ -191,9 +191,9 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
         
         //on ajoute des sorties a la station
         int temp = Integer.parseInt(txtNombreSorties.getText());
-        if (station.nombreSorties < temp)
+        if (station.getNombreSortie() < temp)
         {
-            for (int i= station.nombreSorties ; i < temp ; i++)
+            for (int i= station.getNombreSortie() ; i < temp ; i++)
             {
                 station.ajouterSortie();
             }

@@ -77,6 +77,10 @@ public class Controller {
         return sortie;
     }
     
+    public void raffraichirPlan()
+    {
+        this.fenetre.panneauPlanTravailExt.RafraichirPlan();
+    }
     void rendreGrilleMagnetique(){}
     void afficherModeImage(){}
     

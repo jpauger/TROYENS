@@ -68,7 +68,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="panneauOutils" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="panneauProprietes" pref="370" max="32767" attributes="0"/>
+                      <Component id="panneauProprietes" pref="375" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -264,7 +264,7 @@
                           <Component id="btnJonction" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="186" max="32767" attributes="0"/>
+                  <EmptySpace pref="204" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

@@ -216,8 +216,8 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             JLabel labelSortie = new JLabel();
             labelSortie.setIcon(new ImageIcon("src/ico/sortie.png") );
             
-            labelSortie.setLocation(station.coordonnees.getX()+ 40 , station.coordonnees.getY()+ 10 + (station.listeSorties.get(i).getNumSortie()*20) );
-
+            labelSortie.setLocation(station.coordonnees.getX()+ 40 , station.coordonnees.getY() + ( station.listeSorties.get(i).getNumSortie()*10) );
+            //labelSortie.setLocation(station.listeSorties.get(i).coordonnees.getX(),station.listeSorties.get(i).coordonnees.getY() );
             labelSortie.setSize(5,5);
             labelSortie.setVisible(true);
             this.conteneur.add(labelSortie);

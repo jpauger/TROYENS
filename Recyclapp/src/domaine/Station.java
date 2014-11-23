@@ -23,8 +23,7 @@ public class Station extends Equipement  {
         super.coordonnees = coordonnees;
         this.nomStation = "nomStation";
         this.description = "descriptionStation";
-        this.capaciteMax = 1000;
-        this.nombreSorties = 1;        
+        this.capaciteMax = 1000;      
         this.image = new ImageIcon("src/ico/station3moyen.png");
         
         for(int i =0; i< this.nombreSorties;i++)
@@ -66,10 +65,14 @@ public class Station extends Equipement  {
     
     void majQuantiteSorties(){};
     
+    public int getNombreSortie()
+    {
+        return super.listeSorties.size();
+    }
+    
     public void ajouterSortie ()
     {
-        this.listeSorties.add(new SortieEquipement(this, this.nombreSorties+1));
-        nombreSorties ++;
+        this.listeSorties.add(new SortieEquipement(this, this.getNombreSortie()+1));
     }
         
 }

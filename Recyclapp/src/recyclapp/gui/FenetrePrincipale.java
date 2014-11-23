@@ -17,7 +17,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private final Controller controller;
     private final PanneauSelectionStation panneauSelectionStation ;
     
-    private final PanneauPlanTravail panneauPlanTravailExt;
+    public final PanneauPlanTravail panneauPlanTravailExt;
     
     private int dragged = 0; //L'élément que l'on déplace (1 = Station)
     private boolean dansLePlan = false; //Si le curseur est présentement à l'intérieur du plan
