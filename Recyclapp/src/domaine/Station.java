@@ -26,7 +26,7 @@ public class Station extends Equipement  {
         this.description = "descriptionStation";
         this.capaciteMax = 1000;      
         this.image = new ImageIcon("src/ico/station3moyen.png");
-        this.nombreSorties = 2;
+        this.nombreSorties = 1;
         
         for(int i =0; i< this.nombreSorties;i++)
         {

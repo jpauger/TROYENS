@@ -2,6 +2,8 @@ package recyclapp.gui;
 import application.Controller;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import utilitaires.Coordonnee;
 
 
@@ -400,7 +402,12 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private void btnStationMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStationMouseReleased
 
         Coordonnee coord = new Coordonnee(evt.getX()-420 ,evt.getY());
-        controller.ajouterStation(coord ); 
+        
+        JFrame frame = new JFrame("Entrez coordonnées");
+        String QteSorties = JOptionPane.showInputDialog(frame,"Nombre de sorties :");
+        int nombreSorties = Integer.parseInt(QteSorties);
+                
+        controller.ajouterStation(coord, nombreSorties ); 
         panneauPlanTravailExt.RafraichirPlan();
     }//GEN-LAST:event_btnStationMouseReleased
 

@@ -190,6 +190,9 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
         station.description = txtDescription.getText();
         
         //on ajoute des sorties a la station
+        // pour l'instant on ne permettra pas la modification du nombre de sorties
+        
+        /*
         int temp = Integer.parseInt(txtNombreSorties.getText());
         if (station.getNombreSortie() < temp)
         {
@@ -198,6 +201,7 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
                 station.ajouterSortie();
             }
         }
+        */
     }//GEN-LAST:event_btnEnregistrerActionPerformed
 
     private void btnMatriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMatriceActionPerformed

@@ -39,7 +39,7 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="panneauOutils" max="32767" attributes="0"/>
-                          <Component id="panneauProprietes" pref="429" max="32767" attributes="0"/>
+                          <Component id="panneauProprietes" pref="431" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">

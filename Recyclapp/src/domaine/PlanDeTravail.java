@@ -30,6 +30,16 @@ public class PlanDeTravail {
         listeEquipement.add(nouvelleStation);
     }
     
+    public void ajouterStation(Coordonnee coordonnee, int nombreSorties)
+    {
+        Station nouvelleStation = new Station(coordonneeCliqueSurPlan(coordonnee));
+        for (int i = 1; i< nombreSorties; i++)
+        {
+            nouvelleStation.ajouterSortie();
+        }
+        listeEquipement.add(nouvelleStation);
+    }
+    
     public void supprimerStation (Equipement unEquipement)
     {
         for(int i=0;i<listeEquipement.size();i++)
