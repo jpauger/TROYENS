@@ -255,20 +255,38 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         
         Equipement equipement = controller.obtenirEquipement(coord);
         
-        // on verifie si on a cliqué sur un convoyeur        
-        for (int i =0; i< this.listeCoordonnees.size(); i++)
-        {
-            if ( coord.estSurLigne(this.listeCoordonnees.get(i))) 
-            {
-                this.controller.plan.listeConvoyeur.get(i).selectionner();
-            } 
-        }
+
         if(equipement instanceof Station)
         {
+            AnnulerSelectionConvoyeurs();
             panneauSelectionStation.AfficherPanneauSelection(true);
             panneauSelectionStation.AfficherStation((Station)equipement);
         }
+        else 
+        {
+            // on verifie si on a cliqué sur un convoyeur        
+            for (int i =0; i< this.listeCoordonnees.size(); i++)
+            {
+                if ( coord.estSurLigne(this.listeCoordonnees.get(i))) 
+                {
+                    // On peut récupérer le convoyeur cliqué a ce niveau
+                    this.controller.plan.listeConvoyeur.get(i).selectionner();
+                } 
+            }
 
+        }
+
+        RafraichirPlan();
+    }
+    
+    public void AnnulerSelectionConvoyeurs()
+    {
+        for (int i =0; i< this.listeCoordonnees.size(); i++)
+            {
+                    // On peut récupérer le convoyeur cliqué a ce niveau
+                    this.controller.plan.listeConvoyeur.get(i).deselectionner();
+
+            }
         RafraichirPlan();
     }
     
