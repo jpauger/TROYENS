@@ -13,7 +13,7 @@ public class Equipement {
     public Coordonnee coordonnees;
     public int nombreEntrees = 1 ;
     public int nombreSorties = 1 ;
-    public final Dimension size = new Dimension(70,70);
+    public final Dimension size = new Dimension(64,64);
     public ImageIcon image;
     public ArrayList<SortieEquipement> listeSorties = new ArrayList();
     public SortieEquipement sortieEntrante;

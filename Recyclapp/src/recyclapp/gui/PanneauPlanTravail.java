@@ -29,6 +29,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     private boolean premierEquipementSelectionne = false;
     private final int TAILLECARRE = 40;
     public boolean grille = true;
+    private int dragged = 0;
     
     public java.util.ArrayList<CoordonneeLigne> listeCoordonnees = new java.util.ArrayList();
 
@@ -104,11 +105,12 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                 equip = controller.obtenirEquipement(loc_depart);
                 selectionner(equip);
                 
-                if(equip != null)
+                if(equip != null && dragged > 1)
                 {
                     Coordonnee coord = new Coordonnee(evt.getX()+ equip.coordonnees.getX()-loc_depart.getX(),evt.getY()+equip.coordonnees.getY()-loc_depart.getY());
                     // on relocalise l'équipement sur lequel le MousePressed a été appliqué
                     controller.relocaliserStation(equip , coord); 
+                    dragged = 0;
                     RafraichirPlan();
                 }
             }  
@@ -117,7 +119,9 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         this.conteneur.addMouseMotionListener(new java.awt.event.MouseMotionListener() {
 
             @Override
-            public void mouseDragged(MouseEvent e) {} //TODO : gerer l'affichage de la trace lors du Dragg
+            public void mouseDragged(MouseEvent e) {
+                dragged += 1;
+            } //TODO : gerer l'affichage de la trace lors du Dragg
 
             @Override
             public void mouseMoved(MouseEvent e) {}
@@ -191,7 +195,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             g2d.setStroke(bs);
             g2d.drawLine(x, 0, x, this.getHeight());
         }
-        for(int y = origine.getY() % TAILLECARRE; y < this.getHeight(); y += TAILLECARRE)
+        for(int y = (-origine.getY()) % TAILLECARRE; y < this.getHeight(); y += TAILLECARRE)
         {
             g.setColor(Color.gray);
             Graphics2D g2d = (Graphics2D) g;
@@ -249,6 +253,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             labelPlace.setLocation(coordRel.getX(), coordRel.getY());
             //labelPlace.setLocation(equipement.coordonnees.getX()-controller.plan.coord_camera.getX(), equipement.coordonnees.getY()-controller.plan.coord_camera.getY());
             labelPlace.setSize(equipement.size);
+            labelPlace.setHorizontalAlignment(JLabel.CENTER);
             labelPlace.setVisible(true);
             labelPlace.setIcon(equipement.image);
             labelPlace.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -282,7 +287,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             
             //labelSortie.setLocation(coordRel.getX()+ 40, coordRel.getY() + 10+ ( station.listeSorties.get(i).getNumSortie() * 10 ));
             
-            labelSortie.setLocation(coordRel.getX()+ 40, coordRel.getY() + 10 + ( station.listeSorties.get(i).getNumSortie() * 10 ));
+            labelSortie.setLocation(coordRel.getX()+ 52, coordRel.getY() + 10 + ( station.listeSorties.get(i).getNumSortie() * 10 ));
             labelSortie.setSize(5,5);
             labelSortie.setVisible(true);
             this.conteneur.add(labelSortie);
@@ -308,6 +313,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
      */
     private void MouseClick(java.awt.event.MouseEvent evt)
     {
+        dragged = 0;
         panneauSelectionStation.AfficherPanneauSelection(false);
         Coordonnee coord = new Coordonnee(evt.getX(), evt.getY());
         
@@ -390,8 +396,8 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     public void RafraichirPlan()
     {
         this.conteneur.removeAll();
-        afficherEquipements();
         creerMenuCamera();
+        afficherEquipements();
         this.Init();
         this.conteneur.repaint();
     }  
