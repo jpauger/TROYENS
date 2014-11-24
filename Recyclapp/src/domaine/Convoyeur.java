@@ -44,7 +44,6 @@ public class Convoyeur {
     private int decalageLargeurDepart(Equipement equipement)
     {
         int decalage = this.sortie.equipementMere().size.width / 2;
-        if (this.sortie.equipementMere() instanceof Jonction){ decalage -= 20 ;}
         return decalage;
     }
     
@@ -57,7 +56,6 @@ public class Convoyeur {
     private int decalageLargeurArrivee (Equipement equipement)
     {
         int decalage = this.sortie.equipementMere().size.width / 2;
-        if (this.equipement instanceof Jonction){ decalage -= 20 ;}
         return decalage;
     }
     

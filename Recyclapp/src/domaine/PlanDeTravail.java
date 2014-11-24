@@ -201,29 +201,51 @@ public class PlanDeTravail {
     }
    private Coordonnee coordonneeMagnetique(Coordonnee coord)
     {
+        int dif;
         coord.setX(coord.getX()+32);
         coord.setY(coord.getY()+32);
-        int dif = (coord.getX()+coord_camera.getX())%40;
-        if(dif != 0)
+        
+        dif = Math.abs(coord.getX()%40);
+        if(dif != 0 && coord.getX() < 0)
+        {
+            if(dif < 20)
+                coord.setX(coord.getX()+dif);
+            else
+                coord.setX(coord.getX()-(40-dif));
+        }
+        else if(dif != 0 && coord.getX() > 0)
         {
             if(dif < 20)
                 coord.setX(coord.getX()-dif);
             else
-                coord.setX(coord.getX()+dif);
+                coord.setX(coord.getX()+(40-dif));
         }
         
-        dif = (coord.getY()+coord_camera.getY())%40;
-        if(dif != 0)
+        dif = Math.abs(coord.getY()%40);        
+        if(dif != 0 && coord.getY() < 0)
+        {
+            if(dif < 20)
+                coord.setY(coord.getY()+dif);
+            else
+                coord.setY(coord.getY()-(40-dif));
+        }
+        else if(dif != 0 && coord.getY() > 0)
         {
             if(dif < 20)
                 coord.setY(coord.getY()-dif);
             else
-                coord.setY(coord.getY()+dif);
+                coord.setY(coord.getY()+(40-dif));
         }
         
-        coord.setX(coord.getX()-32-20);
-        coord.setY(coord.getY()-32-20);
+        coord.setX(coord.getX()-32);
+        coord.setY(coord.getY()-32);
                         
-        return coord;        
+        return coord;       
+    }
+    
+    public void centrerCamera()
+    {
+        coord_camera.setX(-420);
+        coord_camera.setY(-300);
     }
 }

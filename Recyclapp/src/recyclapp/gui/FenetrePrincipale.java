@@ -36,7 +36,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         panneauPlanTravailExt = new PanneauPlanTravail(this.panneauPlanTravail, controller, panneauSelectionStation);
         panneauPlanTravailExt.Init();
 
-        controller.ajouterEntreeUsine(new Coordonnee(0,250));
+        controller.ajouterEntreeUsine(new Coordonnee(200-12,300-32));
         panneauPlanTravailExt.RafraichirPlan();
     }
  

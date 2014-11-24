@@ -444,9 +444,10 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     
     private void creerMenuCamera()
     {        
+        JLabel fleche;
         for(int i = 0; i < 4; i++)
         {
-            JLabel fleche = new JLabel();
+            fleche = new JLabel();
             fleche.setSize(20,20);
             fleche.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             
@@ -489,6 +490,17 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             
             this.conteneur.add(fleche);
         }
+        fleche = new JLabel();
+        fleche.setSize(20,20);
+        fleche.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        fleche.setLocation(778,32);
+        fleche.setIcon(new ImageIcon("src/ico/FlecheC.png"));
+        fleche.addMouseListener(new java.awt.event.MouseAdapter(){
+        @Override
+        public void mouseClicked(MouseEvent e){controller.centrerCamera();
+            RafraichirPlan();}
+        });
+        this.conteneur.add(fleche);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

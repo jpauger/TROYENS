@@ -116,4 +116,9 @@ public class Controller {
     {
         plan.MettreAJourQuantiteTous();
     }
+    
+    public void centrerCamera()
+    {
+        plan.centrerCamera();
+    }
 }
