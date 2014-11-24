@@ -102,4 +102,9 @@ public class Controller {
     {
         return plan.coordonneeRelative(coordonnee);
     }
+    
+    public Coordonnee coordonneeCliqueSurPlan(Coordonnee coordonnee)
+    {
+        return plan.coordonneeCliqueSurPlan(coordonnee);
+    }
 }

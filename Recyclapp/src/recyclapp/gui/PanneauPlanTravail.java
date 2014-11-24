@@ -27,6 +27,8 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     private Coordonnee loc_depart = new Coordonnee();
     private Coordonnee coord_depart = new Coordonnee();
     private boolean premierEquipementSelectionne = false;
+    private final int TAILLECARRE = 40;
+    public boolean grille = true;
     
     public java.util.ArrayList<CoordonneeLigne> listeCoordonnees = new java.util.ArrayList();
 
@@ -162,8 +164,46 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     public void paint (Graphics g)
     {
         super.paint(g);
+        if(grille)
+            afficherGrille(g);
         afficherConvoyeurs(g);
         afficherEquipements();
+    }
+    
+    /*
+    *   Permet d'afficher la grille
+    */
+    private void afficherGrille(Graphics g)
+    {
+        BasicStroke bs;
+        Coordonnee origine = controller.plan.coord_camera;
+        int bold = 20/controller.plan.zoom_values[controller.plan.zoom] * TAILLECARRE;
+        for(int x = origine.getX() % TAILLECARRE; x < this.getWidth(); x += TAILLECARRE)
+        {
+            g.setColor(Color.gray);
+            Graphics2D g2d = (Graphics2D) g;
+            if(x == -origine.getX())
+                bs = new BasicStroke(3, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
+            else if((x + origine.getX()) % bold == 0)
+                bs = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
+            else
+                bs = new BasicStroke(1, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
+            g2d.setStroke(bs);
+            g2d.drawLine(x, 0, x, this.getHeight());
+        }
+        for(int y = origine.getY() % TAILLECARRE; y < this.getHeight(); y += TAILLECARRE)
+        {
+            g.setColor(Color.gray);
+            Graphics2D g2d = (Graphics2D) g;
+            if(y == -origine.getY())
+                bs = new BasicStroke(3, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
+            else if((y + origine.getY()) % bold == 0)
+                bs = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
+            else
+                bs = new BasicStroke(1, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
+            g2d.setStroke(bs);
+            g2d.drawLine(0, y, this.getWidth(), y);
+        }
     }
     
     /*
@@ -189,7 +229,6 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             Graphics2D g2d = (Graphics2D) g;
             BasicStroke bs1 = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
             g2d.setStroke(bs1);
-            //g2d.drawLine(this.listeCoordonnees.get(j).getX1()-camX, this.listeCoordonnees.get(j).getY1()-camY, this.listeCoordonnees.get(j).getX2()-camX, this.listeCoordonnees.get(j).getY2()-camY);
             g2d.drawLine(coordRel1.getX(), coordRel1.getY(), coordRel2.getX(), coordRel2.getY());
         }
         
@@ -326,7 +365,8 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     {
         AnnulerSelectionEquipements();
         AnnulerSelectionConvoyeurs();
-        equipement.estSelectionne = true;
+        if(equipement != null)
+            equipement.estSelectionne = true;
         if (equipement instanceof Station)
         {
             panneauSelectionStation.AfficherPanneauSelection(true);

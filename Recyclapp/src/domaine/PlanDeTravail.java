@@ -12,8 +12,8 @@ public class PlanDeTravail {
     public ArrayList<Convoyeur> listeConvoyeur = new ArrayList();
     boolean estMagnetique = false;
     boolean estAfficheImage = false;
-    public Coordonnee coord_camera = new Coordonnee(0,0);
-    public final int zoom_values[] = new int []{5,10,20,40};
+    public Coordonnee coord_camera = new Coordonnee(-420,-300);
+    public final int zoom_values[] = new int []{1,2,4,10};
     public int zoom = 2;
     
     
@@ -138,8 +138,8 @@ public class PlanDeTravail {
        
     public void moveCamera(int x, int y)
     {
-        coord_camera.setX(coord_camera.getX()+x*(40/zoom));    
-        coord_camera.setY(coord_camera.getY()+y*(40/zoom));
+        coord_camera.setX(coord_camera.getX()+x*20);    
+        coord_camera.setY(coord_camera.getY()+y*20);
     }
     
     public Coordonnee coordonneeRelative(Coordonnee coordonnee)
@@ -148,7 +148,7 @@ public class PlanDeTravail {
         return c;
     }
     
-    private Coordonnee coordonneeCliqueSurPlan(Coordonnee coordonnee)
+    public Coordonnee coordonneeCliqueSurPlan(Coordonnee coordonnee)
     {
         Coordonnee c = new Coordonnee(coordonnee.getX()+coord_camera.getX(), coordonnee.getY()+coord_camera.getY());
         return c;

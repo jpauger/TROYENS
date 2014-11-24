@@ -21,7 +21,6 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     
     public final PanneauPlanTravail panneauPlanTravailExt;
     
-    private int dragged = 0; //L'élément que l'on déplace (1 = Station)
     private boolean dansLePlan = false; //Si le curseur est présentement à l'intérieur du plan
 
     /**
@@ -37,7 +36,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         panneauPlanTravailExt = new PanneauPlanTravail(this.panneauPlanTravail, controller, panneauSelectionStation);
         panneauPlanTravailExt.Init();
 
-        controller.ajouterEntreeUsine(new Coordonnee(0,0));
+        controller.ajouterEntreeUsine(new Coordonnee(420-38,300-38));
         panneauPlanTravailExt.RafraichirPlan();
     }
  
@@ -71,13 +70,14 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         panneauPlanTravail = new javax.swing.JPanel();
         panneauMenuBas = new javax.swing.JPanel();
         labelCoordonnees = new javax.swing.JLabel();
-        checkboxGrilleMagetique = new javax.swing.JCheckBox();
+        checkboxGrilleMagnetique = new javax.swing.JCheckBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         textPanelCoordonnees = new javax.swing.JTextPane();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        echelle = new javax.swing.JComboBox();
+        checkboxGrille = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RecyclApp - Troyens");
@@ -135,7 +135,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(810, Short.MAX_VALUE))
         );
         panneauMenuHautLayout.setVerticalGroup(
             panneauMenuHautLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,11 +169,6 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         btnStation.setToolTipText("");
         btnStation.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnStation.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnStation.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                btnStationMouseDragged(evt);
-            }
-        });
         btnStation.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 btnStationMouseReleased(evt);
@@ -287,6 +282,11 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         panneauPlanTravail.setBackground(new java.awt.Color(153, 153, 153));
         panneauPlanTravail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "plan de travail", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
         panneauPlanTravail.setForeground(new java.awt.Color(255, 255, 255));
+        panneauPlanTravail.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                panneauPlanTravailMouseMoved(evt);
+            }
+        });
         panneauPlanTravail.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 panneauPlanTravailMouseEntered(evt);
@@ -300,21 +300,21 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         panneauPlanTravail.setLayout(panneauPlanTravailLayout);
         panneauPlanTravailLayout.setHorizontalGroup(
             panneauPlanTravailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 830, Short.MAX_VALUE)
         );
         panneauPlanTravailLayout.setVerticalGroup(
             panneauPlanTravailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 518, Short.MAX_VALUE)
+            .addGap(0, 579, Short.MAX_VALUE)
         );
 
         panneauMenuBas.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
 
         labelCoordonnees.setText("Coordonnées :");
 
-        checkboxGrilleMagetique.setText("Grille manétique");
+        checkboxGrilleMagnetique.setText("Grille magnétique");
 
+        textPanelCoordonnees.setEditable(false);
         textPanelCoordonnees.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.background"));
-        textPanelCoordonnees.setText("x m , y m");
         jScrollPane2.setViewportView(textPanelCoordonnees);
 
         groupeAffichage.add(jRadioButton1);
@@ -326,7 +326,21 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 
         jLabel1.setText("Échelle :");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5 m", "10 m", "20 m", "40 m" }));
+        echelle.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1 m", "2 m", "4 m", "10 m" }));
+        echelle.setSelectedIndex(2);
+        echelle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                echelleActionPerformed(evt);
+            }
+        });
+
+        checkboxGrille.setSelected(true);
+        checkboxGrille.setText("Grille");
+        checkboxGrille.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkboxGrilleActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panneauMenuBasLayout = new javax.swing.GroupLayout(panneauMenuBas);
         panneauMenuBas.setLayout(panneauMenuBasLayout);
@@ -339,22 +353,33 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(98, 98, 98)
                 .addGroup(panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addGap(100, 100, 100)
-                .addComponent(checkboxGrilleMagetique)
+                    .addComponent(jRadioButton2)
+                    .addComponent(jRadioButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(checkboxGrille)
+                    .addComponent(checkboxGrilleMagnetique))
                 .addGap(77, 77, 77)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(echelle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panneauMenuBasLayout.setVerticalGroup(
             panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panneauMenuBasLayout.createSequentialGroup()
-                .addComponent(jRadioButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton2))
+                .addGroup(panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panneauMenuBasLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(checkboxGrille)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(panneauMenuBasLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jRadioButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton2)
+                    .addComponent(checkboxGrilleMagnetique)))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneauMenuBasLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,9 +387,8 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(labelCoordonnees))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(checkboxGrilleMagetique)
                         .addComponent(jLabel1)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(echelle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -382,10 +406,10 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                             .addComponent(panneauOutils, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panneauMenuBas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(panneauMenuBas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 13, Short.MAX_VALUE))
-                            .addComponent(panneauPlanTravail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(panneauPlanTravail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -397,20 +421,16 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panneauOutils, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panneauProprietes, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE))
+                        .addComponent(panneauProprietes, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panneauPlanTravail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panneauMenuBas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnStationMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStationMouseDragged
-        dragged = 1;
-    }//GEN-LAST:event_btnStationMouseDragged
 
     private void panneauPlanTravailMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panneauPlanTravailMouseEntered
         dansLePlan = true;
@@ -421,19 +441,20 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     }//GEN-LAST:event_panneauPlanTravailMouseExited
 
     private void btnStationMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStationMouseReleased
-
-        Coordonnee coord = new Coordonnee(evt.getX()-330 ,evt.getY());
+        if(dansLePlan)
+        {
+            Coordonnee coord = new Coordonnee(evt.getX()-330 ,evt.getY());
         
-        JFrame frame = new JFrame("Entrez coordonnées");
-        String QteSorties = JOptionPane.showInputDialog(frame,"Nombre de sorties :");
-        int nombreSorties = Integer.parseInt(QteSorties);
+            JFrame frame = new JFrame("Entrez coordonnées");
+            String QteSorties = JOptionPane.showInputDialog(frame,"Nombre de sorties :");
+            int nombreSorties = Integer.parseInt(QteSorties);
                 
-        controller.ajouterStation(coord, nombreSorties ); 
-        panneauPlanTravailExt.RafraichirPlan();
+            controller.ajouterStation(coord, nombreSorties ); 
+            panneauPlanTravailExt.RafraichirPlan();
+        }
     }//GEN-LAST:event_btnStationMouseReleased
 
     private void btnAjoutConvoyeurMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAjoutConvoyeurMouseClicked
-        // TODO add your handling code here:
         btnAjoutConvoyeur.setFont(btnAjoutConvoyeur.getFont().deriveFont(Font.BOLD));
         controller.btnAjoutConvoyeurClicked = true;
     }//GEN-LAST:event_btnAjoutConvoyeurMouseClicked
@@ -443,11 +464,12 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     }//GEN-LAST:event_btnJonctionMouseDragged
 
     private void btnJonctionMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnJonctionMouseReleased
-        // TODO add your handling code here:
-        
-        Coordonnee coord = new Coordonnee(evt.getX()- 170 ,evt.getY()+ 100);
-        controller.ajouterJonction(coord ); 
-        panneauPlanTravailExt.RafraichirPlan();
+        if(dansLePlan)
+        {
+            Coordonnee coord = new Coordonnee(evt.getX()- 170 ,evt.getY()+ 100);
+            controller.ajouterJonction(coord ); 
+            panneauPlanTravailExt.RafraichirPlan();
+        }
     }//GEN-LAST:event_btnJonctionMouseReleased
 
     private void btnSortieUsineMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSortieUsineMouseDragged
@@ -455,11 +477,30 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     }//GEN-LAST:event_btnSortieUsineMouseDragged
 
     private void btnSortieUsineMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSortieUsineMouseReleased
-        // TODO add your handling code here:
-        Coordonnee coord = new Coordonnee(evt.getX()-190 ,evt.getY());
-        controller.ajouterSortieUsine(coord ); 
-        panneauPlanTravailExt.RafraichirPlan();
+        if(dansLePlan)
+        {
+            Coordonnee coord = new Coordonnee(evt.getX()-190 ,evt.getY());
+            controller.ajouterSortieUsine(coord ); 
+            panneauPlanTravailExt.RafraichirPlan();
+        }
     }//GEN-LAST:event_btnSortieUsineMouseReleased
+
+    private void checkboxGrilleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkboxGrilleActionPerformed
+        checkboxGrilleMagnetique.setEnabled(checkboxGrille.isSelected());
+        panneauPlanTravailExt.grille = checkboxGrille.isSelected();
+        panneauPlanTravailExt.RafraichirPlan();
+    }//GEN-LAST:event_checkboxGrilleActionPerformed
+
+    private void echelleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_echelleActionPerformed
+        controller.plan.zoom = echelle.getSelectedIndex();
+        panneauPlanTravailExt.RafraichirPlan();
+    }//GEN-LAST:event_echelleActionPerformed
+
+    private void panneauPlanTravailMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panneauPlanTravailMouseMoved
+        Coordonnee coord = controller.plan.coordonneeCliqueSurPlan(new Coordonnee(evt.getX(),evt.getY()));
+        int zoom = controller.plan.zoom_values[controller.plan.zoom];
+        textPanelCoordonnees.setText("x:"+coord.getX()*zoom/40+"m\ny:"+coord.getY()*zoom/40+"m");
+    }//GEN-LAST:event_panneauPlanTravailMouseMoved
 
        
     /**
@@ -503,9 +544,10 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private javax.swing.JButton btnJonction;
     private javax.swing.JButton btnSortieUsine;
     private javax.swing.JLabel btnStation;
-    private javax.swing.JCheckBox checkboxGrilleMagetique;
+    private javax.swing.JCheckBox checkboxGrille;
+    private javax.swing.JCheckBox checkboxGrilleMagnetique;
+    private javax.swing.JComboBox echelle;
     private javax.swing.ButtonGroup groupeAffichage;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
