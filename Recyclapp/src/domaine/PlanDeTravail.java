@@ -153,4 +153,23 @@ public class PlanDeTravail {
         Coordonnee c = new Coordonnee(coordonnee.getX()+coord_camera.getX(), coordonnee.getY()+coord_camera.getY());
         return c;
     }
+    
+    public void changerZoom(int nouveauZoom)
+    {
+        float ratio = (float)zoom_values[zoom]/zoom_values[nouveauZoom];
+        Coordonnee centre = new Coordonnee(coord_camera.getX()+420,coord_camera.getY()+300);
+        coord_camera.setX(coord_camera.getX()+420);
+        coord_camera.setX((int)(Math.ceil(coord_camera.getX()*ratio)-420));
+        coord_camera.setY(coord_camera.getY()+300);
+        coord_camera.setY((int)(Math.round(coord_camera.getY()*ratio)-300));
+        for(int i=0;i<listeEquipement.size();i++)
+        {
+            Equipement equipement = listeEquipement.get(i);
+            equipement.coordonnees.setX(equipement.coordonnees.getX()+equipement.image.getIconWidth()/2);
+            equipement.coordonnees.setX((int)(Math.ceil(equipement.coordonnees.getX()*ratio)-equipement.image.getIconWidth()/2));
+            equipement.coordonnees.setY(equipement.coordonnees.getY()+equipement.image.getIconHeight()/2);
+            equipement.coordonnees.setY((int)(Math.round(equipement.coordonnees.getY()*ratio)-equipement.image.getIconHeight()/2));
+        }
+        zoom = nouveauZoom;
+    }
 }

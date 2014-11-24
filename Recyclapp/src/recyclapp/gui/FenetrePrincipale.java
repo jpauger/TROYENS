@@ -135,7 +135,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(810, Short.MAX_VALUE))
+                .addContainerGap(798, Short.MAX_VALUE))
         );
         panneauMenuHautLayout.setVerticalGroup(
             panneauMenuHautLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,28 +368,26 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         panneauMenuBasLayout.setVerticalGroup(
             panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panneauMenuBasLayout.createSequentialGroup()
-                .addGroup(panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panneauMenuBasLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(checkboxGrille)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(panneauMenuBasLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jRadioButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton2)
-                    .addComponent(checkboxGrilleMagnetique)))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneauMenuBasLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(labelCoordonnees))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(echelle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneauMenuBasLayout.createSequentialGroup()
+                        .addGroup(panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panneauMenuBasLayout.createSequentialGroup()
+                                .addComponent(checkboxGrille)
+                                .addGap(3, 3, 3)
+                                .addComponent(checkboxGrilleMagnetique))
+                            .addComponent(jLabel1)
+                            .addComponent(echelle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, panneauMenuBasLayout.createSequentialGroup()
+                        .addGroup(panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.CENTER, panneauMenuBasLayout.createSequentialGroup()
+                                .addComponent(jRadioButton1)
+                                .addGap(4, 4, 4)
+                                .addComponent(jRadioButton2))
+                            .addComponent(labelCoordonnees, javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -409,7 +407,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                             .addComponent(panneauMenuBas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(panneauPlanTravail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 98, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -421,7 +419,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panneauOutils, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panneauProprietes, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))
+                        .addComponent(panneauProprietes, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panneauPlanTravail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -438,6 +436,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 
     private void panneauPlanTravailMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panneauPlanTravailMouseExited
         dansLePlan = false;
+        textPanelCoordonnees.setText("");
     }//GEN-LAST:event_panneauPlanTravailMouseExited
 
     private void btnStationMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStationMouseReleased
@@ -492,7 +491,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     }//GEN-LAST:event_checkboxGrilleActionPerformed
 
     private void echelleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_echelleActionPerformed
-        controller.plan.zoom = echelle.getSelectedIndex();
+        controller.plan.changerZoom(echelle.getSelectedIndex());
         panneauPlanTravailExt.RafraichirPlan();
     }//GEN-LAST:event_echelleActionPerformed
 

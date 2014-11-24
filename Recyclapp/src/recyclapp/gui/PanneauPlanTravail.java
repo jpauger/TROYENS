@@ -178,7 +178,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         BasicStroke bs;
         Coordonnee origine = controller.plan.coord_camera;
         int bold = 20/controller.plan.zoom_values[controller.plan.zoom] * TAILLECARRE;
-        for(int x = origine.getX() % TAILLECARRE; x < this.getWidth(); x += TAILLECARRE)
+        for(int x = (-origine.getX()) % TAILLECARRE; x < this.getWidth(); x += TAILLECARRE)
         {
             g.setColor(Color.gray);
             Graphics2D g2d = (Graphics2D) g;

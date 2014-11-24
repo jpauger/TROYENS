@@ -107,4 +107,9 @@ public class Controller {
     {
         return plan.coordonneeCliqueSurPlan(coordonnee);
     }
+    
+    public void changerZoom(int nouveauZoom)
+    {
+        plan.changerZoom(nouveauZoom);
+    }
 }
