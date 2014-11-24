@@ -65,6 +65,8 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         btnJonction = new javax.swing.JButton();
         btnSortieUsine = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         panneauProprietes = new javax.swing.JPanel();
         panneauPlanTravail = new javax.swing.JPanel();
         panneauMenuBas = new javax.swing.JPanel();
@@ -133,7 +135,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(702, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panneauMenuHautLayout.setVerticalGroup(
             panneauMenuHautLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,8 +156,9 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         panneauOutils.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "outils", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
         panneauOutils.setToolTipText("");
 
-        btnAjoutConvoyeur.setText("Ajouter Convoyeur");
+        btnAjoutConvoyeur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.vector.line.png"))); // NOI18N
         btnAjoutConvoyeur.setToolTipText("");
+        btnAjoutConvoyeur.setEnabled(false);
         btnAjoutConvoyeur.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAjoutConvoyeurMouseClicked(evt);
@@ -164,7 +167,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 
         btnStation.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/station3moyen.png"))); // NOI18N
         btnStation.setToolTipText("");
-        btnStation.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnStation.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnStation.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnStation.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -179,8 +182,9 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 
         jLabel8.setText("Station");
 
-        btnJonction.setText("Jonction");
+        btnJonction.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/jonction.png"))); // NOI18N
         btnJonction.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnJonction.setEnabled(false);
         btnJonction.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 btnJonctionMouseDragged(evt);
@@ -195,6 +199,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         btnSortieUsine.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.door.leave.png"))); // NOI18N
         btnSortieUsine.setToolTipText("");
         btnSortieUsine.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSortieUsine.setEnabled(false);
         btnSortieUsine.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 btnSortieUsineMouseDragged(evt);
@@ -206,7 +211,11 @@ public class FenetrePrincipale extends javax.swing.JFrame{
             }
         });
 
-        jLabel9.setText("sortie usine");
+        jLabel9.setText("sortie d' usine");
+
+        jLabel10.setText("Jonction");
+
+        jLabel11.setText("Convoyeur");
 
         javax.swing.GroupLayout panneauOutilsLayout = new javax.swing.GroupLayout(panneauOutils);
         panneauOutils.setLayout(panneauOutilsLayout);
@@ -215,37 +224,47 @@ public class FenetrePrincipale extends javax.swing.JFrame{
             .addGroup(panneauOutilsLayout.createSequentialGroup()
                 .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panneauOutilsLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(btnAjoutConvoyeur))
-                    .addGroup(panneauOutilsLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addGap(67, 67, 67)
+                        .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
-                            .addComponent(btnStation)
-                            .addComponent(btnSortieUsine, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
-                        .addGap(62, 62, 62)
-                        .addComponent(btnJonction)))
-                .addContainerGap(206, Short.MAX_VALUE))
+                            .addComponent(btnStation, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneauOutilsLayout.createSequentialGroup()
+                        .addContainerGap(65, Short.MAX_VALUE)
+                        .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel11)
+                            .addComponent(btnAjoutConvoyeur, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(72, 72, 72)))
+                .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneauOutilsLayout.createSequentialGroup()
+                        .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnJonction, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSortieUsine, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
+                        .addGap(92, 92, 92))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneauOutilsLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(84, 84, 84))))
         );
         panneauOutilsLayout.setVerticalGroup(
             panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panneauOutilsLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnStation, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSortieUsine, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panneauOutilsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnStation))
-                    .addGroup(panneauOutilsLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(btnJonction)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
+                    .addComponent(btnAjoutConvoyeur, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnJonction, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSortieUsine, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(btnAjoutConvoyeur)
+                .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel10))
                 .addGap(23, 23, 23))
         );
 
@@ -285,7 +304,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         );
         panneauPlanTravailLayout.setVerticalGroup(
             panneauPlanTravailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 593, Short.MAX_VALUE)
+            .addGap(0, 518, Short.MAX_VALUE)
         );
 
         panneauMenuBas.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
@@ -359,12 +378,14 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                     .addComponent(panneauMenuHaut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(panneauOutils, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panneauProprietes, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(panneauProprietes, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                            .addComponent(panneauOutils, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panneauPlanTravail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panneauMenuBas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(panneauMenuBas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 13, Short.MAX_VALUE))
+                            .addComponent(panneauPlanTravail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -372,15 +393,15 @@ public class FenetrePrincipale extends javax.swing.JFrame{
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panneauMenuHaut, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(panneauPlanTravail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panneauMenuBas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panneauOutils, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(panneauProprietes, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panneauProprietes, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panneauPlanTravail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addComponent(panneauMenuBas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -401,7 +422,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 
     private void btnStationMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStationMouseReleased
 
-        Coordonnee coord = new Coordonnee(evt.getX()-420 ,evt.getY());
+        Coordonnee coord = new Coordonnee(evt.getX()-330 ,evt.getY());
         
         JFrame frame = new JFrame("Entrez coordonnées");
         String QteSorties = JOptionPane.showInputDialog(frame,"Nombre de sorties :");
@@ -424,7 +445,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private void btnJonctionMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnJonctionMouseReleased
         // TODO add your handling code here:
         
-        Coordonnee coord = new Coordonnee(evt.getX()- 290 ,evt.getY()+ 10);
+        Coordonnee coord = new Coordonnee(evt.getX()- 170 ,evt.getY()+ 100);
         controller.ajouterJonction(coord ); 
         panneauPlanTravailExt.RafraichirPlan();
     }//GEN-LAST:event_btnJonctionMouseReleased
@@ -435,7 +456,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 
     private void btnSortieUsineMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSortieUsineMouseReleased
         // TODO add your handling code here:
-        Coordonnee coord = new Coordonnee(evt.getX()-440 ,evt.getY()+90);
+        Coordonnee coord = new Coordonnee(evt.getX()-190 ,evt.getY());
         controller.ajouterSortieUsine(coord ); 
         panneauPlanTravailExt.RafraichirPlan();
     }//GEN-LAST:event_btnSortieUsineMouseReleased
@@ -486,6 +507,8 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private javax.swing.ButtonGroup groupeAffichage;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
