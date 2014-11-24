@@ -10,8 +10,8 @@ public class PlanDeTravail {
     
     public ArrayList<Equipement> listeEquipement = new ArrayList();
     public ArrayList<Convoyeur> listeConvoyeur = new ArrayList();
-    boolean estMagnetique = false;
-    boolean estAfficheImage = false;
+    public boolean estMagnetique = false;
+    public boolean estAfficheImage = false;
     public Coordonnee coord_camera = new Coordonnee(-420,-300);
     public final int zoom_values[] = new int []{1,2,4,10};
     public int zoom = 2;
@@ -26,7 +26,10 @@ public class PlanDeTravail {
     
     public void ajouterStation (Coordonnee coordonnee)
     {
-        Station nouvelleStation = new Station(coordonneeCliqueSurPlan(coordonnee),1);
+        Coordonnee coord = coordonneeCliqueSurPlan(coordonnee);
+        if(estMagnetique)
+            coord = coordonneeMagnetique(coord);
+        Station nouvelleStation = new Station(coord);
         listeEquipement.add(nouvelleStation);
     }
     
@@ -34,6 +37,10 @@ public class PlanDeTravail {
     {
         Station nouvelleStation = new Station(coordonneeCliqueSurPlan(coordonnee), nombreSorties);
         /*for (int i = 1; i< nombreSorties; i++)
+        Coordonnee coord = coordonneeCliqueSurPlan(coordonnee);
+        if(estMagnetique)
+            coord = coordonneeMagnetique(coord);
+        Station nouvelleStation = new Station(coord);
         {
             nouvelleStation.ajouterSortie();
         }*/
@@ -57,6 +64,8 @@ public class PlanDeTravail {
         {
             if ( equipement.coordonnees == unEquipement.coordonnees)
             {
+                if(estMagnetique)
+                    coorArrivee = coordonneeMagnetique(coorArrivee);
                 equipement.coordonnees = coorArrivee;
             }
         }
@@ -65,19 +74,28 @@ public class PlanDeTravail {
     
     public void ajouterEntreeUsine (Coordonnee coordonnee)
     {
-       EntreeUsine nouvelleEntreeUsine = new EntreeUsine(coordonneeCliqueSurPlan(coordonnee));
+        Coordonnee coord = coordonneeCliqueSurPlan(coordonnee);
+        if(estMagnetique)
+            coord = coordonneeMagnetique(coord);
+       EntreeUsine nouvelleEntreeUsine = new EntreeUsine(coord);
        listeEquipement.add(nouvelleEntreeUsine);
     }
     
     public void ajouterSortieUsine (Coordonnee coordonnee)
     {
-        SortieUsine nouvelleSortieUsine = new SortieUsine(coordonneeCliqueSurPlan(coordonnee));
+        Coordonnee coord = coordonneeCliqueSurPlan(coordonnee);
+        if(estMagnetique)
+            coord = coordonneeMagnetique(coord);
+        SortieUsine nouvelleSortieUsine = new SortieUsine(coord);
         listeEquipement.add(nouvelleSortieUsine);
     }
     
     public void ajouterJonction (Coordonnee coordonnee)
     {
-        Jonction nouvelleJonction = new Jonction(coordonneeCliqueSurPlan(coordonnee));
+        Coordonnee coord = coordonneeCliqueSurPlan(coordonnee);
+        if(estMagnetique)
+            coord = coordonneeMagnetique(coord);
+        Jonction nouvelleJonction = new Jonction(coord);
         listeEquipement.add(nouvelleJonction);
     }
     
@@ -165,10 +183,10 @@ public class PlanDeTravail {
         for(int i=0;i<listeEquipement.size();i++)
         {
             Equipement equipement = listeEquipement.get(i);
-            equipement.coordonnees.setX(equipement.coordonnees.getX()+equipement.image.getIconWidth()/2);
-            equipement.coordonnees.setX((int)(Math.ceil(equipement.coordonnees.getX()*ratio)-equipement.image.getIconWidth()/2));
-            equipement.coordonnees.setY(equipement.coordonnees.getY()+equipement.image.getIconHeight()/2);
-            equipement.coordonnees.setY((int)(Math.round(equipement.coordonnees.getY()*ratio)-equipement.image.getIconHeight()/2));
+            equipement.coordonnees.setX(equipement.coordonnees.getX()+equipement.size.width/2);
+            equipement.coordonnees.setX((int)(Math.ceil(equipement.coordonnees.getX()*ratio)-equipement.size.width/2));
+            equipement.coordonnees.setY(equipement.coordonnees.getY()+equipement.size.height/2);
+            equipement.coordonnees.setY((int)(Math.round(equipement.coordonnees.getY()*ratio)-equipement.size.height/2));
         }
         zoom = nouveauZoom;
     }
@@ -184,5 +202,32 @@ public class PlanDeTravail {
                 ((Station)equipement).majQuantiteMatrice();
             }
         }
+    
+   private Coordonnee coordonneeMagnetique(Coordonnee coord)
+    {
+        coord.setX(coord.getX()+32);
+        coord.setY(coord.getY()+32);
+        int dif = (coord.getX()+coord_camera.getX())%40;
+        if(dif != 0)
+        {
+            if(dif < 20)
+                coord.setX(coord.getX()-dif);
+            else
+                coord.setX(coord.getX()+dif);
+        }
+        
+        dif = (coord.getY()+coord_camera.getY())%40;
+        if(dif != 0)
+        {
+            if(dif < 20)
+                coord.setY(coord.getY()-dif);
+            else
+                coord.setY(coord.getY()+dif);
+        }
+        
+        coord.setX(coord.getX()-32-20);
+        coord.setY(coord.getY()-32-20);
+                        
+        return coord;        
     }
 }

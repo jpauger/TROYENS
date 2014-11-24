@@ -169,6 +169,11 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         btnStation.setToolTipText("");
         btnStation.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnStation.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnStation.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                btnStationMouseDragged(evt);
+            }
+        });
         btnStation.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 btnStationMouseReleased(evt);
@@ -283,6 +288,9 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         panneauPlanTravail.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "plan de travail", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
         panneauPlanTravail.setForeground(new java.awt.Color(255, 255, 255));
         panneauPlanTravail.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                panneauPlanTravailMouseDragged(evt);
+            }
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 panneauPlanTravailMouseMoved(evt);
             }
@@ -312,6 +320,11 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         labelCoordonnees.setText("Coordonnées :");
 
         checkboxGrilleMagnetique.setText("Grille magnétique");
+        checkboxGrilleMagnetique.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkboxGrilleMagnetiqueActionPerformed(evt);
+            }
+        });
 
         textPanelCoordonnees.setEditable(false);
         textPanelCoordonnees.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.background"));
@@ -442,7 +455,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private void btnStationMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStationMouseReleased
         if(dansLePlan)
         {
-            Coordonnee coord = new Coordonnee(evt.getX()-330 ,evt.getY());
+            Coordonnee coord = new Coordonnee(evt.getX()-337 ,evt.getY()-2);
         
             JFrame frame = new JFrame("Entrez coordonnées");
             String QteSorties = JOptionPane.showInputDialog(frame,"Nombre de sorties :");
@@ -459,26 +472,36 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     }//GEN-LAST:event_btnAjoutConvoyeurMouseClicked
 
     private void btnJonctionMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnJonctionMouseDragged
-        // TODO add your handling code here:
+        if(dansLePlan)
+        {
+            Coordonnee coord = controller.plan.coordonneeCliqueSurPlan(new Coordonnee(evt.getX(),evt.getY()));
+            int zoom = controller.plan.zoom_values[controller.plan.zoom];
+            textPanelCoordonnees.setText("x:"+coord.getX()*zoom/40+"m\ny:"+coord.getY()*zoom/40+"m");
+        }
     }//GEN-LAST:event_btnJonctionMouseDragged
 
     private void btnJonctionMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnJonctionMouseReleased
         if(dansLePlan)
         {
-            Coordonnee coord = new Coordonnee(evt.getX()- 170 ,evt.getY()+ 100);
+            Coordonnee coord = new Coordonnee(evt.getX()- 186 ,evt.getY()+ 106);
             controller.ajouterJonction(coord ); 
             panneauPlanTravailExt.RafraichirPlan();
         }
     }//GEN-LAST:event_btnJonctionMouseReleased
 
     private void btnSortieUsineMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSortieUsineMouseDragged
-        // TODO add your handling code here:
+        if(dansLePlan)
+        {
+            Coordonnee coord = controller.plan.coordonneeCliqueSurPlan(new Coordonnee(evt.getX(),evt.getY()));
+            int zoom = controller.plan.zoom_values[controller.plan.zoom];
+            textPanelCoordonnees.setText("x:"+coord.getX()*zoom/40+"m\ny:"+coord.getY()*zoom/40+"m");
+        }
     }//GEN-LAST:event_btnSortieUsineMouseDragged
 
     private void btnSortieUsineMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSortieUsineMouseReleased
         if(dansLePlan)
         {
-            Coordonnee coord = new Coordonnee(evt.getX()-190 ,evt.getY());
+            Coordonnee coord = new Coordonnee(evt.getX()-185 ,evt.getY()-2);
             controller.ajouterSortieUsine(coord ); 
             panneauPlanTravailExt.RafraichirPlan();
         }
@@ -501,6 +524,24 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         textPanelCoordonnees.setText("x:"+coord.getX()*zoom/40+"m\ny:"+coord.getY()*zoom/40+"m");
     }//GEN-LAST:event_panneauPlanTravailMouseMoved
 
+    private void checkboxGrilleMagnetiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkboxGrilleMagnetiqueActionPerformed
+        controller.plan.estMagnetique = checkboxGrilleMagnetique.isSelected();
+    }//GEN-LAST:event_checkboxGrilleMagnetiqueActionPerformed
+
+    private void panneauPlanTravailMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panneauPlanTravailMouseDragged
+        Coordonnee coord = controller.plan.coordonneeCliqueSurPlan(new Coordonnee(evt.getX(),evt.getY()));
+        int zoom = controller.plan.zoom_values[controller.plan.zoom];
+        textPanelCoordonnees.setText("x:"+coord.getX()*zoom/40+"m\ny:"+coord.getY()*zoom/40+"m");
+    }//GEN-LAST:event_panneauPlanTravailMouseDragged
+
+    private void btnStationMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStationMouseDragged
+        if(dansLePlan)
+        {
+            Coordonnee coord = controller.plan.coordonneeCliqueSurPlan(new Coordonnee(evt.getX(),evt.getY()));
+            int zoom = controller.plan.zoom_values[controller.plan.zoom];
+            textPanelCoordonnees.setText("x:"+coord.getX()*zoom/40+"m\ny:"+coord.getY()*zoom/40+"m");
+        }
+    }//GEN-LAST:event_btnStationMouseDragged
        
     /**
      * @param args the command line arguments
