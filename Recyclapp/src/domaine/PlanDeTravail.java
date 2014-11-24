@@ -29,21 +29,16 @@ public class PlanDeTravail {
         Coordonnee coord = coordonneeCliqueSurPlan(coordonnee);
         if(estMagnetique)
             coord = coordonneeMagnetique(coord);
-        Station nouvelleStation = new Station(coord);
+        Station nouvelleStation = new Station(coord,1);
         listeEquipement.add(nouvelleStation);
     }
     
     public void ajouterStation(Coordonnee coordonnee, int nombreSorties)
     {
-        Station nouvelleStation = new Station(coordonneeCliqueSurPlan(coordonnee), nombreSorties);
-        /*for (int i = 1; i< nombreSorties; i++)
         Coordonnee coord = coordonneeCliqueSurPlan(coordonnee);
         if(estMagnetique)
             coord = coordonneeMagnetique(coord);
-        Station nouvelleStation = new Station(coord);
-        {
-            nouvelleStation.ajouterSortie();
-        }*/
+        Station nouvelleStation = new Station(coord, nombreSorties);
         listeEquipement.add(nouvelleStation);
     }
     
@@ -107,6 +102,7 @@ public class PlanDeTravail {
             listeConvoyeur.add(nouveauConvoyeur);
             sortie.setEstConnecte(true);
             System.out.println("convoyeur ajouté");
+            MettreAJourQuantiteTous();
 
             if(sortie.equipementMere() instanceof Jonction)
             {
@@ -202,7 +198,7 @@ public class PlanDeTravail {
                 ((Station)equipement).majQuantiteMatrice();
             }
         }
-    
+    }
    private Coordonnee coordonneeMagnetique(Coordonnee coord)
     {
         coord.setX(coord.getX()+32);
