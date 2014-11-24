@@ -323,6 +323,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         else if (!(equipement instanceof Jonction) && !(equipement instanceof EntreeUsine) && !(equipement instanceof SortieUsine))
         {
             AnnulerSelectionConvoyeurs();
+            coord = controller.plan.coordonneeCliqueSurPlan(coord);
             // on verifie si on a cliqué sur un convoyeur        
             for (int i =0; i< this.listeCoordonnees.size(); i++)
             {
