@@ -26,17 +26,17 @@ public class PlanDeTravail {
     
     public void ajouterStation (Coordonnee coordonnee)
     {
-        Station nouvelleStation = new Station(coordonneeCliqueSurPlan(coordonnee));
+        Station nouvelleStation = new Station(coordonneeCliqueSurPlan(coordonnee),1);
         listeEquipement.add(nouvelleStation);
     }
     
     public void ajouterStation(Coordonnee coordonnee, int nombreSorties)
     {
-        Station nouvelleStation = new Station(coordonneeCliqueSurPlan(coordonnee));
-        for (int i = 1; i< nombreSorties; i++)
+        Station nouvelleStation = new Station(coordonneeCliqueSurPlan(coordonnee), nombreSorties);
+        /*for (int i = 1; i< nombreSorties; i++)
         {
             nouvelleStation.ajouterSortie();
-        }
+        }*/
         listeEquipement.add(nouvelleStation);
     }
     
@@ -171,5 +171,18 @@ public class PlanDeTravail {
             equipement.coordonnees.setY((int)(Math.round(equipement.coordonnees.getY()*ratio)-equipement.image.getIconHeight()/2));
         }
         zoom = nouveauZoom;
+    }
+    
+    public void MettreAJourQuantiteTous()
+    {
+        for(int i = 0;i<listeEquipement.size();i++)
+        {
+            Equipement equipement = listeEquipement.get(i);
+            if(equipement instanceof Station)
+            {
+                ((Station)equipement).majQuantiteProduitSorties();
+                ((Station)equipement).majQuantiteMatrice();
+            }
+        }
     }
 }

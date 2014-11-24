@@ -205,7 +205,7 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEnregistrerActionPerformed
 
     private void btnMatriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMatriceActionPerformed
-        fenetreTransformation = new FenetreMatriceTransformation(station);
+        fenetreTransformation = new FenetreMatriceTransformation(station,controller);
         
     }//GEN-LAST:event_btnMatriceActionPerformed
 

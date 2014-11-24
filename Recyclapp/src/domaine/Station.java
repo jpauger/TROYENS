@@ -19,14 +19,14 @@ public class Station extends Equipement  {
     public MatriceTransformation matriceTransformation ;
     
     //constructeur
-    public Station (Coordonnee coordonnees)
+    public Station (Coordonnee coordonnees, int nombreSorties)
     {
         super.coordonnees = coordonnees;
         this.nomStation = "nomStation";
         this.description = "descriptionStation";
         this.capaciteMax = 1000;      
         this.image = new ImageIcon("src/ico/station3moyen.png");
-        this.nombreSorties = 1;
+        this.nombreSorties = nombreSorties;
         
         for(int i =0; i< this.nombreSorties;i++)
         {
@@ -63,6 +63,15 @@ public class Station extends Equipement  {
                 }
             } 
         }
+    }
+    
+    public void majQuantiteMatrice()
+    {
+        for(int i =0 ; i< produits.length; i++)
+        {
+            LigneProduit ligneProduit = this.sortieEntrante.listeLigneProduit.get(i);
+            produits[i][0] = ligneProduit.produit.nom + "(" + ligneProduit.quantite + ")";
+        } 
     }
     
     public void majQuantiteProduitSorties()

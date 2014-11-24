@@ -112,4 +112,8 @@ public class Controller {
     {
         plan.changerZoom(nouveauZoom);
     }
+    public void MettreAJourQuantiteTous()
+    {
+        plan.MettreAJourQuantiteTous();
+    }
 }

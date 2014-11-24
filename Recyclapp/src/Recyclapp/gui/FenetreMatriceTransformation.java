@@ -1,19 +1,23 @@
 package recyclapp.gui;
 
+import application.Controller;
 import domaine.Station;
 import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 public class FenetreMatriceTransformation extends javax.swing.JFrame {
     private JTable tableau;
     private Station station;
+    private Controller controller;
     /**
      * Creates new form FenetreMatriceTransformation
      */
     @SuppressWarnings("empty-statement")
-    public FenetreMatriceTransformation(Station station) {
+    public FenetreMatriceTransformation(Station station,Controller controller) {
         initComponents();
         this.station = station;
+        this.controller = controller;
         String[] colonnes = new String[station.nombreSorties + 1];
         colonnes[0] = "Produits";
         for(int i = 1;i<=station.nombreSorties;i++)
@@ -76,10 +80,31 @@ public class FenetreMatriceTransformation extends javax.swing.JFrame {
         for (int i = 0 ; i < nRow ; i++)
             for (int j = 0 ; j < nCol ; j++)
                 tableData[i][j] = tableau.getValueAt(i,j);
-        station.produits = tableData;
-        station.majQuantiteProduitSorties();
+        if(!validerMatrice(tableData))
+        {
+            JOptionPane.showMessageDialog(this, "Le pourcentage pour la somme de chaque matière doit égaler 100%");
+        }
+        else
+        {
+            station.produits = tableData;
+            controller.MettreAJourQuantiteTous();
+        }
     }//GEN-LAST:event_btnEnregistrerActionPerformed
 
+    private boolean validerMatrice(Object[][] tableData)
+    {
+        for(int i=0;i<tableData.length;i++)
+        {
+            int total =0;
+            for(int j=1; j<tableData[i].length;j++)
+            {
+                total += Integer.parseInt(tableData[i][j].toString());
+            }
+            if(total != 100)
+                return false;
+        }
+        return true;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnregistrer;

@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.ToolTipManager;
 
 /**
  *
@@ -48,7 +49,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt){
                 MouseClick(evt);
-                
+                AfficherToolTip(evt);
                 // ici on verifie si le bouton ajout convoyeur est cliqué
                 if (controller.btnAjoutConvoyeurClicked)
                 {
@@ -301,7 +302,45 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         return coordLigne ;
     }
     
+    private void AfficherToolTip(java.awt.event.MouseEvent evt)
+    {
+        Coordonnee coordonnee = new Coordonnee(evt.getX(),evt.getY());
+        Equipement equipement = controller.obtenirEquipement(coordonnee);
+        if(equipement != null)
+        {
+            ToolTipManager.sharedInstance().setInitialDelay(0);
+            
+            this.conteneur.setToolTipText(preparerMessageQuantite(equipement));
+            //Hack pour afficher le tooltip sans avoir à bouger
+            ToolTipManager.sharedInstance().mouseMoved(new MouseEvent(this.conteneur,
+                    MouseEvent.MOUSE_MOVED,
+                    System.currentTimeMillis(),
+                    0,
+                    evt.getX(),
+                    evt.getY(),
+                    0,
+                    false));
+        }
+        else
+            this.conteneur.setToolTipText(null);
+    }
     
+    private String preparerMessageQuantite(Equipement equipement)
+    {
+        String message = "<html>";
+        if(equipement.sortieEntrante != null)
+        {
+            for(int i = 0; i <equipement.sortieEntrante.listeLigneProduit.size();i++)
+            {
+                LigneProduit ligneProduit = equipement.sortieEntrante.listeLigneProduit.get(i);
+                message += ligneProduit.produit.nom + " : " + ligneProduit.quantite + "Kg/h<br>";
+            }
+            message += "</html>";
+        }
+        else
+            message =null;
+        return message;
+    }
     
     /*
      *   Gère les actions a effectuer lorsqu'on fait un simple click sur le plan de travail
