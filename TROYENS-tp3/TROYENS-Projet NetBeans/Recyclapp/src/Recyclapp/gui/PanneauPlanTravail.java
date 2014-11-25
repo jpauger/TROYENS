@@ -344,7 +344,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         {
             Coordonnee coordRel = controller.coordonneeRelative(station.coordonnees);
             JLabel labelSortie = new JLabel();
-            labelSortie.setIcon(new ImageIcon("src/ico/sortie.png") );
+            labelSortie.setIcon(new ImageIcon(getClass().getResource("/ico/sortie.png")));
             
             //labelSortie.setLocation(coordRel.getX()+ 40, coordRel.getY() + 10+ ( station.listeSorties.get(i).getNumSortie() * 10 ));
             
@@ -541,7 +541,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             
             if(i == 0) {//haut
                 fleche.setLocation(778, 12);
-                fleche.setIcon(new ImageIcon("src/ico/FlecheH.png"));
+                fleche.setIcon(new ImageIcon(getClass().getResource("/ico/FlecheH.png")));
                 fleche.addMouseListener(new java.awt.event.MouseAdapter(){
                     @Override
                     public void mouseClicked(MouseEvent e){controller.moveCamera(0,-1);
@@ -550,7 +550,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             }
             else if(i == 1) {//droite
                 fleche.setLocation(798, 32);
-                fleche.setIcon(new ImageIcon("src/ico/FlecheD.png"));
+                fleche.setIcon(new ImageIcon(getClass().getResource("/ico/FlecheD.png")));
                 fleche.addMouseListener(new java.awt.event.MouseAdapter(){
                     @Override
                     public void mouseClicked(MouseEvent e){controller.moveCamera(1,0);
@@ -559,7 +559,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             }
             else if(i == 2) {//bas
                 fleche.setLocation(778, 52);
-                fleche.setIcon(new ImageIcon("src/ico/FlecheB.png"));
+                fleche.setIcon(new ImageIcon(getClass().getResource("/ico/FlecheB.png")));
                 fleche.addMouseListener(new java.awt.event.MouseAdapter(){
                     @Override
                     public void mouseClicked(MouseEvent e){controller.moveCamera(0,1);
@@ -568,7 +568,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             }
             else if(i == 3) {//gauche
                 fleche.setLocation(758, 32);
-                fleche.setIcon(new ImageIcon("src/ico/FlecheG.png"));
+                fleche.setIcon(new ImageIcon(getClass().getResource("/ico/FlecheG.png")));
                 fleche.addMouseListener(new java.awt.event.MouseAdapter(){
                     @Override
                     public void mouseClicked(MouseEvent e){controller.moveCamera(-1,0);
@@ -582,7 +582,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         fleche.setSize(20,20);
         fleche.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         fleche.setLocation(778,32);
-        fleche.setIcon(new ImageIcon("src/ico/FlecheC.png"));
+        fleche.setIcon(new ImageIcon(getClass().getResource("/ico/FlecheC.png")));
         fleche.addMouseListener(new java.awt.event.MouseAdapter(){
         @Override
         public void mouseClicked(MouseEvent e){controller.centrerCamera();

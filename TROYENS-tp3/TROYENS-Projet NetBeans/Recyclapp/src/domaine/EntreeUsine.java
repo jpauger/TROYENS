@@ -13,7 +13,7 @@ public class EntreeUsine extends Equipement {
     {
         this.nom = "Entrée d'usine";
        super.coordonnees = coordonnees;          
-       this.image = new ImageIcon("src/ico/light/appbar.door.enter.png");
+       this.image = new ImageIcon(getClass().getResource("/ico/light/appbar.door.enter.png"));
        SortieEquipement sortieEquipement = new SortieEquipement((Equipement)this, 0);
        sortieEquipement.listeLigneProduit.add(new LigneProduit(new Produit("Bois"),1000));
        sortieEquipement.listeLigneProduit.add(new LigneProduit(new Produit("Metal"),1000));
