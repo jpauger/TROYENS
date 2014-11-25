@@ -267,6 +267,11 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             
             if (equipement instanceof Station)
             {
+                JLabel labelNom = new JLabel(equipement.nom);
+                labelNom.setLocation(coordRel.getX()+equipement.size.width/2-100,coordRel.getY()+equipement.size.height+2-100);
+                labelNom.setSize(200, 200);
+                labelNom.setHorizontalAlignment(JLabel.CENTER);
+                this.conteneur.add(labelNom);
                 afficherSortiesStations((Station)equipement);
             }
             

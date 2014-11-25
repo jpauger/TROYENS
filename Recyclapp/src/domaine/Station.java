@@ -10,8 +10,6 @@ import utilitaires.Coordonnee;
  */
 public class Station extends Equipement  {
     
-    
-    public String nomStation = "" ;
     public int capaciteMax ;
     public String description ;  
     public Object[][] produits;
@@ -22,8 +20,8 @@ public class Station extends Equipement  {
     public Station (Coordonnee coordonnees, int nombreSorties)
     {
         super.coordonnees = coordonnees;
-        this.nomStation = "nomStation";
-        this.description = "descriptionStation";
+        this.nom = "Station";
+        this.description = "Description de la station";
         this.capaciteMax = 1000;      
         this.image = new ImageIcon("src/ico/station3moyen.png");
         this.nombreSorties = nombreSorties;

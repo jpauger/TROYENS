@@ -11,6 +11,7 @@ public class EntreeUsine extends Equipement {
     
     public EntreeUsine (Coordonnee coordonnees)
     {
+        this.nom = "Entrée d'usine";
        super.coordonnees = coordonnees;          
        this.image = new ImageIcon("src/ico/light/appbar.door.enter.png");
        SortieEquipement sortieEquipement = new SortieEquipement((Equipement)this, 0);

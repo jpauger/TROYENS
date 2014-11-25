@@ -144,9 +144,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNomStation">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnEnregistrer">
       <Properties>
@@ -174,7 +171,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="labelNbSorties">
       <Properties>
-        <Property name="text" type="java.lang.String" value="nombre de sorties :"/>
+        <Property name="text" type="java.lang.String" value="Nombre de sorties :"/>
       </Properties>
     </Component>
   </SubComponents>

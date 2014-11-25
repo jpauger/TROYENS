@@ -11,6 +11,7 @@ public class Jonction extends Equipement {
     
     public Jonction (Coordonnee coordonnees)
     {
+        this.nom = "Jonction";
         super.coordonnees = coordonnees;
         this.image = new ImageIcon("src/ico/jonction.png");
         this.listeSorties.add(new SortieEquipement((Equipement)this, 0));  

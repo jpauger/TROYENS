@@ -46,7 +46,7 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
     public void AfficherStation(Station station)
     {
         this.station = station;
-        txtNomStation.setText(station.nomStation);
+        txtNomStation.setText(station.nom);
         txtDescription.setText(station.description);
         txtCapaciteMax.setText(Integer.toString(station.capaciteMax));
         
@@ -102,8 +102,6 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
 
         jLabel3.setText("Capacité max.(kg/h) :");
 
-        txtNomStation.setText("jTextField1");
-
         btnEnregistrer.setText("Enregistrer");
         btnEnregistrer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,7 +119,7 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
 
         txtNombreSorties.setEditable(false);
 
-        labelNbSorties.setText("nombre de sorties :");
+        labelNbSorties.setText("Nombre de sorties :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -190,7 +188,7 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerActionPerformed
-        station.nomStation = txtNomStation.getText();
+        station.nom = txtNomStation.getText();
         station.description = txtDescription.getText();
         station.capaciteMax = Integer.parseInt(txtCapaciteMax.getText());
         //on ajoute des sorties a la station

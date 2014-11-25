@@ -509,6 +509,8 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 
     private void checkboxGrilleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkboxGrilleActionPerformed
         checkboxGrilleMagnetique.setEnabled(checkboxGrille.isSelected());
+        if(!checkboxGrille.isSelected())
+            checkboxGrilleMagnetique.setSelected(false);
         panneauPlanTravailExt.grille = checkboxGrille.isSelected();
         panneauPlanTravailExt.RafraichirPlan();
     }//GEN-LAST:event_checkboxGrilleActionPerformed

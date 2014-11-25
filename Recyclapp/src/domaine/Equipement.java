@@ -9,7 +9,7 @@ import utilitaires.*;
  * @author TROYENS
  */
 public class Equipement {
-    
+    public String nom = "" ;
     public Coordonnee coordonnees;
     public int nombreEntrees = 1 ;
     public int nombreSorties = 1 ;

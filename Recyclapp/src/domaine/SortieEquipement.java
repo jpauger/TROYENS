@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class SortieEquipement {
     
     private final int numeroSortie;
-    //public Coordonnee coordonnees ;
     public boolean sortieParDefaut = false;
     private boolean estConnectee = false;
     private final Equipement equipementMere ;
