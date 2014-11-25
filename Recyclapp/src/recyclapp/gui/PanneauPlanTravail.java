@@ -10,6 +10,7 @@ import java.awt.Color;
 
 import java.awt.BasicStroke;
 import java.awt.Cursor;
+import java.awt.Polygon;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.BorderFactory;
@@ -264,6 +265,31 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             BasicStroke bs1 = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
             g2d.setStroke(bs1);
             g2d.drawLine(coordRel1.getX(), coordRel1.getY(), coordRel2.getX(), coordRel2.getY());
+            
+            double angle = Math.toRadians(45);
+            int taillePointe = 12;
+            Coordonnee point1 = new Coordonnee(), point2 = new Coordonnee(), point3 = new Coordonnee();
+            double dy = coordRel2.getY() - coordRel1.getY();  
+            double dx = coordRel2.getX() - coordRel1.getX();  
+            double theta = Math.atan2(dy, dx);  
+            
+            double rho = theta + angle;  
+            point1.setX((int)Math.round(coordRel2.getX() - 32 * Math.cos(theta)));
+            point1.setY((int)Math.round(coordRel2.getY() - 32 * Math.sin(theta)));
+            
+            point2.setX((int)Math.round(point1.getX() - taillePointe * Math.cos(rho)));  
+            point2.setY((int)Math.round(point1.getY() - taillePointe * Math.sin(rho)));  
+            
+            rho = theta - angle;  
+            point3.setX((int)Math.round(point1.getX() - taillePointe * Math.cos(rho)));  
+            point3.setY((int)Math.round(point1.getY() - taillePointe * Math.sin(rho))); 
+            
+            Polygon p=new Polygon();
+            p.addPoint(point1.getX(), point1.getY());
+            p.addPoint(point2.getX(), point2.getY());
+            p.addPoint(point3.getX(), point3.getY());
+            g2d.draw(p);
+            g2d.fillPolygon(p);
         }
         
         
