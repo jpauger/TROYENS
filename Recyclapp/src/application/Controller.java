@@ -14,6 +14,7 @@ public class Controller {
     Station station ;
     public PlanDeTravail plan;
     public boolean btnAjoutConvoyeurClicked = false ;
+    public boolean modeAjoutConvoyeurTermine = false;
     
     public Controller()
     {
@@ -97,8 +98,8 @@ public class Controller {
     }
     
     public void QuitterModeAjoutConvoyeur()
-    {
-        //this.fenetre.QuitterModeAjoutConvoyeur();
+    {  
+        this.modeAjoutConvoyeurTermine = true ;
     }
     
     void rendreGrilleMagnetique(){}

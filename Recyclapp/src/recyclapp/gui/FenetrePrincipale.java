@@ -458,13 +458,8 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 
     private void btnAjoutConvoyeurMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAjoutConvoyeurMouseClicked
         btnAjoutConvoyeur.setFont(btnAjoutConvoyeur.getFont().deriveFont(Font.BOLD));
-        
         btnAjoutConvoyeur.setIcon(new ImageIcon("src/ico/dark/appbar.vector.line.png"));
-        //  plus haut une facon de changer l'icone du bouton ajout convoyeur... mais comment le remettre après ?
-        // comment passer par le controller pour informé l'interface(que l'on sort du mode ajout convoyeur ) ? ligne plus bas pr remmtre l'image par defaut
-        // btnAjoutConvoyeur.setIcon(new ImageIcon("src/ico/light/appbar.vector.line.png"));
-        
-        
+        this.controller.modeAjoutConvoyeurTermine = false;  
         controller.btnAjoutConvoyeurClicked = true;
     }//GEN-LAST:event_btnAjoutConvoyeurMouseClicked
 
@@ -521,6 +516,11 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         Coordonnee coord = controller.plan.coordonneeCliqueSurPlan(new Coordonnee(evt.getX(),evt.getY()));
         int zoom = controller.plan.zoom_values[controller.plan.zoom];
         textPanelCoordonnees.setText("x:"+coord.getX()*zoom/40+"m\ny:"+coord.getY()*zoom/40+"m");
+        
+        if (controller.modeAjoutConvoyeurTermine)
+        {
+            quitterModeAjoutConvoyeur();
+        }
     }//GEN-LAST:event_panneauPlanTravailMouseMoved
 
     private void checkboxGrilleMagnetiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkboxGrilleMagnetiqueActionPerformed
@@ -568,22 +568,12 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         }
     }//GEN-LAST:event_btnAjoutStationMouseReleased
     
-    public void QuitterModeAjoutConvoyeur()
+    public void quitterModeAjoutConvoyeur()
     {
         this.btnAjoutConvoyeur.setIcon(new ImageIcon("src/ico/light/appbar.vector.line.png"));
-        this.panneauOutils.validate();
-        this.panneauOutils.repaint();
+        this.controller.modeAjoutConvoyeurTermine = true ;
     }
-    /* btnStationMouseDragged
-    
-        
-    
-    
-    // btn station mouse realeased
-    
-    
-    
-    */
+
     
     /**
      * @param args the command line arguments

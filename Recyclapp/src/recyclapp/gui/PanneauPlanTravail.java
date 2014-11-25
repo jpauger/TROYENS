@@ -105,7 +105,6 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                             Equipement equipement = controller.obtenirEquipement(coord1);
                             selectionner(equipement);
                             RafraichirPlan();
-
                             coord_depart = coord1;
                             premierEquipementSelectionne = true ;
                         }
