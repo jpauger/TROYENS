@@ -13,7 +13,7 @@ public class SortieUsine extends Equipement {
     {
         nom = "Sortie d'usine";
        super.coordonnees = coordonnees;          
-       this.image = new ImageIcon("src/ico/light/appbar.door.leave.png");
+       this.image = new ImageIcon(getClass().getResource("/ico/light/appbar.door.leave.png"));
        
        this.listeSorties.add(new SortieEquipement((Equipement)this, 0));
        this.listeSorties.get(0).setEstConnecte(true);

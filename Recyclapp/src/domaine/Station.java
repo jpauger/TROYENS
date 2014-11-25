@@ -22,7 +22,7 @@ public class Station extends Equipement  {
         this.nom = "Station";
         this.description = "Description de la station";
         this.capaciteMax = 1000;      
-        this.image = new ImageIcon("src/ico/station3moyen.png");
+        this.image = new ImageIcon(getClass().getResource("/ico/station3moyen.png"));
         this.nombreSorties = nombreSorties;
         
         for(int i =0; i< this.nombreSorties;i++)

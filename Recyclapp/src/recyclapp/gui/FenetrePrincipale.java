@@ -458,7 +458,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 
     private void btnAjoutConvoyeurMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAjoutConvoyeurMouseClicked
         btnAjoutConvoyeur.setFont(btnAjoutConvoyeur.getFont().deriveFont(Font.BOLD));
-        btnAjoutConvoyeur.setIcon(new ImageIcon("src/ico/dark/appbar.vector.line.png"));
+        btnAjoutConvoyeur.setIcon(new ImageIcon(getClass().getResource("/ico/dark/appbar.vector.line.png")));
         this.controller.modeAjoutConvoyeurTermine = false;  
         controller.btnAjoutConvoyeurClicked = true;
     }//GEN-LAST:event_btnAjoutConvoyeurMouseClicked
@@ -570,7 +570,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     
     public void quitterModeAjoutConvoyeur()
     {
-        this.btnAjoutConvoyeur.setIcon(new ImageIcon("src/ico/light/appbar.vector.line.png"));
+        this.btnAjoutConvoyeur.setIcon(new ImageIcon(getClass().getResource("/ico/light/appbar.vector.line.png")));
         this.controller.modeAjoutConvoyeurTermine = true ;
     }
 
