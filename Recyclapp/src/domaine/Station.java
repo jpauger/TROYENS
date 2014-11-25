@@ -12,7 +12,7 @@ public class Station extends Equipement  {
     
     
     public String nomStation = "" ;
-    public double capaciteMax ;
+    public int capaciteMax ;
     public String description ;  
     public Object[][] produits;
     

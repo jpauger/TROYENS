@@ -48,6 +48,8 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
         this.station = station;
         txtNomStation.setText(station.nomStation);
         txtDescription.setText(station.description);
+        txtCapaciteMax.setText(Integer.toString(station.capaciteMax));
+        
         txtNombreSorties.setText(String.valueOf(station.getNombreSortie()));
         
         if(station.ObtenirListeProduitEntrant().isEmpty())
@@ -116,6 +118,8 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
                 btnMatriceActionPerformed(evt);
             }
         });
+
+        txtNombreSorties.setEditable(false);
 
         labelNbSorties.setText("nombre de sorties :");
 
@@ -188,7 +192,7 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
     private void btnEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerActionPerformed
         station.nomStation = txtNomStation.getText();
         station.description = txtDescription.getText();
-        
+        station.capaciteMax = Integer.parseInt(txtCapaciteMax.getText());
         //on ajoute des sorties a la station
         // pour l'instant on ne permettra pas la modification du nombre de sorties
         
