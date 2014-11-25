@@ -67,11 +67,14 @@ public class Station extends Equipement  {
     
     public void majQuantiteMatrice()
     {
-        for(int i =0 ; i< produits.length; i++)
+        if(produits != null)
         {
-            LigneProduit ligneProduit = this.ObtenirListeProduitEntrant().get(i);
-            produits[i][0] = ligneProduit.produit.nom + "(" + ligneProduit.quantite + ")";
-        } 
+            for(int i =0 ; i< produits.length; i++)
+            {
+                LigneProduit ligneProduit = this.ObtenirListeProduitEntrant().get(i);
+                produits[i][0] = ligneProduit.produit.nom + "(" + ligneProduit.quantite + ")";
+            } 
+        }
     }
     
     public void majQuantiteProduitSorties()
@@ -79,21 +82,25 @@ public class Station extends Equipement  {
         //Vider la lsite de produit pour chaque sorties
         for(int i = 0; i< listeSorties.size();i++)
         {
-            listeSorties.get(i).listeLigneProduit.clear();
+            if(listeSorties.get(i).listeLigneProduit != null)
+                listeSorties.get(i).listeLigneProduit.clear();
         }
         //Recréer la liste de produits pour chaque produit entrant multiplié par la matrice de transformation
-        for(int i = 0; i< produits.length;i++)
+        if(produits != null)
         {
-            for(int j=0; j < this.ObtenirListeProduitEntrant().size();j++)
+            for(int i = 0; i< produits.length;i++)
             {
-               LigneProduit listeLigneProduit = this.ObtenirListeProduitEntrant().get(j);
-               if(produits[i][0].toString().contains(listeLigneProduit.produit.nom))
-               {
-                   for(int k = 0 ; k< this.listeSorties.size();k++)
+                for(int j=0; j < this.ObtenirListeProduitEntrant().size();j++)
+                {
+                   LigneProduit listeLigneProduit = this.ObtenirListeProduitEntrant().get(j);
+                   if(produits[i][0].toString().contains(listeLigneProduit.produit.nom))
                    {
-                       this.listeSorties.get(k).listeLigneProduit.add(new LigneProduit(listeLigneProduit.produit,listeLigneProduit.quantite * Integer.parseInt(produits[i][k+1].toString()) / 100));
+                       for(int k = 0 ; k< this.listeSorties.size();k++)
+                       {
+                           this.listeSorties.get(k).listeLigneProduit.add(new LigneProduit(listeLigneProduit.produit,listeLigneProduit.quantite * Integer.parseInt(produits[i][k+1].toString()) / 100));
+                       }
                    }
-               }
+                }
             }
         }
     };
