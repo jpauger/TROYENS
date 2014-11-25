@@ -95,6 +95,12 @@ public class Controller {
     {
         this.fenetre.panneauPlanTravailExt.RafraichirPlan();
     }
+    
+    public void QuitterModeAjoutConvoyeur()
+    {
+        //this.fenetre.QuitterModeAjoutConvoyeur();
+    }
+    
     void rendreGrilleMagnetique(){}
     void afficherModeImage(){}
     

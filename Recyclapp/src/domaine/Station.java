@@ -1,5 +1,4 @@
 package domaine;
-import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import utilitaires.Coordonnee;
 

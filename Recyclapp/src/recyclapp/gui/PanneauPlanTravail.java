@@ -58,36 +58,58 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                     if (premierEquipementSelectionne)
                     {
                         Coordonnee coord2 = new Coordonnee(evt.getX(),evt.getY());
-                        Equipement equipementDepart = controller.obtenirEquipement(coord_depart);
-                        Equipement equipementFin = controller.obtenirEquipement(coord2);
-                        
-                        if ( !(equipementFin instanceof EntreeUsine)  && !(equipementFin.entreeOccupee) )
-                        {
-                            controller.ajouterConvoyeur(equipementDepart.obtenirSortieVide(), equipementFin);
-                            selectionner(equipementFin);
-                           if (! (equipementFin instanceof Jonction))
-                            {
-                                equipementFin.entreeOccupee = true;
-                            } 
-                        }
 
-                        // on reinitialise les booleens a false pour sortir du mode ajout de convoyeur
-                        premierEquipementSelectionne = false;
-                        controller.btnAjoutConvoyeurClicked = false;
-                        
-                        RafraichirPlan(); 
+                        if (controller.obtenirEquipement(coord2) == null )
+                        {
+                            controller.QuitterModeAjoutConvoyeur();
+                            premierEquipementSelectionne = false;
+                            controller.btnAjoutConvoyeurClicked = false ;
+                        }
+                        else
+                        {
+                            Equipement equipementDepart = controller.obtenirEquipement(coord_depart);
+                            Equipement equipementFin = controller.obtenirEquipement(coord2);
+                            if ( !(equipementFin instanceof EntreeUsine)  && !(equipementFin.entreeOccupee) )
+                            {
+                                controller.ajouterConvoyeur(equipementDepart.obtenirSortieVide(), equipementFin);
+                                selectionner(equipementFin);
+                                if (! (equipementFin instanceof Jonction))
+                                {
+                                    equipementFin.entreeOccupee = true;
+                                } 
+                            }
+
+                            // on reinitialise les booleens a false pour sortir du mode ajout de convoyeur
+                            premierEquipementSelectionne = false;
+
+                            controller.btnAjoutConvoyeurClicked = false;
+
+                            controller.QuitterModeAjoutConvoyeur();
+
+                            RafraichirPlan(); 
+                        }
                     }
                     else // 1ere action : cas ou un premier element n'est pas encore selectionné
                     {
                         Coordonnee coord1 = new Coordonnee(evt.getX(),evt.getY());
                         // on stock les coordonnées de la premiere station pour y acceder lors de la 2eme action
-                        Equipement equipement = controller.obtenirEquipement(coord1);
+                        //Equipement equipement = controller.obtenirEquipement(coord1);
                         
-                        selectionner(equipement);
-                        RafraichirPlan();
+                        if (controller.obtenirEquipement(coord1) == null )
+                        {
+                            controller.QuitterModeAjoutConvoyeur();
+                            controller.btnAjoutConvoyeurClicked = false ;
+                        }
+                        else
+                        {
+                            Equipement equipement = controller.obtenirEquipement(coord1);
+                            selectionner(equipement);
+                            RafraichirPlan();
+
+                            coord_depart = coord1;
+                            premierEquipementSelectionne = true ;
+                        }
                         
-                        coord_depart = coord1;
-                        premierEquipementSelectionne = true ;
                     }
                 }
             }   
@@ -115,6 +137,13 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                     RafraichirPlan();
                 }
             }  
+            
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
+                AnnulerSelectionEquipements();
+                RafraichirPlan();
+            }
         });
         
         this.conteneur.addMouseMotionListener(new java.awt.event.MouseMotionListener() {
@@ -126,6 +155,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
 
             @Override
             public void mouseMoved(MouseEvent e) {}
+            
         });
     }
     

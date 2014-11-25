@@ -72,7 +72,7 @@ public class Convoyeur {
         int coorDepartX = this.sortie.equipementMere().coordonnees.getX() + decalageLargeurDepart(this.equipement) ; 
         if (this.sortie.equipementMere() instanceof Station)
         {
-            coorDepartX = this.sortie.equipementMere().coordonnees.getX()+ 40 ;
+            coorDepartX = this.sortie.equipementMere().coordonnees.getX()+ 53 ;
         }
         return coorDepartX ;
     }
@@ -83,7 +83,7 @@ public class Convoyeur {
         
         if (this.sortie.equipementMere() instanceof Station)
         {
-            coorDepartY = this.sortie.equipementMere().coordonnees.getY()+ 10 + this.sortie.getNumSortie()*10 ;
+            coorDepartY = this.sortie.equipementMere().coordonnees.getY()+ 11 + this.sortie.getNumSortie()*10 ;
         }
         return coorDepartY ;
     }

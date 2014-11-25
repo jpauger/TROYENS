@@ -50,6 +50,7 @@ public class Equipement {
             if (!listeSorties.get(i).estConnecte())
             {
                 sortieEquipement = listeSorties.get(i);
+                break;
             }
         }
         return sortieEquipement ;
