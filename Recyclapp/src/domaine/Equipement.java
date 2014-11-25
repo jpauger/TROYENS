@@ -16,7 +16,7 @@ public class Equipement {
     public final Dimension size = new Dimension(64,64);
     public ImageIcon image;
     public ArrayList<SortieEquipement> listeSorties = new ArrayList();
-    public SortieEquipement sortieEntrante;
+    public ArrayList<SortieEquipement> listeSortieEntrante = new ArrayList();
     public boolean estSelectionne = false;
     public boolean entreeOccupee = false ;
     
@@ -58,6 +58,30 @@ public class Equipement {
     public int getNombreSortie()
     {
         return this.listeSorties.size();
+    }
+    
+    public ArrayList<LigneProduit> ObtenirListeProduitEntrant()
+    {
+        ArrayList<LigneProduit> listeLigneProduit = new ArrayList();
+        for(int i =0;i<listeSortieEntrante.size();i++)
+        {
+            ArrayList<LigneProduit> listeLigneProduitSortie = listeSortieEntrante.get(i).listeLigneProduit;
+            for(int j=0;j< listeLigneProduitSortie.size();j++)
+            {
+                boolean produitTrouve = false;
+                for(int k =0; k< listeLigneProduit.size(); k++)
+                {
+                    if(listeLigneProduitSortie.get(j).produit.nom == listeLigneProduit.get(k).produit.nom)
+                    {
+                        listeLigneProduit.get(k).quantite += listeLigneProduitSortie.get(j).quantite;
+                        produitTrouve = true;
+                    }
+                }
+                if(!produitTrouve)
+                    listeLigneProduit.add(new LigneProduit(listeLigneProduitSortie.get(j).produit, listeLigneProduitSortie.get(j).quantite));
+            }
+        }
+        return listeLigneProduit;
     }
     
     public void ajouterSortie ()

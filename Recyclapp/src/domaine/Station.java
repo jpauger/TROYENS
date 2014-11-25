@@ -46,12 +46,12 @@ public class Station extends Equipement  {
     }
     public void definirMatriceBase()
     {
-        if(this.sortieEntrante != null)
+        if(!this.ObtenirListeProduitEntrant().isEmpty())
         {
-            produits = new  Object[this.sortieEntrante.listeLigneProduit.size()][];
+            produits = new  Object[this.ObtenirListeProduitEntrant().size()][];
             for(int i =0 ; i< produits.length; i++)
             {
-                LigneProduit ligneProduit = this.sortieEntrante.listeLigneProduit.get(i);
+                LigneProduit ligneProduit = this.ObtenirListeProduitEntrant().get(i);
                 produits[i] = new Object[this.nombreSorties + 1];
                 produits[i][0] = ligneProduit.produit.nom + "(" + ligneProduit.quantite + ")";
                 for(int j=1;j<=this.nombreSorties;j++)
@@ -69,7 +69,7 @@ public class Station extends Equipement  {
     {
         for(int i =0 ; i< produits.length; i++)
         {
-            LigneProduit ligneProduit = this.sortieEntrante.listeLigneProduit.get(i);
+            LigneProduit ligneProduit = this.ObtenirListeProduitEntrant().get(i);
             produits[i][0] = ligneProduit.produit.nom + "(" + ligneProduit.quantite + ")";
         } 
     }
@@ -84,9 +84,9 @@ public class Station extends Equipement  {
         //Recréer la liste de produits pour chaque produit entrant multiplié par la matrice de transformation
         for(int i = 0; i< produits.length;i++)
         {
-            for(int j=0; j < this.sortieEntrante.listeLigneProduit.size();j++)
+            for(int j=0; j < this.ObtenirListeProduitEntrant().size();j++)
             {
-               LigneProduit listeLigneProduit = this.sortieEntrante.listeLigneProduit.get(j);
+               LigneProduit listeLigneProduit = this.ObtenirListeProduitEntrant().get(j);
                if(produits[i][0].toString().contains(listeLigneProduit.produit.nom))
                {
                    for(int k = 0 ; k< this.listeSorties.size();k++)

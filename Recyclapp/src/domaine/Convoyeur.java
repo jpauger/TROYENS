@@ -9,8 +9,8 @@ import java.awt.Color;
 public class Convoyeur {
     
     private Color couleur;
-    private final SortieEquipement sortie ;
-    private final Equipement equipement; 
+    public final SortieEquipement sortie ;
+    public final Equipement equipement; 
     public boolean estSelectionne ;
     
     
@@ -21,9 +21,11 @@ public class Convoyeur {
         this.sortie = uneSortie ;
         this.equipement = unEquipement;
         this.estSelectionne = false ;
-        unEquipement.sortieEntrante = uneSortie;
+        unEquipement.listeSortieEntrante.add(uneSortie);
         if(unEquipement instanceof Station)
             ((Station)unEquipement).definirMatriceBase();
+        if(unEquipement instanceof Jonction)
+            ((Jonction)unEquipement).calculerSortie();
     }
     
     LigneProduit[] obtenirInformationTransit()

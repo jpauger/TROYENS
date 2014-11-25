@@ -50,7 +50,7 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
         txtDescription.setText(station.description);
         txtNombreSorties.setText(String.valueOf(station.getNombreSortie()));
         
-        if(station.sortieEntrante == null)
+        if(station.ObtenirListeProduitEntrant().isEmpty())
             btnMatrice.setVisible(false);
         else
             btnMatrice.setVisible(true);

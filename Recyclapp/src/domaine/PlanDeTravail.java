@@ -133,6 +133,16 @@ public class PlanDeTravail {
         return null;
     }
     
+    public Convoyeur obtenirConvoyeurSelectionne()
+    {
+        for(int i=0;i<this.listeConvoyeur.size();i++)
+        {
+            if(listeConvoyeur.get(i).estSelectionne)
+                return listeConvoyeur.get(i);
+        }
+        return null;
+    }
+    
     public SortieEquipement obtenirSortieVide()
     {
         //code temporaire juste pour eviter une erreur de type "missing return"

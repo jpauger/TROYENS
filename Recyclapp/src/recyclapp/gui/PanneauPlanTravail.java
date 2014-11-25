@@ -311,20 +311,18 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     {
         Coordonnee coordonnee = new Coordonnee(evt.getX(),evt.getY());
         Equipement equipement = controller.obtenirEquipement(coordonnee);
+        Convoyeur convoyeurSeclectionne = controller.obtenirConvoyeurSelectionne();
+        ToolTipManager.sharedInstance().setInitialDelay(0);
+        
         if(equipement != null)
-        {
-            ToolTipManager.sharedInstance().setInitialDelay(0);
-            
+        { 
             this.conteneur.setToolTipText(preparerMessageQuantite(equipement));
-            //Hack pour afficher le tooltip sans avoir à bouger
-            ToolTipManager.sharedInstance().mouseMoved(new MouseEvent(this.conteneur,
-                    MouseEvent.MOUSE_MOVED,
-                    System.currentTimeMillis(),
-                    0,
-                    evt.getX(),
-                    evt.getY(),
-                    0,
-                    false));
+            hackMouseEvent(evt);            
+        }
+        else if(convoyeurSeclectionne != null)
+        {
+            this.conteneur.setToolTipText(preparerMessageQuantite(convoyeurSeclectionne));
+            hackMouseEvent(evt);  
         }
         else
             this.conteneur.setToolTipText(null);
@@ -333,11 +331,11 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     private String preparerMessageQuantite(Equipement equipement)
     {
         String message = "<html>";
-        if(equipement.sortieEntrante != null)
+        if(!equipement.ObtenirListeProduitEntrant().isEmpty())
         {
-            for(int i = 0; i <equipement.sortieEntrante.listeLigneProduit.size();i++)
+            for(int i = 0; i <equipement.ObtenirListeProduitEntrant().size();i++)
             {
-                LigneProduit ligneProduit = equipement.sortieEntrante.listeLigneProduit.get(i);
+                LigneProduit ligneProduit = equipement.ObtenirListeProduitEntrant().get(i);
                 message += ligneProduit.produit.nom + " : " + ligneProduit.quantite + "Kg/h<br>";
             }
             message += "</html>";
@@ -345,6 +343,36 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         else
             message =null;
         return message;
+    }
+    
+    private String preparerMessageQuantite(Convoyeur convoyeur)
+    {
+        String message = "<html>";
+        if(convoyeur.sortie != null)
+        {
+            for(int i = 0; i < convoyeur.sortie.listeLigneProduit.size();i++)
+            {
+                LigneProduit ligneProduit = convoyeur.sortie.listeLigneProduit.get(i);
+                message += ligneProduit.produit.nom + " : " + ligneProduit.quantite + "Kg/h<br>";
+            }
+            message += "</html>";
+        }
+        else
+            message =null;
+        return message;
+    }
+    
+    private void hackMouseEvent(java.awt.event.MouseEvent evt)
+    {
+        //Hack pour afficher le tooltip sans avoir à bouger
+        ToolTipManager.sharedInstance().mouseMoved(new MouseEvent(this.conteneur,
+                MouseEvent.MOUSE_MOVED,
+                System.currentTimeMillis(),
+                0,
+                evt.getX(),
+                evt.getY(),
+                0,
+                false));
     }
     
     /*

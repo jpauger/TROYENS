@@ -63,6 +63,11 @@ public class Controller {
         plan.validerPlan();
     }
     
+    public Convoyeur obtenirConvoyeurSelectionne()
+    {
+        return plan.obtenirConvoyeurSelectionne();
+    }
+    
     public Equipement obtenirEquipement(Coordonnee coordonnee)
     {
         return plan.obtenirEquipement(coordonnee);
