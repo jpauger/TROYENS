@@ -202,10 +202,14 @@ public class PlanDeTravail {
         for(int i = 0;i<listeEquipement.size();i++)
         {
             Equipement equipement = listeEquipement.get(i);
-            if(equipement instanceof Station)
+            if(equipement instanceof Station )
             {
                 ((Station)equipement).majQuantiteProduitSorties();
                 ((Station)equipement).majQuantiteMatrice();
+            }
+            if (equipement instanceof EntreeUsine)
+            {
+                ((EntreeUsine)equipement).majPanier();
             }
         }
     }

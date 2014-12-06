@@ -18,6 +18,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 //    private final InterfacePlan interfacePlan;
     private final Controller controller;
     private final PanneauSelectionStation panneauSelectionStation ;
+    private final PanneauSelectionEntreeUsine panneauSelectionEntreeUsine ;
     
     public final PanneauPlanTravail panneauPlanTravailExt;
     
@@ -33,10 +34,13 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         panneauSelectionStation = new PanneauSelectionStation(this.panneauProprietes ,controller);
         panneauSelectionStation.Init();
         
-        panneauPlanTravailExt = new PanneauPlanTravail(this.panneauPlanTravail, controller, panneauSelectionStation);
+        panneauSelectionEntreeUsine = new PanneauSelectionEntreeUsine(this.panneauProprietes, controller);
+        panneauSelectionEntreeUsine.Init();
+        
+        panneauPlanTravailExt = new PanneauPlanTravail(this.panneauPlanTravail, controller, panneauSelectionStation, panneauSelectionEntreeUsine);
         panneauPlanTravailExt.Init();
 
-        controller.ajouterEntreeUsine(new Coordonnee(200-12,300-32));
+        //controller.ajouterEntreeUsine(new Coordonnee(200-12,300-32));
         panneauPlanTravailExt.RafraichirPlan();
     }
  
@@ -66,6 +70,8 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         btnAjoutStation = new javax.swing.JButton();
+        btnEntreeUsine = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
         panneauProprietes = new javax.swing.JPanel();
         panneauPlanTravail = new javax.swing.JPanel();
         panneauMenuBas = new javax.swing.JPanel();
@@ -225,44 +231,77 @@ public class FenetrePrincipale extends javax.swing.JFrame{
             }
         });
 
+        btnEntreeUsine.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.door.enter.png"))); // NOI18N
+        btnEntreeUsine.setToolTipText("");
+        btnEntreeUsine.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEntreeUsine.setFocusPainted(false);
+        btnEntreeUsine.setSelected(true);
+        btnEntreeUsine.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                btnEntreeUsineMouseDragged(evt);
+            }
+        });
+        btnEntreeUsine.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnEntreeUsineMouseReleased(evt);
+            }
+        });
+
+        jLabel12.setText("entrée d' usine");
+
         javax.swing.GroupLayout panneauOutilsLayout = new javax.swing.GroupLayout(panneauOutils);
         panneauOutils.setLayout(panneauOutilsLayout);
         panneauOutilsLayout.setHorizontalGroup(
             panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panneauOutilsLayout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel11)
-                    .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panneauOutilsLayout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(jLabel8))
-                        .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAjoutStation, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(btnAjoutConvoyeur, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneauOutilsLayout.createSequentialGroup()
+                    .addGroup(panneauOutilsLayout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel11)
+                            .addComponent(btnAjoutConvoyeur, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panneauOutilsLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAjoutStation, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panneauOutilsLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel8)))))
+                .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panneauOutilsLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnJonction, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSortieUsine, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10))
                         .addGap(92, 92, 92))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneauOutilsLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(84, 84, 84))))
+                    .addGroup(panneauOutilsLayout.createSequentialGroup()
+                        .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panneauOutilsLayout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(btnEntreeUsine, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panneauOutilsLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel12)
+                                .addGap(60, 60, 60)))
+                        .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(btnSortieUsine, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19))))
         );
         panneauOutilsLayout.setVerticalGroup(
             panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panneauOutilsLayout.createSequentialGroup()
                 .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnSortieUsine, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAjoutStation, javax.swing.GroupLayout.PREFERRED_SIZE, 62, Short.MAX_VALUE))
+                .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAjoutStation, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSortieUsine, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEntreeUsine, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel12))
                 .addGap(28, 28, 28)
                 .addGroup(panneauOutilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAjoutConvoyeur, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -493,7 +532,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private void btnSortieUsineMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSortieUsineMouseReleased
         if(dansLePlan)
         {
-            Coordonnee coord = new Coordonnee(evt.getX()-185 ,evt.getY()-2);
+            Coordonnee coord = new Coordonnee(evt.getX()-145 ,evt.getY()-2);
             controller.ajouterSortieUsine(coord ); 
             panneauPlanTravailExt.RafraichirPlan();
         }
@@ -567,6 +606,23 @@ public class FenetrePrincipale extends javax.swing.JFrame{
             }
         }
     }//GEN-LAST:event_btnAjoutStationMouseReleased
+
+    private void btnEntreeUsineMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntreeUsineMouseDragged
+        // TODO add your handling code here:
+        Coordonnee coord = controller.plan.coordonneeCliqueSurPlan(new Coordonnee(evt.getX(),evt.getY()));
+        int zoom = controller.plan.zoom_values[controller.plan.zoom];
+        textPanelCoordonnees.setText("x:"+coord.getX()*zoom/40+"m\ny:"+coord.getY()*zoom/40+"m");
+    }//GEN-LAST:event_btnEntreeUsineMouseDragged
+
+    private void btnEntreeUsineMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntreeUsineMouseReleased
+        // TODO add your handling code here:
+         Coordonnee coord = new Coordonnee(evt.getX()-275 ,evt.getY()-2);
+        
+        try {controller.ajouterEntreeUsine(coord ); }
+        catch(NullPointerException e){}
+        
+        panneauPlanTravailExt.RafraichirPlan();
+    }//GEN-LAST:event_btnEntreeUsineMouseReleased
     
     public void quitterModeAjoutConvoyeur()
     {
@@ -614,6 +670,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAjoutConvoyeur;
     private javax.swing.JButton btnAjoutStation;
+    private javax.swing.JButton btnEntreeUsine;
     private javax.swing.JButton btnJonction;
     private javax.swing.JButton btnSortieUsine;
     private javax.swing.JCheckBox checkboxGrille;
@@ -623,6 +680,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

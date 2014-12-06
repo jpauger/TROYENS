@@ -100,7 +100,7 @@ public class Station extends Equipement  {
                 }
             }
         }
-    };
+    }
     
     
 

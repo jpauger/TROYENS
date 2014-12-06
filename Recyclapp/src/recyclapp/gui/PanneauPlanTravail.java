@@ -26,6 +26,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     private final JPanel conteneur ;
     private final Controller controller;
     private final PanneauSelectionStation panneauSelectionStation;
+    private final PanneauSelectionEntreeUsine panneauSelectionEntreeUsine ;
     private Coordonnee loc_depart = new Coordonnee();
     private Coordonnee coord_depart = new Coordonnee();
     private boolean premierEquipementSelectionne = false;
@@ -40,11 +41,13 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
      * @param unConteneur
      * @param unController
      * @param unPanneauSelectionStation
+     * @param unPanneauSEU
      */
-    public PanneauPlanTravail(JPanel unConteneur, Controller unController,PanneauSelectionStation unPanneauSelectionStation ) {
+    public PanneauPlanTravail(JPanel unConteneur, Controller unController,PanneauSelectionStation unPanneauSelectionStation, PanneauSelectionEntreeUsine unPanneauSEU ) {
         conteneur = unConteneur ;
         controller = unController ;
         panneauSelectionStation = unPanneauSelectionStation;
+        panneauSelectionEntreeUsine = unPanneauSEU ;
         initComponents();
         
         this.conteneur.addMouseListener(new java.awt.event.MouseAdapter(){
@@ -442,6 +445,8 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     {
         dragged = 0;
         panneauSelectionStation.AfficherPanneauSelection(false);
+        panneauSelectionEntreeUsine.Afficher(false);
+        
         Coordonnee coord = new Coordonnee(evt.getX(), evt.getY());
         
         Equipement equipement = controller.obtenirEquipement(coord);
@@ -453,7 +458,13 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             panneauSelectionStation.AfficherPanneauSelection(true);
             panneauSelectionStation.AfficherStation((Station)equipement);
         }
-        else if (!(equipement instanceof Jonction) && !(equipement instanceof EntreeUsine) && !(equipement instanceof SortieUsine))
+        else if(equipement instanceof EntreeUsine)
+        {
+            selectionner(equipement);
+            panneauSelectionEntreeUsine.Afficher(true);
+            panneauSelectionEntreeUsine.AfficherEntree((EntreeUsine) equipement);
+        }
+        else if (!(equipement instanceof Jonction) && !(equipement instanceof SortieUsine))
         {
             AnnulerSelectionConvoyeurs();
             coord = controller.plan.coordonneeCliqueSurPlan(coord);
@@ -505,6 +516,11 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         {
             panneauSelectionStation.AfficherPanneauSelection(true);
             panneauSelectionStation.AfficherStation((Station)equipement);
+        }
+        if (equipement instanceof EntreeUsine)
+        {
+            panneauSelectionEntreeUsine.Afficher(true);
+            panneauSelectionEntreeUsine.AfficherEntree((EntreeUsine) equipement);
         }
     }
     
