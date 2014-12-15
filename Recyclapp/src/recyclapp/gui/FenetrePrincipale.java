@@ -2,6 +2,8 @@ package recyclapp.gui;
 import application.Controller;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import utilitaires.Coordonnee;
@@ -55,12 +57,12 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 
         groupeAffichage = new javax.swing.ButtonGroup();
         panneauMenuHaut = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        btnSave = new javax.swing.JLabel();
+        btnLoad = new javax.swing.JLabel();
+        btnUndo = new javax.swing.JLabel();
+        btnRedo = new javax.swing.JLabel();
+        btnDelete = new javax.swing.JLabel();
+        btnCheck = new javax.swing.JLabel();
         panneauOutils = new javax.swing.JPanel();
         btnAjoutConvoyeur = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -92,71 +94,59 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 
         panneauMenuHaut.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "menu haut [x]", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
 
-        jLabel2.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/save.png"))); // NOI18N
-        jLabel2.setMinimumSize(new java.awt.Dimension(50, 50));
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/save.png"))); // NOI18N
+        btnSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSaveMouseClicked(evt);
+            }
+        });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.folder.open.png"))); // NOI18N
+        btnLoad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.folder.open.png"))); // NOI18N
+        btnLoad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLoad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLoadMouseClicked(evt);
+            }
+        });
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.undo.curve.png"))); // NOI18N
-        jLabel4.setText("jLabel4");
-        jLabel4.setMaximumSize(new java.awt.Dimension(75, 75));
-        jLabel4.setPreferredSize(new java.awt.Dimension(75, 75));
+        btnUndo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.undo.curve.png"))); // NOI18N
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.redo.curve.png"))); // NOI18N
-        jLabel5.setText("jLabel5");
-        jLabel5.setMaximumSize(new java.awt.Dimension(75, 75));
-        jLabel5.setMinimumSize(new java.awt.Dimension(25, 25));
-        jLabel5.setPreferredSize(new java.awt.Dimension(75, 75));
+        btnRedo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.redo.curve.png"))); // NOI18N
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.delete.png"))); // NOI18N
-        jLabel6.setText("jLabel6");
-        jLabel6.setMaximumSize(new java.awt.Dimension(75, 75));
-        jLabel6.setMinimumSize(new java.awt.Dimension(75, 75));
-        jLabel6.setPreferredSize(new java.awt.Dimension(75, 75));
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.delete.png"))); // NOI18N
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.check.png"))); // NOI18N
-        jLabel7.setText("jLabel7");
-        jLabel7.setMaximumSize(new java.awt.Dimension(75, 75));
-        jLabel7.setMinimumSize(new java.awt.Dimension(75, 75));
-        jLabel7.setPreferredSize(new java.awt.Dimension(75, 75));
-
-        ImageIcon iconeEnregistrer = new ImageIcon("save.png");
-        jLabel2.setIcon(iconeEnregistrer);
+        btnCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.check.png"))); // NOI18N
 
         javax.swing.GroupLayout panneauMenuHautLayout = new javax.swing.GroupLayout(panneauMenuHaut);
         panneauMenuHaut.setLayout(panneauMenuHautLayout);
         panneauMenuHautLayout.setHorizontalGroup(
             panneauMenuHautLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panneauMenuHautLayout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSave)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addGap(4, 4, 4)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLoad)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUndo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(798, Short.MAX_VALUE))
+                .addComponent(btnRedo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDelete)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCheck)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panneauMenuHautLayout.setVerticalGroup(
             panneauMenuHautLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panneauMenuHautLayout.createSequentialGroup()
-                .addGroup(panneauMenuHautLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panneauMenuHautLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panneauMenuHautLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSave)
+                    .addComponent(btnLoad)
+                    .addComponent(btnUndo)
+                    .addComponent(btnRedo)
+                    .addComponent(btnDelete)
+                    .addComponent(btnCheck))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(panneauMenuHautLayout.createSequentialGroup()
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
         );
 
         panneauOutils.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "outils", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
@@ -413,7 +403,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                 .addGroup(panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jRadioButton2)
                     .addComponent(jRadioButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(checkboxGrille)
                     .addComponent(checkboxGrilleMagnetique))
@@ -421,7 +411,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(echelle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         panneauMenuBasLayout.setVerticalGroup(
             panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -469,13 +459,13 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panneauMenuHaut, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panneauMenuHaut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panneauOutils, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panneauProprietes, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE))
+                        .addComponent(panneauProprietes, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(panneauPlanTravail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -623,6 +613,23 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         
         panneauPlanTravailExt.RafraichirPlan();
     }//GEN-LAST:event_btnEntreeUsineMouseReleased
+
+    private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
+        final JFileChooser fc = new JFileChooser();
+        String dossierSauvegardes = (System.getProperty("user.dir")).concat("/Sauvegardes");
+        File f = new File(dossierSauvegardes);
+        f.mkdirs();
+        int returnVal = fc.showSaveDialog(FenetrePrincipale.this);
+    }//GEN-LAST:event_btnSaveMouseClicked
+
+    private void btnLoadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoadMouseClicked
+        final JFileChooser fc = new JFileChooser();
+        String dossierSauvegardes = (System.getProperty("user.dir")).concat("/Sauvegardes");
+        File f = new File(dossierSauvegardes);
+        f.mkdirs();
+        fc.setCurrentDirectory(f);
+        int returnVal = fc.showOpenDialog(FenetrePrincipale.this);
+    }//GEN-LAST:event_btnLoadMouseClicked
     
     public void quitterModeAjoutConvoyeur()
     {
@@ -670,9 +677,15 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAjoutConvoyeur;
     private javax.swing.JButton btnAjoutStation;
+    private javax.swing.JLabel btnCheck;
+    private javax.swing.JLabel btnDelete;
     private javax.swing.JButton btnEntreeUsine;
     private javax.swing.JButton btnJonction;
+    private javax.swing.JLabel btnLoad;
+    private javax.swing.JLabel btnRedo;
+    private javax.swing.JLabel btnSave;
     private javax.swing.JButton btnSortieUsine;
+    private javax.swing.JLabel btnUndo;
     private javax.swing.JCheckBox checkboxGrille;
     private javax.swing.JCheckBox checkboxGrilleMagnetique;
     private javax.swing.JComboBox echelle;
@@ -681,12 +694,6 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JRadioButton jRadioButton1;
