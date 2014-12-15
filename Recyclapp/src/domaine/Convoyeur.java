@@ -10,6 +10,7 @@ import utilitaires.Coordonnee;
 public class Convoyeur {
     
     private Color couleur;
+    public int capaciteMax = 2000;
     public final SortieEquipement sortie ;
     public final Equipement equipement; 
     public boolean estSelectionne ;

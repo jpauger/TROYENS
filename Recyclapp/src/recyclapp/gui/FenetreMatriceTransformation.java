@@ -23,7 +23,8 @@ public class FenetreMatriceTransformation extends javax.swing.JFrame {
         for(int i = 1;i<=station.nombreSorties;i++)
         {
             colonnes[i] = "Sortie " + i;
-        }
+        }       
+        
                 
         tableau = new JTable(station.produits, colonnes);
         this.setLayout(new BorderLayout());
