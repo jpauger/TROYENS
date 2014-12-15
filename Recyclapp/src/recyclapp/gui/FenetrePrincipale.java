@@ -627,8 +627,6 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         File f = new File(dossierSauvegardes);
         f.mkdirs();
         fc.setCurrentDirectory(f);
-        FileNameExtensionFilter filtre = new FileNameExtensionFilter("Fichiers txt", "txt", "text");
-        fc.setFileFilter(filtre);
         int returnVal = fc.showSaveDialog(FenetrePrincipale.this);
         if(returnVal == JFileChooser.APPROVE_OPTION)
             controller.sauvegarderPlan(fc.getSelectedFile());
@@ -640,11 +638,10 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         File f = new File(dossierSauvegardes);
         f.mkdirs();
         fc.setCurrentDirectory(f);
-        FileNameExtensionFilter filtre = new FileNameExtensionFilter("Fichiers txt", "txt", "text");
-        fc.setFileFilter(filtre);
         int returnVal = fc.showOpenDialog(FenetrePrincipale.this);
         if(returnVal == JFileChooser.APPROVE_OPTION)
             controller.chargerPlan(fc.getSelectedFile());
+        panneauPlanTravailExt.RafraichirPlan();
     }//GEN-LAST:event_btnLoadMouseClicked
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked

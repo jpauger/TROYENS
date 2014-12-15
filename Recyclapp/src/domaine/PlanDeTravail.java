@@ -2,6 +2,9 @@ package domaine;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import utilitaires.*;
 import java.util.ArrayList;
 
@@ -280,11 +283,48 @@ public class PlanDeTravail implements java.io.Serializable {
     
     public void sauvegarderPlan(File f)
     {
-        System.out.println("On sauvegarde " + f.getPath());
+        try
+        {
+            FileOutputStream fileOut = new FileOutputStream(f.getPath());
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(this);
+            out.close();
+            fileOut.close();
+            System.out.println("On sauvegarde " + f.getPath());
+        }catch(IOException i)
+        {
+            i.printStackTrace();
+        }
     }
     
     public void chargerPlan(File f)
     {
-        System.out.println("On charge " + f.getPath());
+        PlanDeTravail e = null;
+        try
+        {
+            FileInputStream fileIn = new FileInputStream(f.getPath());
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            e = (PlanDeTravail) in.readObject();
+            in.close();
+            fileIn.close();
+            System.out.println("On charge " + f.getPath());
+            
+            listeEquipement = e.listeEquipement;
+            listeConvoyeur = e.listeConvoyeur;
+            estMagnetique = e.estMagnetique;
+            estAfficheImage = e.estAfficheImage;
+            coord_camera.setX(e.coord_camera.getX());
+            coord_camera.setY(e.coord_camera.getY());
+            zoom = e.zoom;
+        }catch(IOException i)
+        {
+            i.printStackTrace();
+            return;
+        }catch(ClassNotFoundException c)
+        {
+            System.out.println("PlanDeTravail class not found");
+            c.printStackTrace();
+        }
+         
     }
 }

@@ -9,7 +9,7 @@ import utilitaires.Coordonnee;
  * Sert a représenter un convoyeur comme une liste de plusieurs portions de convoyeurs
  * 
  */
-public class RepresentationConvoyeur {
+public class RepresentationConvoyeur implements java.io.Serializable {
     
     
     public final ArrayList<PortionConvoyeur> listePortions = new ArrayList();

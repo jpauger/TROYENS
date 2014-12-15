@@ -10,7 +10,7 @@ import utilitaires.Coordonnee;
  * La représatation d'un convoyeur sera composée de plusieurs portions
  * 
  */
-public class PortionConvoyeur {
+public class PortionConvoyeur implements java.io.Serializable {
     
     private Coordonnee pointDepart ;
     private Coordonnee pointArrivee ;
