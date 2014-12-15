@@ -71,7 +71,6 @@ public class PanneauSelectionEntreeUsine extends javax.swing.JPanel {
         txtNomEntree = new javax.swing.JTextField();
         btnEnregistrer = new javax.swing.JButton();
         btnPanierProduit = new javax.swing.JButton();
-        btnAjouterProduit = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "selection"));
 
@@ -90,19 +89,11 @@ public class PanneauSelectionEntreeUsine extends javax.swing.JPanel {
             }
         });
 
-        btnPanierProduit.setText("Afficher produits entrant");
+        btnPanierProduit.setText("Panier de produits entrants");
         btnPanierProduit.setToolTipText("");
         btnPanierProduit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPanierProduitActionPerformed(evt);
-            }
-        });
-
-        btnAjouterProduit.setText("Ajouter un produit");
-        btnAjouterProduit.setToolTipText("");
-        btnAjouterProduit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAjouterProduitActionPerformed(evt);
             }
         });
 
@@ -123,17 +114,13 @@ public class PanneauSelectionEntreeUsine extends javax.swing.JPanel {
                             .addComponent(txtNomEntree, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(33, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnEnregistrer))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnPanierProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnEnregistrer)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAjouterProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(32, 32, 32)
+                        .addComponent(btnPanierProduit, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,11 +136,9 @@ public class PanneauSelectionEntreeUsine extends javax.swing.JPanel {
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(btnAjouterProduit)
-                .addGap(18, 18, 18)
+                .addGap(60, 60, 60)
                 .addComponent(btnPanierProduit)
-                .addGap(45, 45, 45)
+                .addGap(44, 44, 44)
                 .addComponent(btnEnregistrer)
                 .addContainerGap())
         );
@@ -172,27 +157,8 @@ public class PanneauSelectionEntreeUsine extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnPanierProduitActionPerformed
 
-    private void btnAjouterProduitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterProduitActionPerformed
-        
-        String nomProduit = Util.recupChaineOptionPane("Ajouter un produit","Nom du produit");
-        
-        if (nomProduit != null)
-        {
-            String message = "Taux d'arrivée de "+ nomProduit + " (Kg/h):";
-            String quantiteProduitStr = Util.recupChaineOptionPane("Ajouter un produit",message);
-            
-            int quantiteProduit = Integer.parseInt(quantiteProduitStr);
-            
-            if (quantiteProduit > 0)
-            {
-                entree.ajouterLigneProduit(quantiteProduit, new Produit(nomProduit) );
-            }
-        }
-    }//GEN-LAST:event_btnAjouterProduitActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAjouterProduit;
     private javax.swing.JButton btnEnregistrer;
     private javax.swing.JButton btnPanierProduit;
     private javax.swing.JLabel jLabel1;

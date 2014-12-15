@@ -63,7 +63,7 @@ public class Coordonnee {
         double distance = ligne.ptSegDist(X, Y);
         
         // on accepte un ecart de 15 pixels
-        if (distance < 15)
+        if (distance < 2)
         {
             estSurLigne = true ;
         }

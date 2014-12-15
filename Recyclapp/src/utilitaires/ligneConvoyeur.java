@@ -18,6 +18,11 @@ public class ligneConvoyeur extends JComponent {
         this.plan = plan ;
     }
     
+    public void dessinerUnConvoyeur ()
+    {
+        
+    }
+    
     public void dessinerConvoyeurs(Graphics g)
     {
         

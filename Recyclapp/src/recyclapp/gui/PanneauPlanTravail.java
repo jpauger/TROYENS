@@ -253,12 +253,42 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         // on vide la liste des anciennes coordonnees avant de recalculer
         listeCoordonnees.clear();
         
+        
+        
+        for (int i=0 ; i< this.controller.plan.listeConvoyeur.size();i++)
+        {
+            this.controller.plan.listeConvoyeur.get(i).rafraichirRepresentation();
+        }
+        
+        for (int i=0 ; i< this.controller.plan.listeConvoyeur.size();i++)
+        {
+            
+            g.setColor(Color.RED);
+            Graphics2D g2d = (Graphics2D) g;
+            BasicStroke bs1 = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
+            g2d.setStroke(bs1);
+            
+            Convoyeur leConvoyeur = this.controller.plan.listeConvoyeur.get(i);
+            RepresentationConvoyeur representation = leConvoyeur.representation ;
+            
+            for (int nbPortions = 0 ; nbPortions < representation.listePortions.size(); nbPortions++ )
+            {
+                PortionConvoyeur portion = representation.listePortions.get(nbPortions);
+                
+                Coordonnee depart = controller.coordonneeRelative(portion.getPointDepart());
+                Coordonnee arrivee = controller.coordonneeRelative(portion.getPointArrivee());
+                
+                g2d.drawLine(depart.getX(), depart.getY(), arrivee.getX(), arrivee.getY());
+            }
+            
+        }
+        
         // on stocke les coordonnées des lignes a tracer dans une arrayliste
         for (int i= 0; i< this.controller.plan.listeConvoyeur.size(); i++ )
         {
             this.listeCoordonnees.add(i, obtenirCoordonneeLigne(this.controller.plan.listeConvoyeur.get(i) ));
         }
-        
+
         // on trace chacune des lignes
         for (int j= 0; j< this.listeCoordonnees.size(); j++)
         {
@@ -476,6 +506,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                 {
                     // On peut récupérer le convoyeur cliqué a ce niveau
                     this.controller.plan.listeConvoyeur.get(i).selectionner();
+                    break;
                 } 
             }
             
