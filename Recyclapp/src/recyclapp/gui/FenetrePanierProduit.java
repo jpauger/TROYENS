@@ -6,10 +6,13 @@ import domaine.Produit;
 import java.awt.BorderLayout;
 
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import utilitaires.Util;
 
 public class FenetrePanierProduit extends javax.swing.JFrame {
+    private DefaultTableModel cvModel;
     private  JTable tableau;
+    private String[] colonnes;
     private final EntreeUsine entree;
     private final Controller controller;
     
@@ -25,25 +28,23 @@ public class FenetrePanierProduit extends javax.swing.JFrame {
         this.entree = entree;
         this.controller = controller;
         
-        
-        String[] colonnes = new String[2];
+        colonnes = new String[2];
         colonnes[0] = "Produits";
         colonnes[1] = "Taux d'arrivée (Kg)";
         
+        tableau = new JTable();
+        this.setLayout(new BorderLayout());
+        
+        this.add(tableau.getTableHeader(), BorderLayout.PAGE_START);
+        this.add(tableau, BorderLayout.CENTER);
+        
         if (entree.produits != null)
-        {
-            textAucunProduit.setVisible(false);
-            tableau = new JTable(entree.produits, colonnes);
-            this.setLayout(new BorderLayout());
-        
-            this.add(tableau.getTableHeader(), BorderLayout.PAGE_START);
-            this.add(tableau, BorderLayout.CENTER);
+        {            
+            cvModel = new DefaultTableModel(entree.produits,colonnes);
+            
+            tableau.setModel(cvModel);
         }
-        else
-        {
-            textAucunProduit.setVisible(true);
-        }
-        
+        rafraichirText();
         
         this.setLocationRelativeTo(this.controller.fenetre);
 
@@ -156,20 +157,25 @@ public class FenetrePanierProduit extends javax.swing.JFrame {
         
         // TODO : ajouter une nouvelle ligne au tableau des produits
         
-//        String nomProduit = Util.recupChaineOptionPane("Ajouter un produit","nom produit");
-//        
-//        if (nomProduit != null)
-//        {
-//            String message = "Quantité de "+ nomProduit + " (Kg/h):";
-//            String quantiteProduitStr = Util.recupChaineOptionPane("Ajouter un produit",message);
-//            
-//            int quantiteProduit = Integer.parseInt(quantiteProduitStr);
-//            
-//            if (quantiteProduit > 0)
-//            {
-//                entree.ajouterLigneProduit(quantiteProduit, new Produit(nomProduit) );
-//            }
-//        }
+        String nomProduit = Util.recupChaineOptionPane("Ajouter un produit","nom produit");
+        
+        if (nomProduit != null)
+        {
+            String message = "Quantité de "+ nomProduit + " (Kg/h):";
+            String quantiteProduitStr = Util.recupChaineOptionPane("Ajouter un produit",message);
+            
+            int quantiteProduit = Integer.parseInt(quantiteProduitStr);
+            
+            if (quantiteProduit > 0)
+            {
+                entree.ajouterLigneProduit(quantiteProduit, new Produit(nomProduit) );
+            }
+            rafraichirText();
+            cvModel = new DefaultTableModel(entree.produits,colonnes);
+            tableau.setModel(cvModel);
+            cvModel.fireTableDataChanged();
+            tableau.repaint();
+        }
     }//GEN-LAST:event_btnAjouterLigneActionPerformed
 
     
@@ -178,8 +184,12 @@ public class FenetrePanierProduit extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFermerActionPerformed
 
 
-    private void rafraichir()
+    private void rafraichirText()
     {
+        if (entree.produits != null)
+            textAucunProduit.setVisible(false);
+        else
+            textAucunProduit.setVisible(true);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
