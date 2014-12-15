@@ -1,4 +1,7 @@
 package domaine;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import utilitaires.*;
 import java.util.ArrayList;
 
@@ -6,7 +9,7 @@ import java.util.ArrayList;
  *
  * @author TROYENS
  */
-public class PlanDeTravail {
+public class PlanDeTravail implements java.io.Serializable {
     
     public ArrayList<Equipement> listeEquipement = new ArrayList();
     public ArrayList<Convoyeur> listeConvoyeur = new ArrayList();
@@ -42,14 +45,10 @@ public class PlanDeTravail {
         listeEquipement.add(nouvelleStation);
     }
     
-    public void supprimerStation (Equipement unEquipement)
+    public void supprimerStation (int equip)
     {
-        for(int i=0;i<listeEquipement.size();i++)
-        {
-            Equipement equipement = listeEquipement.get(i);
-            if(equipement.estSurEquipement(coordonneeCliqueSurPlan(unEquipement.coordonnees)))
-                listeEquipement.remove(i);
-        }
+        Equipement equipement = listeEquipement.get(equip);
+        System.out.println("On supprime "+equipement.nom);
     }
     
     //deplace une station prise en paramettre vers de nouvelles coordonnées prise en parametre
@@ -261,5 +260,15 @@ public class PlanDeTravail {
     {
         coord_camera.setX(-420);
         coord_camera.setY(-300);
+    }
+    
+    public void sauvegarderPlan(File f)
+    {
+        System.out.println("On sauvegarde " + f.getPath());
+    }
+    
+    public void chargerPlan(File f)
+    {
+        System.out.println("On charge " + f.getPath());
     }
 }

@@ -6,6 +6,7 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import utilitaires.Coordonnee;
 
 
@@ -115,6 +116,12 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         btnRedo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.redo.curve.png"))); // NOI18N
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.delete.png"))); // NOI18N
+        btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteMouseClicked(evt);
+            }
+        });
 
         btnCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.check.png"))); // NOI18N
 
@@ -619,7 +626,12 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         String dossierSauvegardes = (System.getProperty("user.dir")).concat("/Sauvegardes");
         File f = new File(dossierSauvegardes);
         f.mkdirs();
+        fc.setCurrentDirectory(f);
+        FileNameExtensionFilter filtre = new FileNameExtensionFilter("Fichiers txt", "txt", "text");
+        fc.setFileFilter(filtre);
         int returnVal = fc.showSaveDialog(FenetrePrincipale.this);
+        if(returnVal == JFileChooser.APPROVE_OPTION)
+            controller.sauvegarderPlan(fc.getSelectedFile());
     }//GEN-LAST:event_btnSaveMouseClicked
 
     private void btnLoadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoadMouseClicked
@@ -628,8 +640,16 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         File f = new File(dossierSauvegardes);
         f.mkdirs();
         fc.setCurrentDirectory(f);
+        FileNameExtensionFilter filtre = new FileNameExtensionFilter("Fichiers txt", "txt", "text");
+        fc.setFileFilter(filtre);
         int returnVal = fc.showOpenDialog(FenetrePrincipale.this);
+        if(returnVal == JFileChooser.APPROVE_OPTION)
+            controller.chargerPlan(fc.getSelectedFile());
     }//GEN-LAST:event_btnLoadMouseClicked
+
+    private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
+        controller.supprimerStation();
+    }//GEN-LAST:event_btnDeleteMouseClicked
     
     public void quitterModeAjoutConvoyeur()
     {
