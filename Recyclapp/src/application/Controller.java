@@ -18,9 +18,10 @@ public class Controller {
     public boolean modeAjoutConvoyeurTermine = false;
     public int selection = -1;
     
-    public Controller()
+    public Controller(FenetrePrincipale fenetre)
     {
         plan = new PlanDeTravail();
+        this.fenetre = fenetre;
     }
        
     void enregistrer(){}
@@ -32,40 +33,44 @@ public class Controller {
     void afficherFenetreSelection (Equipement equipement){}
     void afficherFenetreMatriceTransformation(Station station){}
     
-    public void ajouterStation(Coordonnee coordonnees)
-    {
-        plan.ajouterStation(coordonnees);
-    }
-    
     public void ajouterStation(Coordonnee coordonnees, int nombreSorties)
     {
         plan.ajouterStation(coordonnees, nombreSorties);
+        validerPlan();
     }
     
     public void ajouterEntreeUsine(Coordonnee coordonnees)
     {
         plan.ajouterEntreeUsine(coordonnees);
+        validerPlan();
     }
     public void ajouterSortieUsine(Coordonnee coordonnees)
     {
         plan.ajouterSortieUsine(coordonnees);
+        validerPlan();
     }
     
     public void ajouterJonction(Coordonnee coordonnees)
     {
         plan.ajouterJonction(coordonnees);
+        validerPlan();
     }
     
     public void ajouterConvoyeur(SortieEquipement sortie, Equipement equipementFinal)
     {
         plan.ajouterConvoyeur(sortie, equipementFinal);
+        validerPlan();
     }
     
-    void validerPlan()
+    public void validerPlan()
     {
-        plan.validerPlan();
+        fenetre.changerCheckIcone(plan.validerPlan());
     }
     
+    public String obtenirErreur()
+    {
+        return plan.erreursValidation;
+    }
     public Convoyeur obtenirConvoyeurSelectionne()
     {
         return plan.obtenirConvoyeurSelectionne();
@@ -82,13 +87,18 @@ public class Controller {
     }
     
     public void supprimerStation()
-    {
+    {        
         if(selection != -1)
             plan.supprimerStation(selection);
         selection = -1;
+        validerPlan();
     }
     
-    
+    public void redefinirMatriceStations()
+    {
+        plan.redefinirMatriceStations();
+    }
+       
     SortieEquipement obtenirSortieVide()
     {
         //code temporaire juste pour eviter une erreur de type "missing return"
@@ -130,7 +140,9 @@ public class Controller {
     }
     public void MettreAJourQuantiteTous()
     {
+        
         plan.MettreAJourQuantiteTous();
+        validerPlan();
     }
     
     public void centrerCamera()
@@ -146,5 +158,6 @@ public class Controller {
     public void chargerPlan(File f)
     {
         plan.chargerPlan(f);
+        validerPlan();
     }
 }

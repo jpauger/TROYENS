@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import utilitaires.*;
 import java.util.ArrayList;
+import javax.accessibility.AccessibleRelation;
 
 /**
  *
@@ -21,6 +22,7 @@ public class PlanDeTravail implements java.io.Serializable {
     public Coordonnee coord_camera = new Coordonnee(-420,-300);
     public final int zoom_values[] = new int []{1,2,4,10};
     public int zoom = 2;
+    public String erreursValidation = "";
     
     
     
@@ -84,6 +86,14 @@ public class PlanDeTravail implements java.io.Serializable {
         }
     }
     
+    public void redefinirMatriceStations()
+    {
+        for(int i=0;i<listeEquipement.size();i++)
+        {
+            if((listeEquipement.get(i)) instanceof Station)
+                ((Station)listeEquipement.get(i)).definirMatriceBase();
+        }
+    }
     
     public void ajouterEntreeUsine (Coordonnee coordonnee)
     {
@@ -135,7 +145,62 @@ public class PlanDeTravail implements java.io.Serializable {
         //TODO : a implementer
     }
     
-    public void validerPlan(){}
+    public boolean validerPlan()
+    {
+        erreursValidation = "";
+        for(int i = 0; i< listeEquipement.size();i++)
+        {
+            if(listeEquipement.get(i) instanceof EntreeUsine)
+            {
+                if(!((EntreeUsine)listeEquipement.get(i)).listeSorties.get(0).estConnecte())
+                    erreursValidation += "Une entrée d'usine n'est pas connecté." + "\n";
+            }
+            if(listeEquipement.get(i) instanceof SortieUsine)
+            {
+                if(((SortieUsine)listeEquipement.get(i)).listeSortieEntrante.size() < 1)
+                    erreursValidation += "Une sortie d'usine n'a pas de sortie." + "\n";
+            }
+            if(listeEquipement.get(i) instanceof Jonction)
+            {
+                if(((Jonction)listeEquipement.get(i)).listeSorties.size() < 1)
+                    erreursValidation += "Une jonction n'a pas de sortie." + "\n";
+                if(((Jonction)listeEquipement.get(i)).listeSortieEntrante.size() < 2)
+                    erreursValidation += "Une jonction n'a pas deux entrées." + "\n";
+            }
+            if(listeEquipement.get(i) instanceof Station)
+            {
+                if(((Station)listeEquipement.get(i)).listeSortieEntrante.size() < 1)
+                    erreursValidation += "Une station n'a pas d'entrée." + "\n";
+                for(int j=0; j<((Station)listeEquipement.get(i)).listeSorties.size(); j++)
+                {
+                    if(!((Station)listeEquipement.get(i)).listeSorties.get(j).estConnecte())
+                        erreursValidation += "Une sortie de station n'est pas connecté." + "\n";
+                }
+                
+                int capaciteEntrante=0;
+                for(int j=0;j <((Station)listeEquipement.get(i)).listeSortieEntrante.size();j++)
+                {
+                    for(int k=0;k<((Station)listeEquipement.get(i)).listeSortieEntrante.get(j).listeLigneProduit.size();k++)
+                    {
+                        capaciteEntrante += ((Station)listeEquipement.get(i)).listeSortieEntrante.get(j).listeLigneProduit.get(k).quantite;
+                    }
+                }
+                if(((Station)listeEquipement.get(i)).capaciteMax < capaciteEntrante)
+                    erreursValidation += "Une station a dépassé sa capacité maximal." + "\n";
+            }
+        }
+        for(int i = 0; i< listeConvoyeur.size();i++)
+        {
+            int capaciteEntrante=0;
+            for(int j=0;j < listeConvoyeur.get(i).sortie.listeLigneProduit.size();j++)
+            {
+                capaciteEntrante += listeConvoyeur.get(i).sortie.listeLigneProduit.get(j).quantite;
+            }
+            if(capaciteEntrante > listeConvoyeur.get(i).capaciteMax)
+                erreursValidation += "Un convoyeur a dépassé sa capacité maximal." + "\n";
+        }
+        return erreursValidation == "";
+    }
     
     public Equipement obtenirEquipement(Coordonnee coordonnee)
     {

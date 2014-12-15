@@ -1,5 +1,6 @@
 package recyclapp.gui;
 import application.Controller;
+import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.io.File;
@@ -33,7 +34,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     public FenetrePrincipale() 
     {
         initComponents();
-        controller = new Controller();
+        controller = new Controller(this);
         panneauSelectionStation = new PanneauSelectionStation(this.panneauProprietes ,controller);
         panneauSelectionStation.Init();
         
@@ -45,6 +46,20 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 
         //controller.ajouterEntreeUsine(new Coordonnee(200-12,300-32));
         panneauPlanTravailExt.RafraichirPlan();
+    }
+    
+    public void changerCheckIcone(boolean estValide)
+    {
+        if(estValide)
+        {
+            //btnCheck.setIcon(new ImageIcon(getClass().getResource("/ico.dark/appbar.check.png")));
+            btnCheck.setBackground(Color.GREEN);
+        }
+        else
+        {
+            //btnCheck.setIcon(new ImageIcon(getClass().getResource("/ico.light/appbar.check.png")));
+            btnCheck.setBackground(Color.RED);
+        }
     }
  
     /**
@@ -63,7 +78,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         btnUndo = new javax.swing.JLabel();
         btnRedo = new javax.swing.JLabel();
         btnDelete = new javax.swing.JLabel();
-        btnCheck = new javax.swing.JLabel();
+        btnCheck = new javax.swing.JButton();
         panneauOutils = new javax.swing.JPanel();
         btnAjoutConvoyeur = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -96,7 +111,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         panneauMenuHaut.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "menu haut [x]", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
 
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/save.png"))); // NOI18N
-        btnSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSave.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSaveMouseClicked(evt);
@@ -104,7 +119,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         });
 
         btnLoad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.folder.open.png"))); // NOI18N
-        btnLoad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLoad.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnLoad.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLoadMouseClicked(evt);
@@ -116,7 +131,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         btnRedo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.redo.curve.png"))); // NOI18N
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.delete.png"))); // NOI18N
-        btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnDeleteMouseClicked(evt);
@@ -124,6 +139,11 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         });
 
         btnCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.check.png"))); // NOI18N
+        btnCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panneauMenuHautLayout = new javax.swing.GroupLayout(panneauMenuHaut);
         panneauMenuHaut.setLayout(panneauMenuHautLayout);
@@ -176,7 +196,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         jLabel8.setText("Station");
 
         btnJonction.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/jonction.png"))); // NOI18N
-        btnJonction.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnJonction.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnJonction.setFocusPainted(false);
         btnJonction.setSelected(true);
         btnJonction.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -192,7 +212,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 
         btnSortieUsine.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.door.leave.png"))); // NOI18N
         btnSortieUsine.setToolTipText("");
-        btnSortieUsine.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSortieUsine.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnSortieUsine.setFocusPainted(false);
         btnSortieUsine.setSelected(true);
         btnSortieUsine.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -230,7 +250,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 
         btnEntreeUsine.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.door.enter.png"))); // NOI18N
         btnEntreeUsine.setToolTipText("");
-        btnEntreeUsine.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEntreeUsine.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnEntreeUsine.setFocusPainted(false);
         btnEntreeUsine.setSelected(true);
         btnEntreeUsine.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -594,7 +614,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                     int nombreSorties = Integer.parseInt(QteSorties);
 
                     controller.ajouterStation(coord, nombreSorties ); 
-                    panneauPlanTravailExt.RafraichirPlan();
+                    panneauPlanTravailExt.RafraichirPlan();                    
                 }
             }
             catch(NullPointerException e)
@@ -648,6 +668,12 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         controller.supprimerStation();
         panneauPlanTravailExt.RafraichirPlan();
     }//GEN-LAST:event_btnDeleteMouseClicked
+
+    private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
+        String erreurs = controller.obtenirErreur();
+        if(!erreurs.isEmpty())
+            JOptionPane.showMessageDialog(this, controller.obtenirErreur());
+    }//GEN-LAST:event_btnCheckActionPerformed
     
     public void quitterModeAjoutConvoyeur()
     {
@@ -695,7 +721,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAjoutConvoyeur;
     private javax.swing.JButton btnAjoutStation;
-    private javax.swing.JLabel btnCheck;
+    private javax.swing.JButton btnCheck;
     private javax.swing.JLabel btnDelete;
     private javax.swing.JButton btnEntreeUsine;
     private javax.swing.JButton btnJonction;
