@@ -19,16 +19,32 @@ public class EntreeUsine extends Equipement {
        super.coordonnees = coordonnees;          
        this.image = new ImageIcon(getClass().getResource("/ico/light/appbar.door.enter.png"));
        SortieEquipement sortieEquipement = new SortieEquipement((Equipement)this, 0);
-       sortieEquipement.listeLigneProduit.add(new LigneProduit(new Produit("Bois"),1000));
-       sortieEquipement.listeLigneProduit.add(new LigneProduit(new Produit("Metal"),1000));
        this.listeSorties.add(sortieEquipement);
        this.definirPanierProduits();
        
     }
     
-    void ajouterLigneProduit (int quantite ,Produit produit )
+    
+    public void ajouterLigneProduit (int quantite ,Produit produit )
     {
-        this.listeSorties.get(0).listeLigneProduit.add(new LigneProduit(produit, quantite));
+        if (quantite != 0)
+        {
+            this.listeSorties.get(0).listeLigneProduit.add(new LigneProduit(produit, quantite));
+            this.definirPanierProduits();
+        }
+    }
+    
+
+    void supprimerLigneProduit (String nomProduit)
+    {
+        for (LigneProduit ligne : this.listeSorties.get(0).listeLigneProduit)
+        {
+            // on parcourt la liste des produit de la seule sortie et si on trouve produit on supprime la ligne entiere
+            if ( ligne.produit.nom.equals(nomProduit) ) 
+            {
+                this.listeSorties.get(0).listeLigneProduit.remove(ligne); 
+            }
+        }
     }
     
     
@@ -36,7 +52,7 @@ public class EntreeUsine extends Equipement {
     {
         for (LigneProduit ligne : this.listeSorties.get(0).listeLigneProduit)
         {
-            // on parcourt la liste des produit de la seule sortie et si on trouve produit on suprime la ligne entiere
+            // on parcourt la liste des produit de la seule sortie et si on trouve produit on supprime la ligne entiere
             if (ligne.produit == produit) 
             {
                 this.listeSorties.get(0).listeLigneProduit.remove(ligne); 
@@ -66,6 +82,8 @@ public class EntreeUsine extends Equipement {
               
         if(!this.listeSorties.get(0).listeLigneProduit.isEmpty())
         {
+            this.retirerProduitsSupprimes();
+            
             produits = new  Object[this.listeSorties.get(0).listeLigneProduit.size()][];
             for(int i =0 ; i< produits.length; i++)
             {
@@ -88,12 +106,28 @@ public class EntreeUsine extends Equipement {
             {
                 Produit nvProduit = new Produit(produits[i][0].toString());
                 int nvQuantite = Integer.parseInt(produits[i][1].toString());
-                LigneProduit nvLigne = new LigneProduit(nvProduit, nvQuantite);
                 
-                this.listeSorties.get(0).listeLigneProduit.add(nvLigne);
+                if (nvQuantite != 0)
+                {
+                    LigneProduit nvLigne = new LigneProduit(nvProduit, nvQuantite);
+                    this.listeSorties.get(0).listeLigneProduit.add(nvLigne);
+                }                  
             }
         }
         
+        this.definirPanierProduits();
+    }
+    
+    public void retirerProduitsSupprimes()
+    {
+        for (LigneProduit ligne : this.listeSorties.get(0).listeLigneProduit)
+        {
+            // on parcourt la liste des produit de la seule sortie et si on trouve produit on supprime la ligne entiere
+            if ( ligne.quantite == 0 ) 
+            {
+                this.listeSorties.get(0).listeLigneProduit.remove(ligne); 
+            }
+        }
     }
         
    

@@ -2,12 +2,14 @@ package recyclapp.gui;
 
 import application.Controller;
 import domaine.EntreeUsine;
+import domaine.Produit;
 import java.awt.BorderLayout;
 
 import javax.swing.JTable;
+import utilitaires.Util;
 
 public class FenetrePanierProduit extends javax.swing.JFrame {
-    private final JTable tableau;
+    private  JTable tableau;
     private final EntreeUsine entree;
     private final Controller controller;
     
@@ -26,13 +28,25 @@ public class FenetrePanierProduit extends javax.swing.JFrame {
         
         String[] colonnes = new String[2];
         colonnes[0] = "Produits";
-        colonnes[1] = "Taux d'arrivée (Kg)";        
-        tableau = new JTable(entree.produits, colonnes);
+        colonnes[1] = "Taux d'arrivée (Kg)";
+        
+        if (entree.produits != null)
+        {
+            textAucunProduit.setVisible(false);
+            tableau = new JTable(entree.produits, colonnes);
+            this.setLayout(new BorderLayout());
+        
+            this.add(tableau.getTableHeader(), BorderLayout.PAGE_START);
+            this.add(tableau, BorderLayout.CENTER);
+        }
+        else
+        {
+            textAucunProduit.setVisible(true);
+        }
         
         
-        this.setLayout(new BorderLayout());
-        this.add(tableau.getTableHeader(), BorderLayout.PAGE_START);
-        this.add(tableau, BorderLayout.CENTER);
+        this.setLocationRelativeTo(this.controller.fenetre);
+
         this.setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
@@ -48,7 +62,9 @@ public class FenetrePanierProduit extends javax.swing.JFrame {
 
         btnEnregistrer = new javax.swing.JButton();
         btnAjouterLigne = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnFermer = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        textAucunProduit = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,34 +82,49 @@ public class FenetrePanierProduit extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Supprimer selection");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnFermer.setText("Fermer");
+        btnFermer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnFermerActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("Aide : Pour supprimer un produit remplacer la quantité par 0");
+
+        textAucunProduit.setText("Aucun produit n'a été ajouté à cette entrée.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnAjouterLigne)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(32, 32, 32)
-                .addComponent(btnEnregistrer)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnFermer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                        .addComponent(btnAjouterLigne)
+                        .addGap(54, 54, 54)
+                        .addComponent(btnEnregistrer))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(textAucunProduit))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(247, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(textAucunProduit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEnregistrer)
-                    .addComponent(btnAjouterLigne)
-                    .addComponent(jButton1))
+                    .addComponent(btnFermer)
+                    .addComponent(btnAjouterLigne))
                 .addGap(30, 30, 30))
         );
 
@@ -104,33 +135,58 @@ public class FenetrePanierProduit extends javax.swing.JFrame {
 
         // TODO : enregistrer les modifications apportées
         //DefaultTableModel dtm = (DefaultTableModel) tableau.getModel();
-        int nRow = tableau.getRowCount(), nCol = tableau.getColumnCount();
+        int nRow = tableau.getRowCount();
+        int nCol = tableau.getColumnCount();
         Object[][] tableData = new Object[nRow][nCol];
         for (int i = 0 ; i < nRow ; i++) 
         {
             for (int j = 0 ; j < nCol ; j++)
+            {
                 tableData[i][j] = tableau.getValueAt(i,j);
+            }
+                
         }
             
         entree.modifierProduits(tableData);
-        controller.MettreAJourQuantiteTous();
-
+        entree.majPanier();
+        
     }//GEN-LAST:event_btnEnregistrerActionPerformed
 
     private void btnAjouterLigneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterLigneActionPerformed
         
         // TODO : ajouter une nouvelle ligne au tableau des produits
+        
+//        String nomProduit = Util.recupChaineOptionPane("Ajouter un produit","nom produit");
+//        
+//        if (nomProduit != null)
+//        {
+//            String message = "Quantité de "+ nomProduit + " (Kg/h):";
+//            String quantiteProduitStr = Util.recupChaineOptionPane("Ajouter un produit",message);
+//            
+//            int quantiteProduit = Integer.parseInt(quantiteProduitStr);
+//            
+//            if (quantiteProduit > 0)
+//            {
+//                entree.ajouterLigneProduit(quantiteProduit, new Produit(nomProduit) );
+//            }
+//        }
     }//GEN-LAST:event_btnAjouterLigneActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        // TODO : supprimer les listes selectionnées et actualiser l'affichage
-    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private void btnFermerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFermerActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnFermerActionPerformed
 
 
+    private void rafraichir()
+    {
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAjouterLigne;
     private javax.swing.JButton btnEnregistrer;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnFermer;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel textAucunProduit;
     // End of variables declaration//GEN-END:variables
 }
