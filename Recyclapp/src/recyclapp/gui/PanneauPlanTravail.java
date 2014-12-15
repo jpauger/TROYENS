@@ -15,6 +15,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
 import javax.swing.ToolTipManager;
 
 /**
@@ -253,48 +254,89 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         // on vide la liste des anciennes coordonnees avant de recalculer
         listeCoordonnees.clear();
         
-        // on stocke les coordonnées des lignes a tracer dans une arrayliste
-        for (int i= 0; i< this.controller.plan.listeConvoyeur.size(); i++ )
+        
+        
+        for (int i=0 ; i< this.controller.plan.listeConvoyeur.size();i++)
         {
-            this.listeCoordonnees.add(i, obtenirCoordonneeLigne(this.controller.plan.listeConvoyeur.get(i) ));
+            this.controller.plan.listeConvoyeur.get(i).rafraichirRepresentation();
         }
         
-        // on trace chacune des lignes
-        for (int j= 0; j< this.listeCoordonnees.size(); j++)
+        for (int i=0 ; i< this.controller.plan.listeConvoyeur.size();i++)
         {
-            Coordonnee coordRel1 = controller.coordonneeRelative(new Coordonnee(this.listeCoordonnees.get(j).getX1(),this.listeCoordonnees.get(j).getY1()));
-            Coordonnee coordRel2 = controller.coordonneeRelative(new Coordonnee(this.listeCoordonnees.get(j).getX2(),this.listeCoordonnees.get(j).getY2()));
-            g.setColor(this.controller.plan.listeConvoyeur.get(j).getCouleur());
+            
+            g.setColor(this.controller.plan.listeConvoyeur.get(i).getCouleur());
             Graphics2D g2d = (Graphics2D) g;
             BasicStroke bs1 = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
             g2d.setStroke(bs1);
-            g2d.drawLine(coordRel1.getX(), coordRel1.getY(), coordRel2.getX(), coordRel2.getY());
             
-            double angle = Math.toRadians(45);
-            int taillePointe = 12;
-            Coordonnee point1 = new Coordonnee(), point2 = new Coordonnee(), point3 = new Coordonnee();
-            double dy = coordRel2.getY() - coordRel1.getY();  
-            double dx = coordRel2.getX() - coordRel1.getX();  
-            double theta = Math.atan2(dy, dx);  
+            Convoyeur leConvoyeur = this.controller.plan.listeConvoyeur.get(i);
+            RepresentationConvoyeur representation = leConvoyeur.representation ;
             
-            double rho = theta + angle;  
-            point1.setX((int)Math.round(coordRel2.getX() - 32 * Math.cos(theta)));
-            point1.setY((int)Math.round(coordRel2.getY() - 32 * Math.sin(theta)));
+            for (int nbPortions = 0 ; nbPortions < representation.listePortions.size(); nbPortions++ )
+            {
+                PortionConvoyeur portion = representation.listePortions.get(nbPortions);
+                
+                Coordonnee depart = controller.coordonneeRelative(portion.getPointDepart());
+                Coordonnee arrivee = controller.coordonneeRelative(portion.getPointArrivee());
+                
+                
+                               
+                g2d.drawLine(depart.getX(), depart.getY(), arrivee.getX(), arrivee.getY());
+                //System.out.println("nombre de portions " + nbPortions );
+                                
+                // on affiche les pointAngulaires
+                JLabel pointAngulaire = new JLabel();
+                pointAngulaire.setIcon(new ImageIcon(getClass().getResource("/ico/sortie.png")));
+                pointAngulaire.setLocation(depart.getX(),depart.getY());
+                pointAngulaire.setSize(5,5);
+                pointAngulaire.setVisible(true);
+                this.conteneur.add(pointAngulaire);
+            }
             
-            point2.setX((int)Math.round(point1.getX() - taillePointe * Math.cos(rho)));  
-            point2.setY((int)Math.round(point1.getY() - taillePointe * Math.sin(rho)));  
-            
-            rho = theta - angle;  
-            point3.setX((int)Math.round(point1.getX() - taillePointe * Math.cos(rho)));  
-            point3.setY((int)Math.round(point1.getY() - taillePointe * Math.sin(rho))); 
-            
-            Polygon p=new Polygon();
-            p.addPoint(point1.getX(), point1.getY());
-            p.addPoint(point2.getX(), point2.getY());
-            p.addPoint(point3.getX(), point3.getY());
-            g2d.draw(p);
-            g2d.fillPolygon(p);
         }
+        
+//        // on stocke les coordonnées des lignes a tracer dans une arrayliste
+//        for (int i= 0; i< this.controller.plan.listeConvoyeur.size(); i++ )
+//        {
+//            this.listeCoordonnees.add(i, obtenirCoordonneeLigne(this.controller.plan.listeConvoyeur.get(i) ));
+//        }
+//
+//        // on trace chacune des lignes
+//        for (int j= 0; j< this.listeCoordonnees.size(); j++)
+//        {
+//            Coordonnee coordRel1 = controller.coordonneeRelative(new Coordonnee(this.listeCoordonnees.get(j).getX1(),this.listeCoordonnees.get(j).getY1()));
+//            Coordonnee coordRel2 = controller.coordonneeRelative(new Coordonnee(this.listeCoordonnees.get(j).getX2(),this.listeCoordonnees.get(j).getY2()));
+//            g.setColor(this.controller.plan.listeConvoyeur.get(j).getCouleur());
+//            Graphics2D g2d = (Graphics2D) g;
+//            BasicStroke bs1 = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
+//            g2d.setStroke(bs1);
+//            g2d.drawLine(coordRel1.getX(), coordRel1.getY(), coordRel2.getX(), coordRel2.getY());
+//            
+//            double angle = Math.toRadians(45);
+//            int taillePointe = 12;
+//            Coordonnee point1 = new Coordonnee(), point2 = new Coordonnee(), point3 = new Coordonnee();
+//            double dy = coordRel2.getY() - coordRel1.getY();  
+//            double dx = coordRel2.getX() - coordRel1.getX();  
+//            double theta = Math.atan2(dy, dx);  
+//            
+//            double rho = theta + angle;  
+//            point1.setX((int)Math.round(coordRel2.getX() - 32 * Math.cos(theta)));
+//            point1.setY((int)Math.round(coordRel2.getY() - 32 * Math.sin(theta)));
+//            
+//            point2.setX((int)Math.round(point1.getX() - taillePointe * Math.cos(rho)));  
+//            point2.setY((int)Math.round(point1.getY() - taillePointe * Math.sin(rho)));  
+//            
+//            rho = theta - angle;  
+//            point3.setX((int)Math.round(point1.getX() - taillePointe * Math.cos(rho)));  
+//            point3.setY((int)Math.round(point1.getY() - taillePointe * Math.sin(rho))); 
+//            
+//            Polygon p=new Polygon();
+//            p.addPoint(point1.getX(), point1.getY());
+//            p.addPoint(point2.getX(), point2.getY());
+//            p.addPoint(point3.getX(), point3.getY());
+//            g2d.draw(p);
+//            g2d.fillPolygon(p);
+//        }
         
         
         
@@ -469,21 +511,52 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         {
             AnnulerSelectionConvoyeurs();
             coord = controller.plan.coordonneeCliqueSurPlan(coord);
-            // on verifie si on a cliqué sur un convoyeur        
-            for (int i =0; i< this.listeCoordonnees.size(); i++)
+            // on verifie si on a cliqué sur un convoyeur    
+            
+            for (int nbConvoyeurs = 0 ; nbConvoyeurs< this.controller.plan.listeConvoyeur.size() ; nbConvoyeurs++ )
             {
-                if ( coord.estSurLigne(this.listeCoordonnees.get(i))) 
+                Convoyeur convoyeur = this.controller.plan.listeConvoyeur.get(nbConvoyeurs);
+                for (int nbPortions = 0 ; nbPortions < convoyeur.representation.listePortions.size(); nbPortions++)
                 {
-                    // On peut récupérer le convoyeur cliqué a ce niveau
-                    this.controller.plan.listeConvoyeur.get(i).selectionner();
-                } 
+                    PortionConvoyeur portion = convoyeur.representation.listePortions.get(nbPortions);
+                    CoordonneeLigne coordonneesPortion = new CoordonneeLigne(portion.getPointDepart(),portion.getPointArrivee());
+                    
+                    if (coord.estSurLigne(coordonneesPortion))
+                    {
+                        this.controller.plan.listeConvoyeur.get(nbConvoyeurs).selectionner();
+                        
+                        if (SwingUtilities.isRightMouseButton(evt))
+                        {
+                        
+                            this.controller.plan.listeConvoyeur.get(nbConvoyeurs).representation.creerNvlPortion(coord, portion);
+                        }
+                        
+                        break;
+                    }
+                    
+                    
+                }
+                
+                
             }
+            
+//            for (int i =0; i< this.listeCoordonnees.size(); i++)
+//            {
+//                if ( coord.estSurLigne(this.listeCoordonnees.get(i))) 
+//                {
+//                    // On peut récupérer le convoyeur cliqué a ce niveau
+//                    this.controller.plan.listeConvoyeur.get(i).selectionner();
+//                    break;
+//                } 
+//            }
             
             controller.selection = -1;
 
         }
         else
             controller.selection = -1;
+        
+        
 
         RafraichirPlan();
         AnnulerSelectionEquipements();
@@ -497,9 +570,8 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
      */
     public void AnnulerSelectionConvoyeurs()
     {
-        for (int i =0; i< this.listeCoordonnees.size(); i++)
+        for (int i =0; i< this.controller.plan.listeConvoyeur.size(); i++)
         {
-            // On pourrait récupérer le convoyeur cliqué a ce niveau
             this.controller.plan.listeConvoyeur.get(i).deselectionner();
 
         }

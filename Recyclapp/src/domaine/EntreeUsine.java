@@ -74,7 +74,16 @@ public class EntreeUsine extends Equipement {
     
     public void modifierProduits(Object[][] nvProduits)
     {
-        this.produits = nvProduits ;
+        for (int i = 0; i< nvProduits.length ; i++)
+        {
+            if ( Integer.parseInt(nvProduits[i][1].toString()) != 0 )
+            {
+                this.produits[i] = nvProduits[i];
+            }
+        }
+        //this.produits = nvProduits ;
+        
+        
     }
     
     private void definirPanierProduits()

@@ -1,5 +1,6 @@
 package domaine;
 import java.awt.Color;
+import utilitaires.Coordonnee;
 
 
 /**
@@ -12,6 +13,7 @@ public class Convoyeur {
     public final SortieEquipement sortie ;
     public final Equipement equipement; 
     public boolean estSelectionne ;
+    public RepresentationConvoyeur representation ;
     
     
     // constructeur
@@ -26,6 +28,27 @@ public class Convoyeur {
             ((Station)unEquipement).definirMatriceBase();
         if(unEquipement instanceof Jonction)
             ((Jonction)unEquipement).calculerSortie();
+        
+        initialiserRepresentation(uneSortie, unEquipement);
+    }
+    
+    
+    private void initialiserRepresentation(SortieEquipement sortie, Equipement equipement)
+    {
+        Coordonnee CoordonneeDepart = new Coordonnee(this.coorDepartX(), this.coorDepartY());
+        Coordonnee CoordonneeArrivee = new Coordonnee (this.coorArriveeX(), this.coorArriveeY());
+        
+        RepresentationConvoyeur uneRepresentation  = new RepresentationConvoyeur(CoordonneeDepart, CoordonneeArrivee);
+        this.representation = uneRepresentation ;
+    }
+    
+    public void rafraichirRepresentation()
+    {
+        Coordonnee CoordonneeDepart = new Coordonnee(this.coorDepartX(), this.coorDepartY());
+        Coordonnee CoordonneeArrivee = new Coordonnee (this.coorArriveeX(), this.coorArriveeY());
+        
+        RepresentationConvoyeur uneRepresentation  = new RepresentationConvoyeur(CoordonneeDepart, CoordonneeArrivee);
+        this.representation = uneRepresentation ;
     }
     
     LigneProduit[] obtenirInformationTransit()
@@ -39,6 +62,8 @@ public class Convoyeur {
     {
         this.couleur = nvlCouleur ;
     } 
+    
+
     
     // Calcul du decalage 
     
