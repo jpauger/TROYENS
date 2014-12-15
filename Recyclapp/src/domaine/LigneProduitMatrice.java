@@ -4,7 +4,7 @@ package domaine;
  *
  * @author TROYENS
  */
-public class LigneProduitMatrice {
+public class LigneProduitMatrice implements java.io.Serializable {
     
     int pourcentage ;
     SortieEquipement sortieEquipement;
