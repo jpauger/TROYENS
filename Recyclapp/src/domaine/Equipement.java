@@ -84,10 +84,25 @@ public class Equipement {
         }
         return listeLigneProduit;
     }
-    
+       
     public void ajouterSortie ()
     {
         this.listeSorties.add(new SortieEquipement(this, this.getNombreSortie()+1));
+    }
+    
+    public String ObtenirTauxPurete(LigneProduit ligneProduit)
+    {
+        int quantiteTotal = 0;
+        for(int i=0;i<listeSortieEntrante.size();i++)
+        {
+            for(int j=0;j<listeSortieEntrante.get(i).listeLigneProduit.size();j++)
+            {
+                    quantiteTotal += listeSortieEntrante.get(i).listeLigneProduit.get(j).quantite;
+            }
+        }
+        
+         float tauxRetourne = (float)ligneProduit.quantite / quantiteTotal * 100;
+        return String.format("%.0f",tauxRetourne)  + "%";
     }
     
     public void ajouterEntree()

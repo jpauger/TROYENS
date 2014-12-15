@@ -151,7 +151,9 @@ public class FenetrePanierProduit extends javax.swing.JFrame {
             
         entree.modifierProduits(tableData);
         entree.majPanier();
-        controller.redefinirMatriceStations();        
+        
+        
+        controller.redefinirMatriceStations();  
     }//GEN-LAST:event_btnEnregistrerActionPerformed
 
     private void btnAjouterLigneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterLigneActionPerformed

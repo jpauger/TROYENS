@@ -442,7 +442,9 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             for(int i = 0; i <equipement.ObtenirListeProduitEntrant().size();i++)
             {
                 LigneProduit ligneProduit = equipement.ObtenirListeProduitEntrant().get(i);
-                message += ligneProduit.produit.nom + " : " + ligneProduit.quantite + "Kg/h<br>";
+                if(ligneProduit.quantite > 0)
+                    message += ligneProduit.produit.nom + " : " + ligneProduit.quantite + "Kg/h, Taux de pureté: " + 
+                            equipement.ObtenirTauxPurete(ligneProduit)+ " Taux de récupération: " + controller.ObtenirTauxRecuperation(ligneProduit)+ "<br>";
             }
             message += "</html>";
         }
@@ -459,7 +461,9 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             for(int i = 0; i < convoyeur.sortie.listeLigneProduit.size();i++)
             {
                 LigneProduit ligneProduit = convoyeur.sortie.listeLigneProduit.get(i);
-                message += ligneProduit.produit.nom + " : " + ligneProduit.quantite + "Kg/h<br>";
+                if(ligneProduit.quantite > 0)
+                    message += ligneProduit.produit.nom + " : " + ligneProduit.quantite + "Kg/h, Taux de pureté: " +
+                            convoyeur.ObtenirTauxPurete(ligneProduit)+ " Taux de récupération: " + controller.ObtenirTauxRecuperation(ligneProduit)+ "<br>";
             }
             message += "</html>";
         }
