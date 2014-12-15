@@ -11,7 +11,7 @@ import recyclapp.gui.FenetrePrincipale;
  */
 public class Controller {
     
-    FenetrePrincipale fenetre ;
+    public FenetrePrincipale fenetre ;
     Station station ;
     public PlanDeTravail plan;
     public boolean btnAjoutConvoyeurClicked = false ;
