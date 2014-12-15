@@ -48,26 +48,22 @@ public class PlanDeTravail implements java.io.Serializable {
     public void supprimerStation (int equip)
     {
         Equipement equipement = listeEquipement.get(equip);
-        SortieEquipement sortieASupprime = equipement.listeSorties.get(equip);
+        ArrayList<SortieEquipement> sortieASupprime = equipement.listeSorties;
         System.out.println("On supprime "+equipement.nom);
-        
-       for(int i=0; i<listeConvoyeur.size();i++)
+        for(int j=0; j<sortieASupprime.size(); j++)
         {
-            if(listeConvoyeur.get(i).equipement == equipement)      
-            {
-                //libérer la sortie qui de la station
-                listeConvoyeur.remove(i);
-            }
-            
-            if(listeConvoyeur.get(i).sortie == sortieASupprime)
-            {
-                 //libérer la sortie qui de la station
-                listeConvoyeur.remove(i);
-            }
+            for(int i=0; i<listeConvoyeur.size();i++)
+             {
+                 if(listeConvoyeur.get(i).equipement == equipement || listeConvoyeur.get(i).sortie == sortieASupprime.get(j) )      
+                 {
+                     //libérer la sortie qui de la station
+                     listeConvoyeur.remove(i);
+                     listeConvoyeur.remove(j);
+                 }
+             }
+            listeEquipement.remove(equipement);
         }
-        listeEquipement.remove(equipement);
     }
-    
     //deplace une station prise en paramettre vers de nouvelles coordonnées prise en parametre
     public void relocaliserStation (Equipement unEquipement, Coordonnee coorArrivee)
     {
