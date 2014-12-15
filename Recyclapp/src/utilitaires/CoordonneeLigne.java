@@ -19,6 +19,14 @@ public class CoordonneeLigne {
         Y2 = point2Y;
     }
     
+    public CoordonneeLigne (Coordonnee pointDepart, Coordonnee pointArrivee)
+    {
+        X1 = pointDepart.getX();
+        Y1 = pointDepart.getY();
+        X2 = pointArrivee.getX();
+        Y2 = pointArrivee.getY();
+    }
+    
     public int getX1 () { return X1; }
     public int getY1 () { return Y1; }
     public int getX2 () { return X2; }
