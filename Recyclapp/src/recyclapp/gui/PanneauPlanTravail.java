@@ -33,6 +33,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     private final int TAILLECARRE = 40;
     public boolean grille = true;
     private int dragged = 0;
+    public int selection;
     
     public java.util.ArrayList<CoordonneeLigne> listeCoordonnees = new java.util.ArrayList();
 
@@ -477,8 +478,12 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                     this.controller.plan.listeConvoyeur.get(i).selectionner();
                 } 
             }
+            
+            controller.selection = -1;
 
         }
+        else
+            controller.selection = -1;
 
         RafraichirPlan();
         AnnulerSelectionEquipements();
@@ -511,7 +516,15 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         AnnulerSelectionEquipements();
         AnnulerSelectionConvoyeurs();
         if(equipement != null)
+        {
             equipement.estSelectionne = true;
+            
+            for(int i = 0; i< this.controller.plan.listeEquipement.size(); i++)
+            {
+                if(this.controller.plan.listeEquipement.get(i) == equipement)
+                    controller.selection = i;
+            }
+        }
         if (equipement instanceof Station)
         {
             panneauSelectionStation.AfficherPanneauSelection(true);

@@ -1,6 +1,7 @@
 
 package application;
 import domaine.*;
+import java.io.File;
 import utilitaires.*;
 import recyclapp.gui.FenetrePrincipale;
 
@@ -15,6 +16,7 @@ public class Controller {
     public PlanDeTravail plan;
     public boolean btnAjoutConvoyeurClicked = false ;
     public boolean modeAjoutConvoyeurTermine = false;
+    public int selection = -1;
     
     public Controller()
     {
@@ -79,9 +81,11 @@ public class Controller {
         plan.relocaliserStation(equipement,coorArrivee);
     }
     
-    public void supprimerStation(Equipement equipement)
+    public void supprimerStation()
     {
-        plan.supprimerStation(equipement);
+        if(selection != -1)
+            plan.supprimerStation(selection);
+        selection = -1;
     }
     
     
@@ -132,5 +136,15 @@ public class Controller {
     public void centrerCamera()
     {
         plan.centrerCamera();
+    }
+    
+    public void sauvegarderPlan(File f)
+    {
+        plan.sauvegarderPlan(f);
+    }
+    
+    public void chargerPlan(File f)
+    {
+        plan.chargerPlan(f);
     }
 }
