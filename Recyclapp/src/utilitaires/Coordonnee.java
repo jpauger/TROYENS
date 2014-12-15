@@ -8,7 +8,7 @@ import java.awt.geom.Line2D;
  *
  * @author TROYENS
  */
-public class Coordonnee {
+public class Coordonnee implements java.io.Serializable {
     
     private int x ;
     private int y ;

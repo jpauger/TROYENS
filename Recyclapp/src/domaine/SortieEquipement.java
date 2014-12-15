@@ -6,7 +6,7 @@ import java.util.ArrayList;
  *
  * @author TROYENS
  */
-public class SortieEquipement {
+public class SortieEquipement implements java.io.Serializable {
     
     private final int numeroSortie;
     public boolean sortieParDefaut = false;

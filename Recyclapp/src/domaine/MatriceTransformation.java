@@ -6,7 +6,7 @@ import java.util.ArrayList;
  *
  * @author TROYENS
  */
-public class MatriceTransformation {
+public class MatriceTransformation implements java.io.Serializable {
     
     public ArrayList<ArrayList<LigneProduitMatrice>> matriceLigneProduitMatrice = new ArrayList();
     public ArrayList<LigneProduitMatrice> listeLigneProduitMatrice = new ArrayList();

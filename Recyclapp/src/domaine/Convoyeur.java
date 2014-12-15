@@ -7,7 +7,7 @@ import utilitaires.Coordonnee;
  *
  * @author TROYENS
  */
-public class Convoyeur {
+public class Convoyeur implements java.io.Serializable {
     
     private Color couleur;
     public int capaciteMax = 2000;

@@ -4,7 +4,7 @@ package domaine;
  *
  * @author TROYENS
  */
-public class LigneProduit {
+public class LigneProduit implements java.io.Serializable {
     public Produit produit ;
     public int quantite ;
 

@@ -8,7 +8,7 @@ import utilitaires.*;
  *
  * @author TROYENS
  */
-public class Equipement {
+public class Equipement implements java.io.Serializable {
     public String nom = "" ;
     public Coordonnee coordonnees;
     public int nombreEntrees = 1 ;

@@ -4,7 +4,7 @@ package domaine;
  *
  * @author TROYENS
  */
-public class Produit {    
+public class Produit implements java.io.Serializable {    
     public String nom ;
     public String description ;
 
