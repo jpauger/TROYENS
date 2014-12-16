@@ -10,13 +10,9 @@
         <file>file:/C:/Users/De%20Bayzer/Dropbox/2%20-%20Analyse%20Orienté%20Objet%20-%202007/TROYENS/Recyclapp/src/application/Controller.java</file>
         <file>file:/C:/Users/De%20Bayzer/Dropbox/2%20-%20Analyse%20Orienté%20Objet%20-%202007/TROYENS/Recyclapp/src/domaine/MatriceTransformation.java</file>
         <group>
-            <file>file:/C:/Users/De%20Bayzer/Dropbox/2%20-%20Analyse%20Orienté%20Objet%20-%202007/TROYENS2/TROYENS/Recyclapp/src/recyclapp/gui/PanneauPlanTravail.java</file>
-            <file>file:/C:/Users/De%20Bayzer/Dropbox/2%20-%20Analyse%20Orienté%20Objet%20-%202007/TROYENS2/TROYENS/Recyclapp/src/domaine/PlanDeTravail.java</file>
             <file>file:/C:/Users/De%20Bayzer/Dropbox/2%20-%20Analyse%20Orienté%20Objet%20-%202007/TROYENS2/TROYENS/Recyclapp/src/recyclapp/gui/PanneauSelectionStation.java</file>
-            <file>file:/C:/Users/De%20Bayzer/Dropbox/2%20-%20Analyse%20Orienté%20Objet%20-%202007/TROYENS2/TROYENS/Recyclapp/src/application/Controller.java</file>
-            <file>file:/C:/Users/De%20Bayzer/Dropbox/2%20-%20Analyse%20Orienté%20Objet%20-%202007/TROYENS2/TROYENS/Recyclapp/src/domaine/Convoyeur.java</file>
-            <file>file:/C:/Users/De%20Bayzer/Dropbox/2%20-%20Analyse%20Orienté%20Objet%20-%202007/TROYENS2/TROYENS/Recyclapp/src/domaine/RepresentationConvoyeur.java</file>
-            <file>file:/C:/Users/De%20Bayzer/Dropbox/2%20-%20Analyse%20Orienté%20Objet%20-%202007/TROYENS2/TROYENS/Recyclapp/src/recyclapp/gui/PanneauSelectionConvoyeur.java</file>
+            <file>file:/C:/Users/De%20Bayzer/Dropbox/2%20-%20Analyse%20Orienté%20Objet%20-%202007/TROYENS2/TROYENS/Recyclapp/src/recyclapp/gui/FenetrePrincipale.java</file>
+            <file>file:/C:/Users/De%20Bayzer/Dropbox/2%20-%20Analyse%20Orienté%20Objet%20-%202007/TROYENS2/TROYENS/Recyclapp/src/domaine/PlanDeTravail.java</file>
         </group>
     </open-files>
 </project-private>

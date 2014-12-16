@@ -180,7 +180,7 @@ public class Convoyeur implements java.io.Serializable {
         int coorDepartX = this.sortie.equipementMere().coordonnees.getX() + decalageLargeurDepart(this.equipement) ; 
         if (this.sortie.equipementMere() instanceof Station)
         {
-            coorDepartX = this.sortie.equipementMere().coordonnees.getX()+ 53 ;
+            coorDepartX = this.sortie.equipementMere().coordonnees.getX()+ 69 ;
         }
         return coorDepartX ;
     }

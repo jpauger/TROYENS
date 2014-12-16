@@ -163,8 +163,8 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             @Override
             public void mouseExited(java.awt.event.MouseEvent evt)
             {
-                AnnulerSelectionEquipements();
-                RafraichirPlan();
+                //AnnulerSelectionEquipements();
+                //RafraichirPlan();
             }
         });
         
@@ -222,9 +222,9 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     {
         super.paint(g);
         if(grille)
-            afficherGrille(g);
-        afficherConvoyeurs(g);
+            afficherGrille(g);    
         afficherEquipements();
+        afficherConvoyeurs(g);
     }
     
     /*
@@ -401,7 +401,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             
             //labelSortie.setLocation(coordRel.getX()+ 40, coordRel.getY() + 10+ ( station.listeSorties.get(i).getNumSortie() * 10 ));
             
-            labelSortie.setLocation(coordRel.getX()+ 52, coordRel.getY() + 10 + ( station.listeSorties.get(i).getNumSortie() * 10 ));
+            labelSortie.setLocation(coordRel.getX()+ 68, coordRel.getY() + 10 + ( station.listeSorties.get(i).getNumSortie() * 10 ));
             labelSortie.setSize(5,5);
             labelSortie.setVisible(true);
             this.conteneur.add(labelSortie);
@@ -557,7 +557,17 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             this.controller.plan.listeConvoyeur.get(i).deselectionner();
 
         }
+        panneauSelectionConvoyeur.Afficher(false);
         RafraichirPlan();
+    }
+    
+    public void aucunPanneauSelection ()
+    {
+        
+        panneauSelectionStation.AfficherPanneauSelection(false);
+        panneauSelectionConvoyeur.Afficher(false);
+        panneauSelectionEntreeUsine.Afficher(false);
+
     }
     
     
@@ -598,6 +608,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         {
             this.controller.plan.listeEquipement.get(i).estSelectionne = false;
         }
+
     }
     
     /*

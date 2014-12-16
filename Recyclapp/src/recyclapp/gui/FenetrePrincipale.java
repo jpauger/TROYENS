@@ -261,8 +261,16 @@ public class FenetrePrincipale extends javax.swing.JFrame{
             }
         });
         btnAjoutStation.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnAjoutStationMousePressed(evt);
+            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 btnAjoutStationMouseReleased(evt);
+            }
+        });
+        btnAjoutStation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAjoutStationActionPerformed(evt);
             }
         });
 
@@ -541,6 +549,8 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     }//GEN-LAST:event_panneauPlanTravailMouseExited
 
     private void btnAjoutConvoyeurMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAjoutConvoyeurMouseClicked
+        panneauPlanTravailExt.RafraichirPlan();
+        panneauPlanTravailExt.aucunPanneauSelection();
         btnAjoutConvoyeur.setFont(btnAjoutConvoyeur.getFont().deriveFont(Font.BOLD));
         btnAjoutConvoyeur.setIcon(new ImageIcon(getClass().getResource("/ico/dark/appbar.vector.line.png")));
         this.controller.modeAjoutConvoyeurTermine = false;  
@@ -561,6 +571,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         {
             Coordonnee coord = new Coordonnee(evt.getX()- 186 ,evt.getY()+ 106);
             controller.ajouterJonction(coord ); 
+            panneauPlanTravailExt.aucunPanneauSelection();
             panneauPlanTravailExt.RafraichirPlan();
         }
     }//GEN-LAST:event_btnJonctionMouseReleased
@@ -579,6 +590,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         {
             Coordonnee coord = new Coordonnee(evt.getX()-145 ,evt.getY()-2);
             controller.ajouterSortieUsine(coord ); 
+            panneauPlanTravailExt.aucunPanneauSelection();
             panneauPlanTravailExt.RafraichirPlan();
         }
     }//GEN-LAST:event_btnSortieUsineMouseReleased
@@ -609,6 +621,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 
     private void checkboxGrilleMagnetiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkboxGrilleMagnetiqueActionPerformed
         controller.plan.estMagnetique = checkboxGrilleMagnetique.isSelected();
+        panneauPlanTravailExt.RafraichirPlan();
     }//GEN-LAST:event_checkboxGrilleMagnetiqueActionPerformed
 
     private void panneauPlanTravailMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panneauPlanTravailMouseDragged
@@ -619,6 +632,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 
     private void btnAjoutStationMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAjoutStationMouseDragged
         // TODO add your handling code here:
+        panneauPlanTravailExt.RafraichirPlan();
         if(dansLePlan)
         {
             Coordonnee coord = controller.plan.coordonneeCliqueSurPlan(new Coordonnee(evt.getX(),evt.getY()));
@@ -641,7 +655,8 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                 {
                     int nombreSorties = Integer.parseInt(QteSorties);
 
-                    controller.ajouterStation(coord, nombreSorties ); 
+                    controller.ajouterStation(coord, nombreSorties );
+                    panneauPlanTravailExt.aucunPanneauSelection();
                     panneauPlanTravailExt.RafraichirPlan();                    
                 }
             }
@@ -666,6 +681,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         try {controller.ajouterEntreeUsine(coord ); }
         catch(NullPointerException e){}
         
+        panneauPlanTravailExt.aucunPanneauSelection();
         panneauPlanTravailExt.RafraichirPlan();
         }
     }//GEN-LAST:event_btnEntreeUsineMouseReleased
@@ -717,12 +733,23 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private void btnRadioTexteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRadioTexteActionPerformed
         // TODO add your handling code here:
         controller.plan.estAfficheImage = !(btnRadioTexte.isSelected());
+        panneauPlanTravailExt.RafraichirPlan();
     }//GEN-LAST:event_btnRadioTexteActionPerformed
 
     private void btnRadioImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRadioImageActionPerformed
         // TODO add your handling code here:
         controller.plan.estAfficheImage = btnRadioImage.isSelected();
+        panneauPlanTravailExt.RafraichirPlan();
     }//GEN-LAST:event_btnRadioImageActionPerformed
+
+    private void btnAjoutStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjoutStationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAjoutStationActionPerformed
+
+    private void btnAjoutStationMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAjoutStationMousePressed
+        // TODO add your handling code here:
+        panneauPlanTravailExt.RafraichirPlan();
+    }//GEN-LAST:event_btnAjoutStationMousePressed
     
     public void quitterModeAjoutConvoyeur()
     {
