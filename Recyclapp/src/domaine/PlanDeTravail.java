@@ -29,7 +29,7 @@ public class PlanDeTravail implements java.io.Serializable {
     public ArrayList<Equipement> listeEquipement = new ArrayList();
     public ArrayList<Convoyeur> listeConvoyeur = new ArrayList();
     public boolean estMagnetique = false;
-    public boolean estAfficheImage = false;
+    public boolean estAfficheImage = true;
     public Coordonnee coord_camera = new Coordonnee(-420,-300);
     transient public final int zoom_values[] = new int []{1,2,4,10};
     public int zoom = 2;

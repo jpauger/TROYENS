@@ -311,6 +311,7 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
             ImageIcon nvImage = new ImageIcon ( chooser.getSelectedFile().getAbsolutePath());
             station.image = nvImage ;
             controller.fenetre.panneauPlanTravailExt.RafraichirPlan();
+            controller.ajouterEtat();
         }
     }//GEN-LAST:event_btnChangerImageActionPerformed
 

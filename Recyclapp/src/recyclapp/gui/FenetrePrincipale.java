@@ -431,6 +431,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         jScrollPane2.setViewportView(textPanelCoordonnees);
 
         groupeAffichage.add(btnRadioImage);
+        btnRadioImage.setSelected(true);
         btnRadioImage.setText("Affichage image");
         btnRadioImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -439,7 +440,6 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         });
 
         groupeAffichage.add(btnRadioTexte);
-        btnRadioTexte.setSelected(true);
         btnRadioTexte.setText("Affichage texte");
         btnRadioTexte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -699,6 +699,9 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     }//GEN-LAST:event_btnEntreeUsineMouseReleased
 
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
+        panneauPlanTravailExt.panneauSelectionStation.AfficherPanneauSelection(false);
+        panneauPlanTravailExt.panneauSelectionConvoyeur.Afficher(false);
+        panneauPlanTravailExt.panneauSelectionEntreeUsine.Afficher(false);
         final JFileChooser fc = new JFileChooser();
         String dossierSauvegardes = (System.getProperty("user.dir")).concat("/Sauvegardes");
         File f = new File(dossierSauvegardes);
@@ -710,6 +713,9 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     }//GEN-LAST:event_btnSaveMouseClicked
 
     private void btnLoadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoadMouseClicked
+        panneauPlanTravailExt.panneauSelectionStation.AfficherPanneauSelection(false);
+        panneauPlanTravailExt.panneauSelectionConvoyeur.Afficher(false);
+        panneauPlanTravailExt.panneauSelectionEntreeUsine.Afficher(false);
         final JFileChooser fc = new JFileChooser();
         String dossierSauvegardes = (System.getProperty("user.dir")).concat("/Sauvegardes");
         File f = new File(dossierSauvegardes);
@@ -718,7 +724,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         int returnVal = fc.showOpenDialog(FenetrePrincipale.this);
         if(returnVal == JFileChooser.APPROVE_OPTION)
             controller.chargerPlan(fc.getSelectedFile());
-        panneauPlanTravailExt.RafraichirPlan();
+        panneauPlanTravailExt.RafraichirPlan();        
     }//GEN-LAST:event_btnLoadMouseClicked
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
