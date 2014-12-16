@@ -187,6 +187,7 @@ public class PanneauSelectionConvoyeur extends javax.swing.JPanel {
         {
             convoyeur.setCouleur(newColor);
             jPanel1.setBackground(convoyeur.getCouleur());
+            controller.plan.ajouterEtat();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

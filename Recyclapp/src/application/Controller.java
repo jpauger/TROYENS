@@ -2,6 +2,7 @@
 package application;
 import domaine.*;
 import java.io.File;
+import javax.swing.JPanel;
 import utilitaires.*;
 import recyclapp.gui.FenetrePrincipale;
 
@@ -198,5 +199,10 @@ public class Controller {
     public void changerEtat(int saut)
     {
         plan.changerEtat(saut);
+    }
+    
+    public void captureEcran(JPanel pan)
+    {
+        plan.captureEcran(pan);
     }
 }

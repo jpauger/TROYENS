@@ -85,6 +85,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         btnRedo = new javax.swing.JLabel();
         btnDelete = new javax.swing.JLabel();
         btnCheck = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         panneauOutils = new javax.swing.JPanel();
         btnAjoutConvoyeur = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -163,6 +164,14 @@ public class FenetrePrincipale extends javax.swing.JFrame{
             }
         });
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.download.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout panneauMenuHautLayout = new javax.swing.GroupLayout(panneauMenuHaut);
         panneauMenuHaut.setLayout(panneauMenuHautLayout);
         panneauMenuHautLayout.setHorizontalGroup(
@@ -178,6 +187,8 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCheck)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -190,7 +201,8 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                     .addComponent(btnUndo)
                     .addComponent(btnRedo)
                     .addComponent(btnDelete)
-                    .addComponent(btnCheck))
+                    .addComponent(btnCheck)
+                    .addComponent(jLabel2))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -712,6 +724,10 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
         controller.supprimerStation();
         controller.supprimerConvoyeur();
+        panneauPlanTravailExt.panneauSelectionStation.AfficherPanneauSelection(false);
+        panneauPlanTravailExt.panneauSelectionConvoyeur.Afficher(false);
+        panneauPlanTravailExt.panneauSelectionEntreeUsine.Afficher(false);
+        controller.validerPlan();
         panneauPlanTravailExt.RafraichirPlan();
     }//GEN-LAST:event_btnDeleteMouseClicked
 
@@ -723,11 +739,19 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 
     private void btnUndoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUndoMouseClicked
         controller.changerEtat(-1);
+        panneauPlanTravailExt.panneauSelectionStation.AfficherPanneauSelection(false);
+        panneauPlanTravailExt.panneauSelectionConvoyeur.Afficher(false);
+        panneauPlanTravailExt.panneauSelectionEntreeUsine.Afficher(false);
+        controller.validerPlan();
         panneauPlanTravailExt.RafraichirPlan();
     }//GEN-LAST:event_btnUndoMouseClicked
 
     private void btnRedoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRedoMouseClicked
         controller.changerEtat(1);
+        panneauPlanTravailExt.panneauSelectionStation.AfficherPanneauSelection(false);
+        panneauPlanTravailExt.panneauSelectionConvoyeur.Afficher(false);
+        panneauPlanTravailExt.panneauSelectionEntreeUsine.Afficher(false);
+        controller.validerPlan();
         panneauPlanTravailExt.RafraichirPlan();
     }//GEN-LAST:event_btnRedoMouseClicked
 
@@ -751,6 +775,10 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         // TODO add your handling code here:
         panneauPlanTravailExt.RafraichirPlan();
     }//GEN-LAST:event_btnAjoutStationMousePressed
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        controller.captureEcran(this.panneauPlanTravail);
+    }//GEN-LAST:event_jLabel2MouseClicked
     
     public void quitterModeAjoutConvoyeur()
     {
@@ -826,6 +854,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;

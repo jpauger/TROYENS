@@ -296,6 +296,7 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
             station.setCouleur(newColor);
             panelCouleur.setBackground(newColor);
             controller.fenetre.panneauPlanTravailExt.RafraichirPlan();
+            controller.plan.ajouterEtat();
         }
     }//GEN-LAST:event_btnChangerCouleurActionPerformed
 

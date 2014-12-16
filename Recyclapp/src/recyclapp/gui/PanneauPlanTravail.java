@@ -26,9 +26,9 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     
     private final JPanel conteneur ;
     private final Controller controller;
-    private final PanneauSelectionStation panneauSelectionStation;
-    private final PanneauSelectionConvoyeur panneauSelectionConvoyeur ;
-    private final PanneauSelectionEntreeUsine panneauSelectionEntreeUsine ;
+    public final PanneauSelectionStation panneauSelectionStation;
+    public final PanneauSelectionConvoyeur panneauSelectionConvoyeur ;
+    public final PanneauSelectionEntreeUsine panneauSelectionEntreeUsine ;
     private Coordonnee loc_depart = new Coordonnee();
     private Coordonnee coord_depart = new Coordonnee();
     private boolean premierEquipementSelectionne = false;

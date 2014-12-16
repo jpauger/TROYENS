@@ -1,4 +1,5 @@
 package domaine;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,11 +9,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.SimpleDateFormat;
 import utilitaires.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.accessibility.AccessibleRelation;
+import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -67,13 +73,11 @@ public class PlanDeTravail implements java.io.Serializable {
         {   
             equipement.listeSortieEntrante.remove(i);
             i--;
-        System.out.println("On supprime "+equipement.nom);
         }
         for(int i = 0; i < equipement.listeSorties.size(); i++)
         {   
             equipement.listeSorties.remove(i);
             i--;
-        System.out.println("On supprime "+equipement.nom);
         }
         for(int i = 0; i < listeEquipement.size(); i++)
         {
@@ -196,7 +200,6 @@ public class PlanDeTravail implements java.io.Serializable {
             Convoyeur nouveauConvoyeur = new Convoyeur(sortie, equipement);
             listeConvoyeur.add(nouveauConvoyeur);
             sortie.setEstConnecte(true);
-            System.out.println("convoyeur ajouté");
             MettreAJourQuantiteTous();
 
             if(sortie.equipementMere() instanceof Jonction)
@@ -587,7 +590,6 @@ public class PlanDeTravail implements java.io.Serializable {
         {} 
         catch (ClassNotFoundException ex) 
         {}
-        System.out.println("État ajouté "+etats.size());
         etats.add(e);
         
         etatPresent = etats.size()-1;
@@ -645,5 +647,21 @@ public class PlanDeTravail implements java.io.Serializable {
         coord_camera.setX(e.coord_camera.getX());
         coord_camera.setY(e.coord_camera.getY());
         zoom = e.zoom;
+    }
+    
+    public void captureEcran(JPanel pan)
+    {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddhhmmss");
+        Calendar now = Calendar.getInstance();
+        File path = new File(System.getProperty("user.dir")+"/Captures/Plan de travail "+formatter.format(now.getTime())+".png");
+        path.mkdirs();
+        BufferedImage bufImage = new BufferedImage(pan.getSize().width, pan.getSize().height,BufferedImage.TYPE_INT_RGB);  
+        pan.paint(bufImage.createGraphics());  
+        try{  
+            path.createNewFile();  
+            ImageIO.write(bufImage, "png", path);
+            JOptionPane.showMessageDialog(null, "Capture d'écran enregistrée\n " + path.getPath(), "RecyclApp", JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception ex){  
+        } 
     }
 }
