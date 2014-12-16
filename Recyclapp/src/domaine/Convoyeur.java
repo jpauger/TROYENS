@@ -15,6 +15,8 @@ public class Convoyeur implements java.io.Serializable {
     public final Equipement equipement; 
     public boolean estSelectionne ;
     public RepresentationConvoyeur representation ;
+//    private final Coordonnee pointDepart;
+//    private final Coordonnee pointArrivee ;
     
     
     // constructeur
@@ -43,6 +45,39 @@ public class Convoyeur implements java.io.Serializable {
         this.representation = uneRepresentation ;
     }
     
+    private Coordonnee getPointDepart(Coordonnee Arrivee)
+    {
+        Coordonnee depart = null ;
+        for( PortionConvoyeur portion : this.representation.listePortions)
+        {
+            if ( portion.getPointArrivee().compareTo(Arrivee))
+                depart = portion.getPointDepart();  
+        }
+        return depart ;
+    }
+    
+    /*
+    * retourne le point d'arrivee du convoyeur
+    * sert pour calculer les coordonnées de la fleche du convoyeur
+    */
+    public Coordonnee ptArrivee()
+    {
+        Coordonnee CoordonneeArrivee = new Coordonnee (this.coorArriveeX(), this.coorArriveeY());
+        return CoordonneeArrivee ;
+    }
+    
+    /*
+    * retourne le point de depart de la derniere portion du convoyeur
+    * sert pour calculer les coordonnées de la fleche du convoyeur
+    */
+    public Coordonnee dernierPtDepart()
+    {
+        Coordonnee ptArrivee = this.ptArrivee();
+        Coordonnee dernierPtDepart = getPointDepart(ptArrivee);
+        return dernierPtDepart;
+    }
+    
+    
     public void rafraichirRepresentation()
     {
         Coordonnee CoordonneeDepart = new Coordonnee(this.coorDepartX(), this.coorDepartY());
@@ -51,6 +86,10 @@ public class Convoyeur implements java.io.Serializable {
         RepresentationConvoyeur uneRepresentation  = new RepresentationConvoyeur(CoordonneeDepart, CoordonneeArrivee);
         this.representation = uneRepresentation ;
     }
+    
+    
+    
+    
     
     LigneProduit[] obtenirInformationTransit()
     {

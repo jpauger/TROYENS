@@ -48,6 +48,16 @@ public class Coordonnee implements java.io.Serializable {
         this.y = ordonnee ;
     }
     
+    public boolean compareTo(Coordonnee coord)
+    {
+        boolean comparaison = false ;
+        
+        if ( (this.getX()== coord.getX()) && (this.getY()== coord.getY()))
+            comparaison = true ;
+        
+        return comparaison ;
+    }
+    
     /*
     * verifie si les coordonnees se situent sur une Ligne ou très proche...
     */
@@ -63,7 +73,7 @@ public class Coordonnee implements java.io.Serializable {
         double distance = ligne.ptSegDist(X, Y);
         
         // on accepte un ecart de 15 pixels
-        if (distance < 2)
+        if (distance < 5)
         {
             estSurLigne = true ;
         }

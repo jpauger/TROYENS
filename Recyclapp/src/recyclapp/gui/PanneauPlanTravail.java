@@ -250,13 +250,8 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     *   Permet d'afficher tous les convoyeurs du plan de travail  
     */
     private void afficherConvoyeurs(Graphics g)
-    {
-        // on vide la liste des anciennes coordonnees avant de recalculer
-        listeCoordonnees.clear();
-        
-        
-        
-        /*for (int i=0 ; i< this.controller.plan.listeConvoyeur.size();i++)
+    {        
+        for (int i=0 ; i< this.controller.plan.listeConvoyeur.size();i++)
         {
             this.controller.plan.listeConvoyeur.get(i).rafraichirRepresentation();
         }
@@ -291,25 +286,17 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                 pointAngulaire.setVisible(true);
                 this.conteneur.add(pointAngulaire);
             }
-            
-        }*/
-        
-        // on stocke les coordonnées des lignes a tracer dans une arrayliste
-        for (int i= 0; i< this.controller.plan.listeConvoyeur.size(); i++ )
-        {
-            this.listeCoordonnees.add(i, obtenirCoordonneeLigne(this.controller.plan.listeConvoyeur.get(i) ));
         }
-
-        // on trace chacune des lignes
-        for (int j= 0; j< this.listeCoordonnees.size(); j++)
+        
+        //    cette partie trace la fleche du convoyeur
+        for (int j= 0; j< this.controller.plan.listeConvoyeur.size(); j++)
         {
-            Coordonnee coordRel1 = controller.coordonneeRelative(new Coordonnee(this.listeCoordonnees.get(j).getX1(),this.listeCoordonnees.get(j).getY1()));
-            Coordonnee coordRel2 = controller.coordonneeRelative(new Coordonnee(this.listeCoordonnees.get(j).getX2(),this.listeCoordonnees.get(j).getY2()));
+            Coordonnee coordRel1 = controller.coordonneeRelative(new Coordonnee(this.controller.plan.listeConvoyeur.get(j).dernierPtDepart().getX() , this.controller.plan.listeConvoyeur.get(j).dernierPtDepart().getY()));
+            Coordonnee coordRel2 = controller.coordonneeRelative(new Coordonnee(this.controller.plan.listeConvoyeur.get(j).ptArrivee().getX() , this.controller.plan.listeConvoyeur.get(j).ptArrivee().getY()));
             g.setColor(this.controller.plan.listeConvoyeur.get(j).getCouleur());
             Graphics2D g2d = (Graphics2D) g;
             BasicStroke bs1 = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
             g2d.setStroke(bs1);
-            g2d.drawLine(coordRel1.getX(), coordRel1.getY(), coordRel2.getX(), coordRel2.getY());
             
             double angle = Math.toRadians(45);
             int taillePointe = 12;
@@ -336,9 +323,6 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             g2d.draw(p);
             g2d.fillPolygon(p);
         }
-        
-        
-        
     }
     
     /*
@@ -512,7 +496,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         }
         else if (!(equipement instanceof Jonction) && !(equipement instanceof SortieUsine))
         {
-            AnnulerSelectionConvoyeurs();
+            //AnnulerSelectionConvoyeurs();
             coord = controller.plan.coordonneeCliqueSurPlan(coord);
             // on verifie si on a cliqué sur un convoyeur    
             
@@ -526,6 +510,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                     
                     if (coord.estSurLigne(coordonneesPortion))
                     {
+                        AnnulerSelectionConvoyeurs();
                         this.controller.plan.listeConvoyeur.get(nbConvoyeurs).selectionner();
                         
                         if (SwingUtilities.isRightMouseButton(evt))
