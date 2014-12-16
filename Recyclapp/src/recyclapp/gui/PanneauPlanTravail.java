@@ -256,14 +256,13 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         
         
         
-        for (int i=0 ; i< this.controller.plan.listeConvoyeur.size();i++)
+        /*for (int i=0 ; i< this.controller.plan.listeConvoyeur.size();i++)
         {
             this.controller.plan.listeConvoyeur.get(i).rafraichirRepresentation();
         }
         
         for (int i=0 ; i< this.controller.plan.listeConvoyeur.size();i++)
         {
-            
             g.setColor(this.controller.plan.listeConvoyeur.get(i).getCouleur());
             Graphics2D g2d = (Graphics2D) g;
             BasicStroke bs1 = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
@@ -293,50 +292,50 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                 this.conteneur.add(pointAngulaire);
             }
             
-        }
+        }*/
         
-//        // on stocke les coordonnées des lignes a tracer dans une arrayliste
-//        for (int i= 0; i< this.controller.plan.listeConvoyeur.size(); i++ )
-//        {
-//            this.listeCoordonnees.add(i, obtenirCoordonneeLigne(this.controller.plan.listeConvoyeur.get(i) ));
-//        }
-//
-//        // on trace chacune des lignes
-//        for (int j= 0; j< this.listeCoordonnees.size(); j++)
-//        {
-//            Coordonnee coordRel1 = controller.coordonneeRelative(new Coordonnee(this.listeCoordonnees.get(j).getX1(),this.listeCoordonnees.get(j).getY1()));
-//            Coordonnee coordRel2 = controller.coordonneeRelative(new Coordonnee(this.listeCoordonnees.get(j).getX2(),this.listeCoordonnees.get(j).getY2()));
-//            g.setColor(this.controller.plan.listeConvoyeur.get(j).getCouleur());
-//            Graphics2D g2d = (Graphics2D) g;
-//            BasicStroke bs1 = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
-//            g2d.setStroke(bs1);
-//            g2d.drawLine(coordRel1.getX(), coordRel1.getY(), coordRel2.getX(), coordRel2.getY());
-//            
-//            double angle = Math.toRadians(45);
-//            int taillePointe = 12;
-//            Coordonnee point1 = new Coordonnee(), point2 = new Coordonnee(), point3 = new Coordonnee();
-//            double dy = coordRel2.getY() - coordRel1.getY();  
-//            double dx = coordRel2.getX() - coordRel1.getX();  
-//            double theta = Math.atan2(dy, dx);  
-//            
-//            double rho = theta + angle;  
-//            point1.setX((int)Math.round(coordRel2.getX() - 32 * Math.cos(theta)));
-//            point1.setY((int)Math.round(coordRel2.getY() - 32 * Math.sin(theta)));
-//            
-//            point2.setX((int)Math.round(point1.getX() - taillePointe * Math.cos(rho)));  
-//            point2.setY((int)Math.round(point1.getY() - taillePointe * Math.sin(rho)));  
-//            
-//            rho = theta - angle;  
-//            point3.setX((int)Math.round(point1.getX() - taillePointe * Math.cos(rho)));  
-//            point3.setY((int)Math.round(point1.getY() - taillePointe * Math.sin(rho))); 
-//            
-//            Polygon p=new Polygon();
-//            p.addPoint(point1.getX(), point1.getY());
-//            p.addPoint(point2.getX(), point2.getY());
-//            p.addPoint(point3.getX(), point3.getY());
-//            g2d.draw(p);
-//            g2d.fillPolygon(p);
-//        }
+        // on stocke les coordonnées des lignes a tracer dans une arrayliste
+        for (int i= 0; i< this.controller.plan.listeConvoyeur.size(); i++ )
+        {
+            this.listeCoordonnees.add(i, obtenirCoordonneeLigne(this.controller.plan.listeConvoyeur.get(i) ));
+        }
+
+        // on trace chacune des lignes
+        for (int j= 0; j< this.listeCoordonnees.size(); j++)
+        {
+            Coordonnee coordRel1 = controller.coordonneeRelative(new Coordonnee(this.listeCoordonnees.get(j).getX1(),this.listeCoordonnees.get(j).getY1()));
+            Coordonnee coordRel2 = controller.coordonneeRelative(new Coordonnee(this.listeCoordonnees.get(j).getX2(),this.listeCoordonnees.get(j).getY2()));
+            g.setColor(this.controller.plan.listeConvoyeur.get(j).getCouleur());
+            Graphics2D g2d = (Graphics2D) g;
+            BasicStroke bs1 = new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL);
+            g2d.setStroke(bs1);
+            g2d.drawLine(coordRel1.getX(), coordRel1.getY(), coordRel2.getX(), coordRel2.getY());
+            
+            double angle = Math.toRadians(45);
+            int taillePointe = 12;
+            Coordonnee point1 = new Coordonnee(), point2 = new Coordonnee(), point3 = new Coordonnee();
+            double dy = coordRel2.getY() - coordRel1.getY();  
+            double dx = coordRel2.getX() - coordRel1.getX();  
+            double theta = Math.atan2(dy, dx);  
+            
+            double rho = theta + angle;  
+            point1.setX((int)Math.round(coordRel2.getX() - 32 * Math.cos(theta)));
+            point1.setY((int)Math.round(coordRel2.getY() - 32 * Math.sin(theta)));
+            
+            point2.setX((int)Math.round(point1.getX() - taillePointe * Math.cos(rho)));  
+            point2.setY((int)Math.round(point1.getY() - taillePointe * Math.sin(rho)));  
+            
+            rho = theta - angle;  
+            point3.setX((int)Math.round(point1.getX() - taillePointe * Math.cos(rho)));  
+            point3.setY((int)Math.round(point1.getY() - taillePointe * Math.sin(rho))); 
+            
+            Polygon p=new Polygon();
+            p.addPoint(point1.getX(), point1.getY());
+            p.addPoint(point2.getX(), point2.getY());
+            p.addPoint(point3.getX(), point3.getY());
+            g2d.draw(p);
+            g2d.fillPolygon(p);
+        }
         
         
         
