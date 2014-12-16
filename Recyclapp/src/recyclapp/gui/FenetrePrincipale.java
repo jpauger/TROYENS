@@ -711,6 +711,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
 
     private void btnDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteMouseClicked
         controller.supprimerStation();
+        controller.supprimerConvoyeur();
         panneauPlanTravailExt.RafraichirPlan();
     }//GEN-LAST:event_btnDeleteMouseClicked
 

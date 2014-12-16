@@ -114,6 +114,11 @@ public class Controller {
         validerPlan();
     }
     
+    public void supprimerConvoyeur()
+    {
+        plan.supprimerConvoyeur();
+    }
+    
     public void redefinirMatriceStations()
     {
         plan.redefinirMatriceStations();

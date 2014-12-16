@@ -110,6 +110,29 @@ public class PlanDeTravail implements java.io.Serializable {
         listeEquipement.remove(equipement);
         ajouterEtat();
     }
+    
+    public void supprimerConvoyeur()
+    {
+        int index = -1;
+        
+        for (Convoyeur convoyeur : listeConvoyeur)
+        {
+            if (convoyeur.estSelectionne)
+            {
+                index = listeConvoyeur.indexOf(convoyeur);
+            }
+        }
+        
+        if (index != -1)
+        {
+            listeConvoyeur.get(index).sortie.setEstConnecte(false);
+            listeConvoyeur.get(index).equipement.entreeOccupee = false ;
+            listeConvoyeur.remove(index);
+        }
+        ajouterEtat();
+    }
+    
+    
     //deplace une station prise en paramettre vers de nouvelles coordonnées prise en parametre
     public void relocaliserStation (Equipement unEquipement, Coordonnee coorArrivee)
     {
