@@ -28,8 +28,8 @@ public class PlanDeTravail implements java.io.Serializable {
     
     public ArrayList<Equipement> listeEquipement = new ArrayList();
     public ArrayList<Convoyeur> listeConvoyeur = new ArrayList();
-    public boolean estMagnetique = false;
-    public boolean estAfficheImage = true;
+    transient public boolean estMagnetique = false;
+    transient public boolean estAfficheImage = true;
     public Coordonnee coord_camera = new Coordonnee(-420,-300);
     transient public final int zoom_values[] = new int []{1,2,4,10};
     public int zoom = 2;
@@ -530,8 +530,6 @@ public class PlanDeTravail implements java.io.Serializable {
             
             listeEquipement = e.listeEquipement;
             listeConvoyeur = e.listeConvoyeur;
-            estMagnetique = e.estMagnetique;
-            estAfficheImage = e.estAfficheImage;
             coord_camera.setX(e.coord_camera.getX());
             coord_camera.setY(e.coord_camera.getY());
             zoom = e.zoom;
@@ -642,8 +640,6 @@ public class PlanDeTravail implements java.io.Serializable {
         
         listeEquipement = e.listeEquipement;
         listeConvoyeur = e.listeConvoyeur;
-        estMagnetique = e.estMagnetique;
-        estAfficheImage = e.estAfficheImage;
         coord_camera.setX(e.coord_camera.getX());
         coord_camera.setY(e.coord_camera.getY());
         zoom = e.zoom;
