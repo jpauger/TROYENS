@@ -164,4 +164,14 @@ public class Controller {
         plan.chargerPlan(f);
         validerPlan();
     }
+    
+    public void ajouterEtat()
+    {
+        plan.ajouterEtat();
+    }
+    
+    public void changerEtat(int saut)
+    {
+        plan.changerEtat(saut);
+    }
 }

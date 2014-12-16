@@ -52,6 +52,8 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         panneauSelectionEntreeUsine = unPanneauSEU ;
         initComponents();
         
+        controller.ajouterEtat();
+        
         this.conteneur.addMouseListener(new java.awt.event.MouseAdapter(){
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt){
@@ -556,8 +558,6 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             controller.selection = -1;
 
         }
-        else
-            controller.selection = -1;
         
         
 
