@@ -1,12 +1,17 @@
 package domaine;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import utilitaires.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.accessibility.AccessibleRelation;
 
 /**
@@ -20,9 +25,11 @@ public class PlanDeTravail implements java.io.Serializable {
     public boolean estMagnetique = false;
     public boolean estAfficheImage = false;
     public Coordonnee coord_camera = new Coordonnee(-420,-300);
-    public final int zoom_values[] = new int []{1,2,4,10};
+    transient public final int zoom_values[] = new int []{1,2,4,10};
     public int zoom = 2;
-    public String erreursValidation = "";
+    transient public String erreursValidation = "";
+    transient private ArrayList<PlanDeTravail> etats = new ArrayList();
+    transient private int etatPresent = 0;
     
     
     
@@ -39,6 +46,7 @@ public class PlanDeTravail implements java.io.Serializable {
             coord = coordonneeMagnetique(coord);
         Station nouvelleStation = new Station(coord,1);
         listeEquipement.add(nouvelleStation);
+        ajouterEtat();
     }
     
     public void ajouterStation(Coordonnee coordonnee, int nombreSorties)
@@ -48,17 +56,45 @@ public class PlanDeTravail implements java.io.Serializable {
             coord = coordonneeMagnetique(coord);
         Station nouvelleStation = new Station(coord, nombreSorties);
         listeEquipement.add(nouvelleStation);
+        ajouterEtat();
     }
     
     public void supprimerStation (int equip)
     {
         Equipement equipement = listeEquipement.get(equip);
+        
+        for(int i = 0; i < equipement.listeSortieEntrante.size(); i++)
+        {   
+            equipement.listeSortieEntrante.remove(i);
+            i--;
         System.out.println("On supprime "+equipement.nom);
+        }
+        for(int i = 0; i < equipement.listeSorties.size(); i++)
+        {   
+            equipement.listeSorties.remove(i);
+            i--;
+        System.out.println("On supprime "+equipement.nom);
+        }
+        for(int i = 0; i < listeEquipement.size(); i++)
+        {
+            for(int j = 0; j < listeEquipement.get(i).listeSortieEntrante.size(); j++)
+            {
+                if(listeEquipement.get(i).listeSortieEntrante.get(j).equipementMere() == equipement)
+                {
+                    listeEquipement.get(i).entreeOccupee = false;
+                    listeEquipement.get(i).listeSortieEntrante.remove(j);
+                    j--;
+                }
+            }
+        }
         
         for(int i =0; i<listeConvoyeur.size();i++)
         {
             if(listeConvoyeur.get(i).equipement == equipement)
+            {
+                listeConvoyeur.get(i).sortie.setEstConnecte(false);
                 listeConvoyeur.remove(i);
+            }
         }
         
         for(int i=0; i<listeConvoyeur.size();i++)
@@ -66,11 +102,13 @@ public class PlanDeTravail implements java.io.Serializable {
              if(listeConvoyeur.get(i).sortie.equipementMere() == equipement)      
              {
                  //libérer la sortie qui de la station
+                 listeConvoyeur.get(i).sortie.setEstConnecte(false);
                  listeConvoyeur.remove(i);
                  i--;
              }
          }
         listeEquipement.remove(equipement);
+        ajouterEtat();
     }
     //deplace une station prise en paramettre vers de nouvelles coordonnées prise en parametre
     public void relocaliserStation (Equipement unEquipement, Coordonnee coorArrivee)
@@ -84,6 +122,7 @@ public class PlanDeTravail implements java.io.Serializable {
                 equipement.coordonnees = coorArrivee;
             }
         }
+        ajouterEtat();
     }
     
     public void redefinirMatriceStations()
@@ -94,6 +133,7 @@ public class PlanDeTravail implements java.io.Serializable {
                 ((Station)listeEquipement.get(i)).definirMatriceBase();
             MettreAJourQuantiteTous();
         }
+        ajouterEtat();
     }
     
     public void ajouterEntreeUsine (Coordonnee coordonnee)
@@ -101,8 +141,9 @@ public class PlanDeTravail implements java.io.Serializable {
         Coordonnee coord = coordonneeCliqueSurPlan(coordonnee);
         if(estMagnetique)
             coord = coordonneeMagnetique(coord);
-       EntreeUsine nouvelleEntreeUsine = new EntreeUsine(coord);
-       listeEquipement.add(nouvelleEntreeUsine);
+        EntreeUsine nouvelleEntreeUsine = new EntreeUsine(coord);
+        listeEquipement.add(nouvelleEntreeUsine);
+        ajouterEtat();
     }
     
     public void ajouterSortieUsine (Coordonnee coordonnee)
@@ -112,6 +153,7 @@ public class PlanDeTravail implements java.io.Serializable {
             coord = coordonneeMagnetique(coord);
         SortieUsine nouvelleSortieUsine = new SortieUsine(coord);
         listeEquipement.add(nouvelleSortieUsine);
+        ajouterEtat();
     }
     
     public void ajouterJonction (Coordonnee coordonnee)
@@ -121,6 +163,7 @@ public class PlanDeTravail implements java.io.Serializable {
             coord = coordonneeMagnetique(coord);
         Jonction nouvelleJonction = new Jonction(coord);
         listeEquipement.add(nouvelleJonction);
+        ajouterEtat();
     }
     
     public void ajouterConvoyeur (SortieEquipement sortie, Equipement equipement)
@@ -138,12 +181,13 @@ public class PlanDeTravail implements java.io.Serializable {
                 sortie.equipementMere().augmenterNbSorties();
             }
         }
- 
+        ajouterEtat();
     }
     
     public void supprimerConvoyeur (SortieEquipement sortie, Equipement equipement)
     {
         //TODO : a implementer
+        ajouterEtat();
     }
     
     public boolean validerPlan()
@@ -159,7 +203,7 @@ public class PlanDeTravail implements java.io.Serializable {
             if(listeEquipement.get(i) instanceof SortieUsine)
             {
                 if(((SortieUsine)listeEquipement.get(i)).listeSortieEntrante.size() < 1)
-                    erreursValidation += "Une sortie d'usine n'a pas de sortie." + "\n";
+                    erreursValidation += "Une sortie d'usine n'a pas d'entrée." + "\n";
             }
             if(listeEquipement.get(i) instanceof Jonction)
             {
@@ -378,7 +422,6 @@ public class PlanDeTravail implements java.io.Serializable {
             out.writeObject(this);
             out.close();
             fileOut.close();
-            System.out.println("On sauvegarde " + f.getPath());
         }catch(IOException i)
         {
             i.printStackTrace();
@@ -395,7 +438,6 @@ public class PlanDeTravail implements java.io.Serializable {
             e = (PlanDeTravail) in.readObject();
             in.close();
             fileIn.close();
-            System.out.println("On charge " + f.getPath());
             
             listeEquipement = e.listeEquipement;
             listeConvoyeur = e.listeConvoyeur;
@@ -404,6 +446,7 @@ public class PlanDeTravail implements java.io.Serializable {
             coord_camera.setX(e.coord_camera.getX());
             coord_camera.setY(e.coord_camera.getY());
             zoom = e.zoom;
+            ajouterEtat();
         }catch(IOException i)
         {
             i.printStackTrace();
@@ -414,5 +457,107 @@ public class PlanDeTravail implements java.io.Serializable {
             c.printStackTrace();
         }
          
+    }
+    
+    public void ajouterEtat()
+    {        
+        if(etatPresent < etats.size()-1)
+        {
+            for(int i = etatPresent+1; i < etats.size(); i++)
+            {
+                etats.remove(i);
+                i--;
+            }
+        }
+        if(etats.size() >= 10)
+            etats.remove(0);
+        
+        
+        PlanDeTravail e = null;
+        
+        String path = System.getProperty("user.dir").concat("/temp");
+        try
+        {
+            FileOutputStream fileOut;
+            fileOut = new FileOutputStream(path);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(this);
+            out.close();
+            fileOut.close();
+        }catch(IOException i)
+        {}
+        
+        try
+        {
+        FileInputStream fileIn = new FileInputStream(path);
+        ObjectInputStream in = new ObjectInputStream(fileIn);
+        e = (PlanDeTravail) in.readObject();
+        in.close();        
+        fileIn.close();
+        
+        File f = new File(path);
+        f.delete();
+        }catch(IOException i)
+        {} 
+        catch (ClassNotFoundException ex) 
+        {}
+        System.out.println("État ajouté "+etats.size());
+        etats.add(e);
+        
+        etatPresent = etats.size()-1;
+    }
+    
+    public void changerEtat(int saut)
+    {
+        if(saut == -1 && etatPresent > 0)
+        {
+            etatPresent -= 1;
+            chargerEtat();
+        }
+        else if(saut == 1 && etatPresent < etats.size()-1)
+        {
+            etatPresent += 1;
+            chargerEtat();
+        }
+    }
+    
+    private void chargerEtat()
+    {
+        PlanDeTravail e = null;
+        
+        String path = System.getProperty("user.dir").concat("/temp");
+        try
+        {
+            FileOutputStream fileOut;
+            fileOut = new FileOutputStream(path);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(etats.get(etatPresent));
+            out.close();
+            fileOut.close();
+        }catch(IOException i)
+        {}
+        
+        try
+        {
+        FileInputStream fileIn = new FileInputStream(path);
+        ObjectInputStream in = new ObjectInputStream(fileIn);
+        e = (PlanDeTravail) in.readObject();
+        in.close();
+        fileIn.close();
+        
+        File f = new File(path);
+        f.delete();
+        }catch(IOException i)
+        {} 
+        catch (ClassNotFoundException ex) 
+        {}
+        
+        listeEquipement = e.listeEquipement;
+        listeConvoyeur = e.listeConvoyeur;
+        estMagnetique = e.estMagnetique;
+        estAfficheImage = e.estAfficheImage;
+        coord_camera.setX(e.coord_camera.getX());
+        coord_camera.setY(e.coord_camera.getY());
+        zoom = e.zoom;
     }
 }

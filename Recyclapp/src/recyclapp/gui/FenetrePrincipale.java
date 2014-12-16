@@ -111,7 +111,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         panneauMenuHaut.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "menu haut [x]", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 153, 153))); // NOI18N
 
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/save.png"))); // NOI18N
-        btnSave.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnSave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSaveMouseClicked(evt);
@@ -119,7 +119,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         });
 
         btnLoad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.folder.open.png"))); // NOI18N
-        btnLoad.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnLoad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLoad.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLoadMouseClicked(evt);
@@ -127,11 +127,23 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         });
 
         btnUndo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.undo.curve.png"))); // NOI18N
+        btnUndo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUndo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUndoMouseClicked(evt);
+            }
+        });
 
         btnRedo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.redo.curve.png"))); // NOI18N
+        btnRedo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRedo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRedoMouseClicked(evt);
+            }
+        });
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/light/appbar.delete.png"))); // NOI18N
-        btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnDeleteMouseClicked(evt);
@@ -625,20 +637,21 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     }//GEN-LAST:event_btnAjoutStationMouseReleased
 
     private void btnEntreeUsineMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntreeUsineMouseDragged
-        // TODO add your handling code here:
         Coordonnee coord = controller.plan.coordonneeCliqueSurPlan(new Coordonnee(evt.getX(),evt.getY()));
         int zoom = controller.plan.zoom_values[controller.plan.zoom];
         textPanelCoordonnees.setText("x:"+coord.getX()*zoom/40+"m\ny:"+coord.getY()*zoom/40+"m");
     }//GEN-LAST:event_btnEntreeUsineMouseDragged
 
     private void btnEntreeUsineMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntreeUsineMouseReleased
-        // TODO add your handling code here:
+        if(dansLePlan)
+        {
          Coordonnee coord = new Coordonnee(evt.getX()-275 ,evt.getY()-2);
         
         try {controller.ajouterEntreeUsine(coord ); }
         catch(NullPointerException e){}
         
         panneauPlanTravailExt.RafraichirPlan();
+        }
     }//GEN-LAST:event_btnEntreeUsineMouseReleased
 
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
@@ -674,6 +687,16 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         if(!erreurs.isEmpty())
             JOptionPane.showMessageDialog(this, controller.obtenirErreur());
     }//GEN-LAST:event_btnCheckActionPerformed
+
+    private void btnUndoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUndoMouseClicked
+        controller.changerEtat(-1);
+        panneauPlanTravailExt.RafraichirPlan();
+    }//GEN-LAST:event_btnUndoMouseClicked
+
+    private void btnRedoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRedoMouseClicked
+        controller.changerEtat(1);
+        panneauPlanTravailExt.RafraichirPlan();
+    }//GEN-LAST:event_btnRedoMouseClicked
     
     public void quitterModeAjoutConvoyeur()
     {

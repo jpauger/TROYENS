@@ -136,7 +136,7 @@
               <Image iconType="3" name="/ico/light/save.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Curseur en forme de main"/>
             </Property>
           </Properties>
           <Events>
@@ -149,7 +149,7 @@
               <Image iconType="3" name="/ico/light/appbar.folder.open.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Curseur en forme de main"/>
             </Property>
           </Properties>
           <Events>
@@ -161,14 +161,26 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/ico/light/appbar.undo.curve.png"/>
             </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Curseur en forme de main"/>
+            </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnUndoMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="btnRedo">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/ico/light/appbar.redo.curve.png"/>
             </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Curseur en forme de main"/>
+            </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnRedoMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="btnDelete">
           <Properties>
@@ -176,7 +188,7 @@
               <Image iconType="3" name="/ico/light/appbar.delete.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Curseur en forme de main"/>
             </Property>
           </Properties>
           <Events>
@@ -326,7 +338,7 @@
               <Image iconType="3" name="/ico/jonction.png"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Curseur par d&#xe9;faut"/>
             </Property>
             <Property name="focusPainted" type="boolean" value="false"/>
             <Property name="selected" type="boolean" value="true"/>
@@ -343,7 +355,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Curseur par d&#xe9;faut"/>
             </Property>
             <Property name="focusPainted" type="boolean" value="false"/>
             <Property name="selected" type="boolean" value="true"/>
@@ -396,7 +408,7 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Curseur par d&#xe9;faut"/>
             </Property>
             <Property name="focusPainted" type="boolean" value="false"/>
             <Property name="selected" type="boolean" value="true"/>
