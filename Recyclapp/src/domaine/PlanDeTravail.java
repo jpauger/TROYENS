@@ -62,12 +62,39 @@ public class PlanDeTravail implements java.io.Serializable {
     public void supprimerStation (int equip)
     {
         Equipement equipement = listeEquipement.get(equip);
+        
+        for(int i = 0; i < equipement.listeSortieEntrante.size(); i++)
+        {   
+            equipement.listeSortieEntrante.remove(i);
+            i--;
         System.out.println("On supprime "+equipement.nom);
+        }
+        for(int i = 0; i < equipement.listeSorties.size(); i++)
+        {   
+            equipement.listeSorties.remove(i);
+            i--;
+        System.out.println("On supprime "+equipement.nom);
+        }
+        for(int i = 0; i < listeEquipement.size(); i++)
+        {
+            for(int j = 0; j < listeEquipement.get(i).listeSortieEntrante.size(); j++)
+            {
+                if(listeEquipement.get(i).listeSortieEntrante.get(j).equipementMere() == equipement)
+                {
+                    listeEquipement.get(i).entreeOccupee = false;
+                    listeEquipement.get(i).listeSortieEntrante.remove(j);
+                    j--;
+                }
+            }
+        }
         
         for(int i =0; i<listeConvoyeur.size();i++)
         {
             if(listeConvoyeur.get(i).equipement == equipement)
+            {
+                listeConvoyeur.get(i).sortie.setEstConnecte(false);
                 listeConvoyeur.remove(i);
+            }
         }
         
         for(int i=0; i<listeConvoyeur.size();i++)
@@ -75,6 +102,7 @@ public class PlanDeTravail implements java.io.Serializable {
              if(listeConvoyeur.get(i).sortie.equipementMere() == equipement)      
              {
                  //libérer la sortie qui de la station
+                 listeConvoyeur.get(i).sortie.setEstConnecte(false);
                  listeConvoyeur.remove(i);
                  i--;
              }
@@ -175,7 +203,7 @@ public class PlanDeTravail implements java.io.Serializable {
             if(listeEquipement.get(i) instanceof SortieUsine)
             {
                 if(((SortieUsine)listeEquipement.get(i)).listeSortieEntrante.size() < 1)
-                    erreursValidation += "Une sortie d'usine n'a pas de sortie." + "\n";
+                    erreursValidation += "Une sortie d'usine n'a pas d'entrée." + "\n";
             }
             if(listeEquipement.get(i) instanceof Jonction)
             {

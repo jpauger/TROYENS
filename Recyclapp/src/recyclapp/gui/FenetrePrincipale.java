@@ -637,20 +637,21 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     }//GEN-LAST:event_btnAjoutStationMouseReleased
 
     private void btnEntreeUsineMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntreeUsineMouseDragged
-        // TODO add your handling code here:
         Coordonnee coord = controller.plan.coordonneeCliqueSurPlan(new Coordonnee(evt.getX(),evt.getY()));
         int zoom = controller.plan.zoom_values[controller.plan.zoom];
         textPanelCoordonnees.setText("x:"+coord.getX()*zoom/40+"m\ny:"+coord.getY()*zoom/40+"m");
     }//GEN-LAST:event_btnEntreeUsineMouseDragged
 
     private void btnEntreeUsineMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntreeUsineMouseReleased
-        // TODO add your handling code here:
+        if(dansLePlan)
+        {
          Coordonnee coord = new Coordonnee(evt.getX()-275 ,evt.getY()-2);
         
         try {controller.ajouterEntreeUsine(coord ); }
         catch(NullPointerException e){}
         
         panneauPlanTravailExt.RafraichirPlan();
+        }
     }//GEN-LAST:event_btnEntreeUsineMouseReleased
 
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
