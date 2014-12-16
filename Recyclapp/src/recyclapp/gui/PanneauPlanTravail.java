@@ -27,6 +27,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
     private final JPanel conteneur ;
     private final Controller controller;
     private final PanneauSelectionStation panneauSelectionStation;
+    private final PanneauSelectionConvoyeur panneauSelectionConvoyeur ;
     private final PanneauSelectionEntreeUsine panneauSelectionEntreeUsine ;
     private Coordonnee loc_depart = new Coordonnee();
     private Coordonnee coord_depart = new Coordonnee();
@@ -45,11 +46,12 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
      * @param unPanneauSelectionStation
      * @param unPanneauSEU
      */
-    public PanneauPlanTravail(JPanel unConteneur, Controller unController,PanneauSelectionStation unPanneauSelectionStation, PanneauSelectionEntreeUsine unPanneauSEU ) {
+    public PanneauPlanTravail(JPanel unConteneur, Controller unController,PanneauSelectionStation unPanneauSelectionStation, PanneauSelectionEntreeUsine unPanneauSEU, PanneauSelectionConvoyeur unPanneauSC ) {
         conteneur = unConteneur ;
         controller = unController ;
         panneauSelectionStation = unPanneauSelectionStation;
         panneauSelectionEntreeUsine = unPanneauSEU ;
+        panneauSelectionConvoyeur = unPanneauSC ;
         initComponents();
         
         controller.ajouterEtat();
@@ -135,6 +137,9 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                 equip = controller.obtenirEquipement(loc_depart);
                 selectionner(equip);
                 
+                PortionConvoyeur portionConvoyeur ;
+                portionConvoyeur = controller.obtenirPortion(loc_depart);
+                
                 if(equip != null && dragged > 1)
                 {
                     Coordonnee coord = new Coordonnee(evt.getX()+ equip.coordonnees.getX()-loc_depart.getX(),evt.getY()+equip.coordonnees.getY()-loc_depart.getY());
@@ -143,6 +148,16 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                     dragged = 0;
                     RafraichirPlan();
                 }
+                else if ( portionConvoyeur != null && dragged > 1 )
+                {
+                    
+                    Coordonnee coord = new Coordonnee(evt.getX(),evt.getY());
+                    int index = controller.obtenirIndexConvoyeur(loc_depart);
+                    controller.plan.listeConvoyeur.get(index).representation.creerNvlPortion(coord, portionConvoyeur);
+                }
+                
+                
+                
             }  
             
             @Override
@@ -273,20 +288,9 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
                 PortionConvoyeur portion = representation.listePortions.get(nbPortions);
                 
                 Coordonnee depart = controller.coordonneeRelative(portion.getPointDepart());
-                Coordonnee arrivee = controller.coordonneeRelative(portion.getPointArrivee());
-                
-                
-                               
+                Coordonnee arrivee = controller.coordonneeRelative(portion.getPointArrivee());       
                 g2d.drawLine(depart.getX(), depart.getY(), arrivee.getX(), arrivee.getY());
-                //System.out.println("nombre de portions " + nbPortions );
                                 
-                // on affiche les pointAngulaires
-                JLabel pointAngulaire = new JLabel();
-                pointAngulaire.setIcon(new ImageIcon(getClass().getResource("/ico/sortie.png")));
-                pointAngulaire.setLocation(depart.getX(),depart.getY());
-                pointAngulaire.setSize(5,5);
-                pointAngulaire.setVisible(true);
-                this.conteneur.add(pointAngulaire);
             }
         }
         
@@ -342,7 +346,25 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             labelPlace.setSize(equipement.size);
             labelPlace.setHorizontalAlignment(JLabel.CENTER);
             labelPlace.setVisible(true);
-            labelPlace.setIcon(equipement.image);
+
+            if ( equipement instanceof Station )
+            {
+                if (controller.plan.estAfficheImage)
+                {
+                    labelPlace.setIcon(equipement.image);
+                }  
+                else
+                {
+                    labelPlace.setBackground(equipement.couleur);
+                    labelPlace.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+                    labelPlace.setOpaque(true);
+                }
+            }
+            else
+            {
+                labelPlace.setIcon(equipement.image);
+            }
+
             labelPlace.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             
             if(equipement.estSelectionne)
@@ -354,7 +376,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
             if (equipement instanceof Station)
             {
                 JLabel labelNom = new JLabel(equipement.nom);
-                labelNom.setLocation(coordRel.getX()+equipement.size.width/2-100,coordRel.getY()+equipement.size.height+2-100);
+                labelNom.setLocation(coordRel.getX()+equipement.size.width/2-100,coordRel.getY()+equipement.size.height+2-95);
                 labelNom.setSize(200, 200);
                 labelNom.setHorizontalAlignment(JLabel.CENTER);
                 this.conteneur.add(labelNom);
@@ -478,6 +500,7 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         dragged = 0;
         panneauSelectionStation.AfficherPanneauSelection(false);
         panneauSelectionEntreeUsine.Afficher(false);
+        panneauSelectionConvoyeur.Afficher(false);
         
         Coordonnee coord = new Coordonnee(evt.getX(), evt.getY());
         
@@ -500,56 +523,27 @@ public class PanneauPlanTravail extends javax.swing.JPanel {
         {
             //AnnulerSelectionConvoyeurs();
             coord = controller.plan.coordonneeCliqueSurPlan(coord);
-            // on verifie si on a cliqué sur un convoyeur    
             
-            for (int nbConvoyeurs = 0 ; nbConvoyeurs< this.controller.plan.listeConvoyeur.size() ; nbConvoyeurs++ )
+            // on verifie si on a cliqué sur un convoyeur                
+            Convoyeur convoyeur;
+            convoyeur = controller.obtenirConvoyeur(coord);
+            
+            if (convoyeur != null )
             {
-                Convoyeur convoyeur = this.controller.plan.listeConvoyeur.get(nbConvoyeurs);
-                for (int nbPortions = 0 ; nbPortions < convoyeur.representation.listePortions.size(); nbPortions++)
-                {
-                    PortionConvoyeur portion = convoyeur.representation.listePortions.get(nbPortions);
-                    CoordonneeLigne coordonneesPortion = new CoordonneeLigne(portion.getPointDepart(),portion.getPointArrivee());
-                    
-                    if (coord.estSurLigne(coordonneesPortion))
-                    {
-                        AnnulerSelectionConvoyeurs();
-                        this.controller.plan.listeConvoyeur.get(nbConvoyeurs).selectionner();
-                        
-                        if (SwingUtilities.isRightMouseButton(evt))
-                        {
-                        
-                            this.controller.plan.listeConvoyeur.get(nbConvoyeurs).representation.creerNvlPortion(coord, portion);
-                        }
-                        
-                        break;
-                    }
-                    
-                    
-                }
-                
-                
+                convoyeur.selectionner();
+                panneauSelectionConvoyeur.Afficher(true);
+                panneauSelectionConvoyeur.AfficherConvoyeur(convoyeur);
             }
-            
-//            for (int i =0; i< this.listeCoordonnees.size(); i++)
-//            {
-//                if ( coord.estSurLigne(this.listeCoordonnees.get(i))) 
-//                {
-//                    // On peut récupérer le convoyeur cliqué a ce niveau
-//                    this.controller.plan.listeConvoyeur.get(i).selectionner();
-//                    break;
-//                } 
-//            }
-            
+                
             controller.selection = -1;
-
         }
         
-        
-
         RafraichirPlan();
         AnnulerSelectionEquipements();
         
     }
+    
+    
     
     
     /*

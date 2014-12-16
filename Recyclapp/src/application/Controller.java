@@ -81,6 +81,26 @@ public class Controller {
         return plan.obtenirEquipement(coordonnee);
     }
     
+    public Convoyeur obtenirConvoyeur (Coordonnee coordonnee)
+    {
+        return plan.obtenirConvoyeur(coordonnee);
+    }
+    
+    public PortionConvoyeur obtenirPortion(Coordonnee coordonnee)
+    {
+        return plan.obtenirPortion(coordonnee);
+    }
+    
+    public int obtenirIndexConvoyeur(Coordonnee coordonnee)
+    {
+        return plan.obtenirIndexConvoyeur(coordonnee);
+    }
+    
+    public int obtenirIndexConvoyeur(Convoyeur convoyeur)
+    {
+        return plan.obtenirIndexConvoyeur(convoyeur);
+    }
+    
     public void relocaliserStation (Equipement equipement, Coordonnee coorArrivee)
     {
         plan.relocaliserStation(equipement,coorArrivee);

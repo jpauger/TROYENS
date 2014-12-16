@@ -261,6 +261,45 @@ public class PlanDeTravail implements java.io.Serializable {
         return null;
     }
     
+    public Convoyeur obtenirConvoyeur(Coordonnee coordonnee)
+    {
+        for (int i=0; i<listeConvoyeur.size();i++)
+        {
+            Convoyeur convoyeur = listeConvoyeur.get(i);
+            for (int nbPortions = 0 ; nbPortions < convoyeur.representation.listePortions.size(); nbPortions++)
+            {
+                PortionConvoyeur portion =listeConvoyeur.get(i).representation.listePortions.get(nbPortions);
+                CoordonneeLigne coordonneesPortion = new CoordonneeLigne(portion.getPointDepart(),portion.getPointArrivee());
+                if (coordonnee.estSurLigne(coordonneesPortion))
+                {
+                    return convoyeur;
+                }
+            }
+        }
+        
+        return null ;
+    }
+    
+    public PortionConvoyeur obtenirPortion (Coordonnee coordonnee)
+    {
+        for (int i=0; i<listeConvoyeur.size();i++)
+        {
+            for (int nbPortions = 0 ; nbPortions < listeConvoyeur.get(i).representation.listePortions.size(); nbPortions++)
+            {
+                PortionConvoyeur portion =listeConvoyeur.get(i).representation.listePortions.get(nbPortions);
+                
+                CoordonneeLigne coordonneesPortion = new CoordonneeLigne(portion.getPointDepart(),portion.getPointArrivee());
+                
+                if (coordonnee.estSurLigne(coordonneesPortion))
+                {
+                    return listeConvoyeur.get(i).representation.listePortions.get(nbPortions);
+                }
+            }
+        }
+        
+        return null ;
+    }
+    
     public Convoyeur obtenirConvoyeurSelectionne()
     {
         for(int i=0;i<this.listeConvoyeur.size();i++)
@@ -269,6 +308,30 @@ public class PlanDeTravail implements java.io.Serializable {
                 return listeConvoyeur.get(i);
         }
         return null;
+    }
+    
+    public int obtenirIndexConvoyeur (Coordonnee coordonnee)
+    {
+        int index = -1;
+        for (int i=0; i<listeConvoyeur.size();i++)
+        {
+            for (int nbPortions = 0 ; nbPortions < listeConvoyeur.get(i).representation.listePortions.size(); nbPortions++)
+            {
+                PortionConvoyeur portion =listeConvoyeur.get(i).representation.listePortions.get(nbPortions);
+                CoordonneeLigne coordonneesPortion = new CoordonneeLigne(portion.getPointDepart(),portion.getPointArrivee());
+                if (coordonnee.estSurLigne(coordonneesPortion))
+                {
+                    index = i ;
+                }
+            }
+        }
+        
+        return index ;
+    }
+    
+    public int obtenirIndexConvoyeur (Convoyeur convoyeur)
+    {
+        return listeConvoyeur.indexOf(convoyeur);
     }
     
     public SortieEquipement obtenirSortieVide()

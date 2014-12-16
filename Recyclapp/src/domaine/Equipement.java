@@ -1,4 +1,5 @@
 package domaine;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -19,6 +20,7 @@ public class Equipement implements java.io.Serializable {
     public ArrayList<SortieEquipement> listeSortieEntrante = new ArrayList();
     public boolean estSelectionne = false;
     public boolean entreeOccupee = false ;
+    public Color couleur ;
     
     LigneProduit[] obtenirInformationTransit()
     {

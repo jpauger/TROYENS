@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import utilitaires.Coordonnee;
+import javax.swing.ButtonGroup;
 
 
 
@@ -23,6 +24,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private final Controller controller;
     private final PanneauSelectionStation panneauSelectionStation ;
     private final PanneauSelectionEntreeUsine panneauSelectionEntreeUsine ;
+    private final PanneauSelectionConvoyeur panneauSelectionConvoyeur ;
     
     public final PanneauPlanTravail panneauPlanTravailExt;
     
@@ -34,6 +36,7 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     public FenetrePrincipale() 
     {
         initComponents();
+        groupButton();
         controller = new Controller(this);
         panneauSelectionStation = new PanneauSelectionStation(this.panneauProprietes ,controller);
         panneauSelectionStation.Init();
@@ -41,7 +44,10 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         panneauSelectionEntreeUsine = new PanneauSelectionEntreeUsine(this.panneauProprietes, controller);
         panneauSelectionEntreeUsine.Init();
         
-        panneauPlanTravailExt = new PanneauPlanTravail(this.panneauPlanTravail, controller, panneauSelectionStation, panneauSelectionEntreeUsine);
+        panneauSelectionConvoyeur = new PanneauSelectionConvoyeur(this.panneauProprietes, controller);
+        panneauSelectionConvoyeur.Init();
+        
+        panneauPlanTravailExt = new PanneauPlanTravail(this.panneauPlanTravail, controller, panneauSelectionStation, panneauSelectionEntreeUsine, panneauSelectionConvoyeur);
         panneauPlanTravailExt.Init();
 
         //controller.ajouterEntreeUsine(new Coordonnee(200-12,300-32));
@@ -97,8 +103,8 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         checkboxGrilleMagnetique = new javax.swing.JCheckBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         textPanelCoordonnees = new javax.swing.JTextPane();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        btnRadioImage = new javax.swing.JRadioButton();
+        btnRadioTexte = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         echelle = new javax.swing.JComboBox();
         checkboxGrille = new javax.swing.JCheckBox();
@@ -404,12 +410,22 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         textPanelCoordonnees.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.background"));
         jScrollPane2.setViewportView(textPanelCoordonnees);
 
-        groupeAffichage.add(jRadioButton1);
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Affichage image");
+        groupeAffichage.add(btnRadioImage);
+        btnRadioImage.setText("Affichage image");
+        btnRadioImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRadioImageActionPerformed(evt);
+            }
+        });
 
-        groupeAffichage.add(jRadioButton2);
-        jRadioButton2.setText("Affichage texte");
+        groupeAffichage.add(btnRadioTexte);
+        btnRadioTexte.setSelected(true);
+        btnRadioTexte.setText("Affichage texte");
+        btnRadioTexte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRadioTexteActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Échelle :");
 
@@ -440,8 +456,8 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(98, 98, 98)
                 .addGroup(panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton1))
+                    .addComponent(btnRadioTexte)
+                    .addComponent(btnRadioImage))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(checkboxGrille)
@@ -469,9 +485,9 @@ public class FenetrePrincipale extends javax.swing.JFrame{
                     .addGroup(javax.swing.GroupLayout.Alignment.CENTER, panneauMenuBasLayout.createSequentialGroup()
                         .addGroup(panneauMenuBasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.CENTER, panneauMenuBasLayout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
+                                .addComponent(btnRadioImage)
                                 .addGap(4, 4, 4)
-                                .addComponent(jRadioButton2))
+                                .addComponent(btnRadioTexte))
                             .addComponent(labelCoordonnees, javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())))
@@ -697,6 +713,16 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         controller.changerEtat(1);
         panneauPlanTravailExt.RafraichirPlan();
     }//GEN-LAST:event_btnRedoMouseClicked
+
+    private void btnRadioTexteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRadioTexteActionPerformed
+        // TODO add your handling code here:
+        controller.plan.estAfficheImage = !(btnRadioTexte.isSelected());
+    }//GEN-LAST:event_btnRadioTexteActionPerformed
+
+    private void btnRadioImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRadioImageActionPerformed
+        // TODO add your handling code here:
+        controller.plan.estAfficheImage = btnRadioImage.isSelected();
+    }//GEN-LAST:event_btnRadioImageActionPerformed
     
     public void quitterModeAjoutConvoyeur()
     {
@@ -740,6 +766,15 @@ public class FenetrePrincipale extends javax.swing.JFrame{
         });
     }
     
+    private void groupButton( ) 
+    {
+
+        ButtonGroup bg1 = new ButtonGroup( );
+
+        bg1.add(btnRadioImage);
+        bg1.add(btnRadioTexte);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAjoutConvoyeur;
@@ -749,6 +784,8 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private javax.swing.JButton btnEntreeUsine;
     private javax.swing.JButton btnJonction;
     private javax.swing.JLabel btnLoad;
+    private javax.swing.JRadioButton btnRadioImage;
+    private javax.swing.JRadioButton btnRadioTexte;
     private javax.swing.JLabel btnRedo;
     private javax.swing.JLabel btnSave;
     private javax.swing.JButton btnSortieUsine;
@@ -763,8 +800,6 @@ public class FenetrePrincipale extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelCoordonnees;
     private javax.swing.JPanel panneauMenuBas;

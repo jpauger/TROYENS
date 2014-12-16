@@ -41,5 +41,15 @@ public class PortionConvoyeur implements java.io.Serializable {
     {
         return this.pointArrivee ;
     }
+    
+    public boolean compareTo (PortionConvoyeur portion)
+    {
+        boolean comparaison = false ;
+        
+        if (( this.getPointDepart().compareTo(portion.getPointDepart())  )&&( this.getPointArrivee().compareTo(portion.getPointArrivee()) ) )
+            comparaison = true ;
+        
+        return comparaison ;
+    }
       
 }

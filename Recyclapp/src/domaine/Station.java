@@ -1,7 +1,7 @@
 package domaine;
 import javax.swing.ImageIcon;
 import utilitaires.Coordonnee;
-
+import java.awt.Color;
 
 /**
  *
@@ -21,7 +21,8 @@ public class Station extends Equipement  {
         super.coordonnees = coordonnees;
         this.nom = "Station";
         this.description = "Description de la station";
-        this.capaciteMax = 1000;      
+        this.capaciteMax = 1000; 
+        this.couleur = Color.blue;
         this.image = new ImageIcon(getClass().getResource("/ico/station3moyen.png"));
         this.nombreSorties = nombreSorties;
         
@@ -106,7 +107,10 @@ public class Station extends Equipement  {
         }
     }
     
-    
+    public void setCouleur(Color nvCouleur)
+    {
+        this.couleur = nvCouleur ;
+    }
 
         
 }

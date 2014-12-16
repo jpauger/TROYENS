@@ -2,8 +2,14 @@ package recyclapp.gui;
 
 import application.Controller;
 import domaine.Station;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import javax.swing.JColorChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -49,7 +55,7 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
         txtNomStation.setText(station.nom);
         txtDescription.setText(station.description);
         txtCapaciteMax.setText(Integer.toString(station.capaciteMax));
-        
+        panelCouleur.setBackground(station.couleur);        
         txtNombreSorties.setText(String.valueOf(station.getNombreSortie()));
         
         if(station.ObtenirListeProduitEntrant().isEmpty())
@@ -64,6 +70,7 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
             lblSortie.setVisible(true);
             this.conteneur.add(lblSortie);
         }
+        
         this.conteneur.repaint();
     }
     
@@ -78,6 +85,7 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -89,6 +97,23 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
         btnMatrice = new javax.swing.JButton();
         txtNombreSorties = new javax.swing.JTextField();
         labelNbSorties = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        panelCouleur = new javax.swing.JPanel();
+        btnChangerCouleur = new javax.swing.JButton();
+        labelImage = new javax.swing.JLabel();
+        panelImage = new javax.swing.JPanel();
+        btnChangerImage = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)), "selection"));
 
@@ -117,45 +142,108 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
             }
         });
 
-        txtNombreSorties.setEditable(false);
+        txtNombreSorties.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreSortiesActionPerformed(evt);
+            }
+        });
 
         labelNbSorties.setText("Nombre de sorties :");
+
+        jLabel4.setText("Couleur :");
+
+        panelCouleur.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        javax.swing.GroupLayout panelCouleurLayout = new javax.swing.GroupLayout(panelCouleur);
+        panelCouleur.setLayout(panelCouleurLayout);
+        panelCouleurLayout.setHorizontalGroup(
+            panelCouleurLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+        );
+        panelCouleurLayout.setVerticalGroup(
+            panelCouleurLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+        );
+
+        btnChangerCouleur.setText("changer couleur");
+        btnChangerCouleur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangerCouleurActionPerformed(evt);
+            }
+        });
+
+        labelImage.setText("Image :");
+
+        panelImage.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panelImage.setMaximumSize(new java.awt.Dimension(64, 64));
+        panelImage.setMinimumSize(new java.awt.Dimension(64, 64));
+        panelImage.setOpaque(false);
+
+        javax.swing.GroupLayout panelImageLayout = new javax.swing.GroupLayout(panelImage);
+        panelImage.setLayout(panelImageLayout);
+        panelImageLayout.setHorizontalGroup(
+            panelImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+        panelImageLayout.setVerticalGroup(
+            panelImageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        btnChangerImage.setText("changer image");
+        btnChangerImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangerImageActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEnregistrer)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(panelCouleur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNomStation, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(labelNbSorties)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(labelNbSorties)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtNombreSorties)
-                                    .addComponent(txtCapaciteMax, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))))
-                        .addContainerGap(32, Short.MAX_VALUE))
+                                        .addComponent(labelImage)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(panelImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtNombreSorties)
+                                .addComponent(txtCapaciteMax, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                                .addComponent(btnChangerCouleur))
+                            .addComponent(btnChangerImage)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnMatrice, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNomStation)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnEnregistrer)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,20 +256,30 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtCapaciteMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombreSorties, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelNbSorties))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelCouleur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnChangerCouleur, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panelImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelImage)
+                    .addComponent(btnChangerImage))
+                .addGap(18, 18, 18)
                 .addComponent(btnMatrice)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
                 .addComponent(btnEnregistrer)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleName("Selection");
@@ -194,7 +292,7 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
         //on ajoute des sorties a la station
         // pour l'instant on ne permettra pas la modification du nombre de sorties
         
-        /*
+        
         int temp = Integer.parseInt(txtNombreSorties.getText());
         if (station.getNombreSortie() < temp)
         {
@@ -203,22 +301,56 @@ public class PanneauSelectionStation extends javax.swing.JPanel {
                 station.ajouterSortie();
             }
         }
-        */
+        
     }//GEN-LAST:event_btnEnregistrerActionPerformed
 
     private void btnMatriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMatriceActionPerformed
         fenetreTransformation = new FenetreMatriceTransformation(station,controller);        
     }//GEN-LAST:event_btnMatriceActionPerformed
 
+    private void txtNombreSortiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreSortiesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreSortiesActionPerformed
+
+    private void btnChangerCouleurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangerCouleurActionPerformed
+        // TODO add your handling code here:
+        Color newColor = JColorChooser.showDialog(conteneur, "Couleur Station", conteneur.getBackground());
+        if (newColor != null)
+        {
+            station.setCouleur(newColor);
+            panelCouleur.setBackground(newColor);
+        }
+    }//GEN-LAST:event_btnChangerCouleurActionPerformed
+
+    private void btnChangerImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangerImageActionPerformed
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG GIF & PNG","jpg","gif","png");
+        chooser.setFileFilter(filter);
+        int returnVal = chooser.showOpenDialog(conteneur);
+        if (returnVal == JFileChooser.APPROVE_OPTION)
+        {
+            ImageIcon nvImage = new ImageIcon ( chooser.getSelectedFile().getAbsolutePath());
+            station.image = nvImage ;
+        }
+    }//GEN-LAST:event_btnChangerImageActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnChangerCouleur;
+    private javax.swing.JButton btnChangerImage;
     private javax.swing.JButton btnEnregistrer;
     private javax.swing.JButton btnMatrice;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelImage;
     private javax.swing.JLabel labelNbSorties;
+    private javax.swing.JPanel panelCouleur;
+    private javax.swing.JPanel panelImage;
     private javax.swing.JTextField txtCapaciteMax;
     private javax.swing.JTextArea txtDescription;
     private javax.swing.JTextField txtNomStation;

@@ -10,19 +10,19 @@ import utilitaires.Coordonnee;
 public class Convoyeur implements java.io.Serializable {
     
     private Color couleur;
+    private Color derniereCouleur ;
     public int capaciteMax = 2000;
     public final SortieEquipement sortie ;
     public final Equipement equipement; 
     public boolean estSelectionne ;
     public RepresentationConvoyeur representation ;
-//    private final Coordonnee pointDepart;
-//    private final Coordonnee pointArrivee ;
+
     
     
     // constructeur
     public Convoyeur (SortieEquipement uneSortie, Equipement unEquipement)
     {
-        this.couleur = Color.BLUE;
+        this.couleur = Color.RED;
         this.sortie = uneSortie ;
         this.equipement = unEquipement;
         this.estSelectionne = false ;
@@ -42,7 +42,18 @@ public class Convoyeur implements java.io.Serializable {
         Coordonnee CoordonneeArrivee = new Coordonnee (this.coorArriveeX(), this.coorArriveeY());
         
         RepresentationConvoyeur uneRepresentation  = new RepresentationConvoyeur(CoordonneeDepart, CoordonneeArrivee);
+        uneRepresentation.ptDepart = CoordonneeDepart ;
+        uneRepresentation.ptArrivee = CoordonneeArrivee ;
+        
         this.representation = uneRepresentation ;
+    }
+    
+    public void rafraichirRepresentation()
+    {
+        Coordonnee CoordonneeDepart = new Coordonnee(this.coorDepartX(), this.coorDepartY());
+        Coordonnee CoordonneeArrivee = new Coordonnee (this.coorArriveeX(), this.coorArriveeY());
+        //RepresentationConvoyeur uneRepresentation  = new RepresentationConvoyeur(CoordonneeDepart, CoordonneeArrivee);
+        this.representation.majPointsCritiques(CoordonneeDepart, CoordonneeArrivee);
     }
     
     private Coordonnee getPointDepart(Coordonnee Arrivee)
@@ -55,6 +66,17 @@ public class Convoyeur implements java.io.Serializable {
         }
         return depart ;
     }
+    
+    public boolean compareTo (Convoyeur nvConvoyeur)
+    {
+        boolean comparaison = false ;
+        
+        if (this.sortie == nvConvoyeur.sortie)
+            comparaison = true ;
+        
+        return comparaison ;
+    }
+    
     
     /*
     * retourne le point d'arrivee du convoyeur
@@ -77,18 +99,10 @@ public class Convoyeur implements java.io.Serializable {
         return dernierPtDepart;
     }
     
-    
-    public void rafraichirRepresentation()
+    public void setRepresentation(RepresentationConvoyeur nvlRepresentation)
     {
-        Coordonnee CoordonneeDepart = new Coordonnee(this.coorDepartX(), this.coorDepartY());
-        Coordonnee CoordonneeArrivee = new Coordonnee (this.coorArriveeX(), this.coorArriveeY());
-        
-        RepresentationConvoyeur uneRepresentation  = new RepresentationConvoyeur(CoordonneeDepart, CoordonneeArrivee);
-        this.representation = uneRepresentation ;
+        this.representation = nvlRepresentation ;
     }
-    
-    
-    
     
     
     LigneProduit[] obtenirInformationTransit()
@@ -98,11 +112,7 @@ public class Convoyeur implements java.io.Serializable {
         return informationTransit;
     }
     
-    public void changerCouleur (Color nvlCouleur)
-    {
-        this.couleur = nvlCouleur ;
-    } 
-     public String ObtenirTauxPurete(LigneProduit ligneProduit)
+    public String ObtenirTauxPurete(LigneProduit ligneProduit)
     {
         int quantiteTotal = 0;
         for(int i=0;i<sortie.listeLigneProduit.size();i++)
@@ -113,6 +123,29 @@ public class Convoyeur implements java.io.Serializable {
          float tauxRetourne = (float)ligneProduit.quantite / quantiteTotal * 100;
         return String.format("%.0f",tauxRetourne)  + "%";
     }
+    
+        public void selectionner()
+    {
+        this.estSelectionne = true;
+
+    }
+    
+    public void deselectionner()
+    {
+        this.estSelectionne = false ;
+    }
+    
+    public Color getCouleur()
+    {
+        return this.couleur;
+    }
+    
+    public void setCouleur(Color nvCouleur)
+    {
+        this.couleur = nvCouleur ;
+    }
+    
+     
 
     
     // Calcul du decalage 
@@ -173,22 +206,7 @@ public class Convoyeur implements java.io.Serializable {
         return this.equipement.coordonnees.getY()+  decalageHauteurArrivee(this.equipement);
     }
     
-    public void selectionner()
-    {
-        this.estSelectionne = true;
-        this.couleur = Color.CYAN;
-    }
-    
-    public void deselectionner()
-    {
-        this.estSelectionne = false ;
-        this.couleur = Color.BLUE;
-    }
-    
-    public Color getCouleur()
-    {
-        return this.couleur;
-    }
+
     
     /* Fin coordonnées */
     

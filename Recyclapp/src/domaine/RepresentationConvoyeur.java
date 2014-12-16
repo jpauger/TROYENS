@@ -12,6 +12,8 @@ import utilitaires.Coordonnee;
 public class RepresentationConvoyeur implements java.io.Serializable {
     
     
+    public Coordonnee ptDepart ;
+    public Coordonnee ptArrivee ;
     public final ArrayList<PortionConvoyeur> listePortions = new ArrayList();
     
     
@@ -21,18 +23,48 @@ public class RepresentationConvoyeur implements java.io.Serializable {
         this.listePortions.add(portionInitiale) ;
     }
     
-    public void creerNvlPortion (Coordonnee nvPoint, PortionConvoyeur portion )
+    
+    public void majPointsCritiques(Coordonnee nvPtDepart, Coordonnee nvPtArrivee)
     {
-        if (listePortions.contains(portion))
+        for (PortionConvoyeur portion : this.listePortions)
         {
-            PortionConvoyeur nvlPortion1 = new PortionConvoyeur( nvPoint, portion.getPointArrivee() );
-            PortionConvoyeur nvlPortion2 = new PortionConvoyeur (portion.getPointDepart(), nvPoint) ;
+            if ( portion.getPointDepart().compareTo(this.ptDepart))
+            {
+                portion.setPointDepart(nvPtDepart);
+                this.ptDepart = nvPtDepart ;
+            }
             
-            listePortions.remove(portion);
+            if ( portion.getPointArrivee().compareTo(this.ptArrivee))
+            {
+                portion.setPointArrivee(nvPtArrivee);
+                this.ptArrivee = nvPtArrivee ;
+            }
+        }  
+    }
+    
+    public void creerNvlPortion (Coordonnee nvPoint, PortionConvoyeur unePortion )
+    {
+        boolean deletePortion = false;
+        int index = 0;
+        
+        for (PortionConvoyeur portion : this.listePortions)
+        {
+            if( portion.compareTo(unePortion) )
+            {
+                deletePortion = true ;
+                index = this.listePortions.indexOf(portion);
+            }
+        } 
+        
+        if (deletePortion)
+        {
+            PortionConvoyeur nvlPortion1 = new PortionConvoyeur( unePortion.getPointDepart(), nvPoint );
+            PortionConvoyeur nvlPortion2 = new PortionConvoyeur (nvPoint, unePortion.getPointArrivee() ) ;
+            this.listePortions.add(nvlPortion1);
+            this.listePortions.add(nvlPortion2);
+            this.listePortions.remove(index);
             
-            listePortions.add(nvlPortion1);
-            listePortions.add(nvlPortion2);
-        }   
+        }
     }
     
     public void deplacerPointAngulaire (Coordonnee PointDepart , Coordonnee PointSortie)
