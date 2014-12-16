@@ -92,6 +92,7 @@ public class PlanDeTravail implements java.io.Serializable {
         {
             if((listeEquipement.get(i)) instanceof Station)
                 ((Station)listeEquipement.get(i)).definirMatriceBase();
+            MettreAJourQuantiteTous();
         }
     }
     
@@ -294,7 +295,29 @@ public class PlanDeTravail implements java.io.Serializable {
             {
                 ((EntreeUsine)equipement).majPanier();
             }
+            if(equipement instanceof Jonction)
+                ((Jonction)equipement).calculerSortie();
         }
+    }
+    public String ObtenirTauxRecuperation(LigneProduit ligneProduit)
+    {
+        int quantiteTotal = 0;
+        for(int i=0;i<listeEquipement.size();i++)
+        {
+            if(listeEquipement.get(i) instanceof EntreeUsine)
+            {
+                for(int j=0;j < listeEquipement.get(i).listeSorties.size();j++)
+                {
+                    for(int k =0 ; k < listeEquipement.get(i).listeSorties.get(j).listeLigneProduit.size();k++)
+                    {
+                        if(listeEquipement.get(i).listeSorties.get(j).listeLigneProduit.get(k).produit.nom == ligneProduit.produit.nom)
+                            quantiteTotal += listeEquipement.get(i).listeSorties.get(j).listeLigneProduit.get(k).quantite;
+                    }
+                }
+            }
+        }
+        float tauxRetourne = (float)ligneProduit.quantite / quantiteTotal * 100;
+        return String.format("%.0f",tauxRetourne)  + "%";
     }
    private Coordonnee coordonneeMagnetique(Coordonnee coord)
     {

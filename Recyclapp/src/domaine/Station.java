@@ -48,15 +48,19 @@ public class Station extends Equipement  {
             produits = new  Object[this.ObtenirListeProduitEntrant().size()][];
             for(int i =0 ; i< produits.length; i++)
             {
+                
                 LigneProduit ligneProduit = this.ObtenirListeProduitEntrant().get(i);
-                produits[i] = new Object[this.nombreSorties + 1];
-                produits[i][0] = ligneProduit.produit.nom + "(" + ligneProduit.quantite + ")";
-                for(int j=1;j<=this.nombreSorties;j++)
+                if(ligneProduit.quantite > 0)
                 {
-                    if(j == 1)
-                        produits[i][j] = 100;
-                    else
-                        produits[i][j] = 0;
+                    produits[i] = new Object[this.nombreSorties + 1];
+                    produits[i][0] = ligneProduit.produit.nom + "(" + ligneProduit.quantite + " Kh/h)";
+                    for(int j=1;j<=this.nombreSorties;j++)
+                    {
+                        if(j == 1)
+                            produits[i][j] = 100;
+                        else
+                            produits[i][j] = 0;
+                    }
                 }
             } 
         }

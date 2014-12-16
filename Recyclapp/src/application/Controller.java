@@ -105,6 +105,10 @@ public class Controller {
         SortieEquipement sortie = null;
         return sortie;
     }
+    public String ObtenirTauxRecuperation(LigneProduit ligneProduit)
+    {
+        return plan.ObtenirTauxRecuperation(ligneProduit);
+    }
     
     public void raffraichirPlan()
     {

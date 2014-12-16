@@ -63,7 +63,17 @@ public class Convoyeur implements java.io.Serializable {
     {
         this.couleur = nvlCouleur ;
     } 
-    
+     public String ObtenirTauxPurete(LigneProduit ligneProduit)
+    {
+        int quantiteTotal = 0;
+        for(int i=0;i<sortie.listeLigneProduit.size();i++)
+        {
+            quantiteTotal += sortie.listeLigneProduit.get(i).quantite;
+        }
+        
+         float tauxRetourne = (float)ligneProduit.quantite / quantiteTotal * 100;
+        return String.format("%.0f",tauxRetourne)  + "%";
+    }
 
     
     // Calcul du decalage 
